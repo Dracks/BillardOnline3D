@@ -1,0 +1,49 @@
+form particleEditor
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true	
+	alignment = ALIGN_VCENTER_HCENTER
+
+    container presets
+    {
+        style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_HCENTER
+		width = 280
+		height = 250
+
+		label title
+        {
+            style = title
+            autoWidth=true
+			height=80
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Main Menu
+        }
+		
+		button singlePlayer
+        {
+            style = buttonStyle
+            autoWidth = true
+            height = 50
+            text = Single Player
+        }
+		
+		button OnLine
+        {
+            style = buttonStyle
+            autoWidth = true
+            height = 50
+            text = OnLine Network
+        }
+		
+		button config
+        {
+            style = buttonStyle
+            autoWidth = true
+            height = 50
+            text = Settings
+        }
+	}
+}
