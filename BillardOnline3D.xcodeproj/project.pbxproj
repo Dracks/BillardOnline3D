@@ -40,12 +40,14 @@
 		5BAF2070152F2DDD003E2AC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206A152F2DDD003E2AC3 /* OpenGLES.framework */; };
 		5BAF2071152F2DDD003E2AC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206B152F2DDD003E2AC3 /* QuartzCore.framework */; };
 		5BAF2072152F2DDD003E2AC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206C152F2DDD003E2AC3 /* UIKit.framework */; };
+		A4616C48161B6EB300BE5C9A /* ThreeBandGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */; };
 		A4A09AF51618606500509476 /* AbstractPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF31618606400509476 /* AbstractPlayerController.cpp */; };
 		A4A09AF81618608400509476 /* DevicePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF61618608400509476 /* DevicePlayer.cpp */; };
 		A4A09AFB161862C200509476 /* AbstractGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF9161862C200509476 /* AbstractGameController.cpp */; };
 		A4C9444116177F1000CB8518 /* MenuAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C9443F16177F0F00CB8518 /* MenuAbstract.cpp */; };
 		A4C944451617A2F900CB8518 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C944431617A2F800CB8518 /* SelectGame.cpp */; };
 		A4C944461617A2F900CB8518 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C944431617A2F800CB8518 /* SelectGame.cpp */; };
+		A4DFE30E161A1CE90096CF53 /* GameHud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DFE30C161A1CE90096CF53 /* GameHud.cpp */; };
 		A4E7B91B1615A80D0045F040 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4E7B9191615A80D0045F040 /* MainMenu.cpp */; };
 		A4E7B91C1615A80D0045F040 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4E7B9191615A80D0045F040 /* MainMenu.cpp */; };
 /* End PBXBuildFile section */
@@ -97,6 +99,8 @@
 		5BAF206C152F2DDD003E2AC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = "../../../../Applications/blackberry-GamePlay/gameplay/gameplay.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = text; name = shaders; path = "../../../../Applications/blackberry-GamePlay/gameplay/res/shaders"; sourceTree = SOURCE_ROOT; };
+		A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThreeBandGame.cpp; path = Game/ModeGames/ThreeBandGame.cpp; sourceTree = "<group>"; };
+		A4616C47161B6EB300BE5C9A /* ThreeBandGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreeBandGame.h; path = Game/ModeGames/ThreeBandGame.h; sourceTree = "<group>"; };
 		A4A09AF31618606400509476 /* AbstractPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbstractPlayerController.cpp; path = Game/AbstractPlayerController.cpp; sourceTree = "<group>"; };
 		A4A09AF41618606500509476 /* AbstractPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractPlayerController.h; path = Game/AbstractPlayerController.h; sourceTree = "<group>"; };
 		A4A09AF61618608400509476 /* DevicePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DevicePlayer.cpp; path = Players/DevicePlayer.cpp; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 		A4C9444016177F1000CB8518 /* MenuAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuAbstract.h; path = Menus/MenuAbstract.h; sourceTree = "<group>"; };
 		A4C944431617A2F800CB8518 /* SelectGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectGame.cpp; path = Menus/SelectGame.cpp; sourceTree = "<group>"; };
 		A4C944441617A2F800CB8518 /* SelectGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectGame.h; path = Menus/SelectGame.h; sourceTree = "<group>"; };
+		A4DFE30C161A1CE90096CF53 /* GameHud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameHud.cpp; path = Menus/GameHud.cpp; sourceTree = "<group>"; };
+		A4DFE30D161A1CE90096CF53 /* GameHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameHud.h; path = Menus/GameHud.h; sourceTree = "<group>"; };
 		A4E7B9191615A80D0045F040 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenu.cpp; path = Menus/MainMenu.cpp; sourceTree = "<group>"; };
 		A4E7B91A1615A80D0045F040 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenu.h; path = Menus/MainMenu.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -249,13 +255,23 @@
 			name = GamePlay;
 			sourceTree = "<group>";
 		};
+		A4616C45161B6E8400BE5C9A /* ModeGames */ = {
+			isa = PBXGroup;
+			children = (
+				A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */,
+				A4616C47161B6EB300BE5C9A /* ThreeBandGame.h */,
+			);
+			name = ModeGames;
+			sourceTree = "<group>";
+		};
 		A4A09AEB16185F6500509476 /* Game */ = {
 			isa = PBXGroup;
 			children = (
-				A4A09AF31618606400509476 /* AbstractPlayerController.cpp */,
-				A4A09AF41618606500509476 /* AbstractPlayerController.h */,
+				A4616C45161B6E8400BE5C9A /* ModeGames */,
 				A4A09AF9161862C200509476 /* AbstractGameController.cpp */,
 				A4A09AFA161862C200509476 /* AbstractGameController.h */,
+				A4A09AF31618606400509476 /* AbstractPlayerController.cpp */,
+				A4A09AF41618606500509476 /* AbstractPlayerController.h */,
 			);
 			name = Game;
 			sourceTree = "<group>";
@@ -287,6 +303,8 @@
 				A4C9444016177F1000CB8518 /* MenuAbstract.h */,
 				A4C944431617A2F800CB8518 /* SelectGame.cpp */,
 				A4C944441617A2F800CB8518 /* SelectGame.h */,
+				A4DFE30C161A1CE90096CF53 /* GameHud.cpp */,
+				A4DFE30D161A1CE90096CF53 /* GameHud.h */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -472,6 +490,8 @@
 				A4A09AF51618606500509476 /* AbstractPlayerController.cpp in Sources */,
 				A4A09AF81618608400509476 /* DevicePlayer.cpp in Sources */,
 				A4A09AFB161862C200509476 /* AbstractGameController.cpp in Sources */,
+				A4DFE30E161A1CE90096CF53 /* GameHud.cpp in Sources */,
+				A4616C48161B6EB300BE5C9A /* ThreeBandGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,6 +30,8 @@ namespace Menus{
 		void back(gameplay::Control::Listener::EventType);
 		
 		void disable();
+		
+		void createGame(gameplay::Control::Listener::EventType);
 	};
 }
 

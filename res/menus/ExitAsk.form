@@ -1,0 +1,47 @@
+form particleEditor
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+	
+	container containerPause
+	{
+		style=basic
+		layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_HCENTER
+		width = 320
+		height = 120
+		
+		label title
+        {
+            style = title
+            autoWidth=true
+			height=40
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Are you sure?
+        }
+
+		container buttonsPause
+		{
+			style=noBorder
+			layout = LAYOUT_FLOW
+			width = 350
+			height = 70
+			
+			button cancel
+			{
+				style= buttonStyle
+				width = 150
+				height = 50
+				text = cancel
+			}
+			button exit
+			{
+				style= buttonStyle
+				width = 150
+				height = 50
+				text = exit
+			}
+		}
+	}
+}

@@ -8,6 +8,7 @@
 
 #include "SelectGame.h"
 #include "MainMenu.h"
+#include "GameHud.h"
 
 using namespace gameplay;
 
@@ -28,6 +29,10 @@ namespace Menus{
 			_form->setConsumeInputEvents(false);
 			
 			((Button*) _form->getControl("back"))->addListener(kNewSelector(&SelectGame::back), Control::Listener::CLICK);
+			((Button*) _form->getControl("eightBall"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
+			((Button*) _form->getControl("nineBall"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
+			((Button*) _form->getControl("threeBand"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
+			
 		}
 	}
 		
@@ -37,6 +42,10 @@ namespace Menus{
 	
 	void SelectGame::back(gameplay::Control::Listener::EventType evt){
 		this->_controller->changeToScreen(new MainMenu(this->_controller));
+	}
+	
+	void SelectGame::createGame(gameplay::Control::Listener::EventType){
+		this->_controller->changeToScreen(new GameHud(this->_controller, new ::Game::AbstractGameController("res/models/ThreeBandGame.scene")));
 	}
 	
 	void SelectGame::disable(){

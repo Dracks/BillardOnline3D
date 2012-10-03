@@ -1,0 +1,90 @@
+form particleEditor
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+
+    container views
+    {
+        style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_LEFT
+        position = 0, 0
+        width = 80
+		height = 200
+		
+		button cue
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Cue
+		}
+		
+		button top
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Top
+		}
+		
+		button free
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Free
+		}
+	}
+	
+	container actions
+	{
+		style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_RIGHT
+        width = 80
+		height = 320
+		
+		
+		button pause
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = X
+		}
+
+		button look
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Look
+		}
+		
+		button point
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Point
+		}
+		
+		button effect
+		{
+			style = buttonStyle
+			width = 60
+			height = 60
+			text = Effect
+		}
+		
+		button shoot
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Shoot
+		}
+	}
+}

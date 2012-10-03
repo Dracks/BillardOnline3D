@@ -1,0 +1,32 @@
+collisionObject Table
+{
+    type = RIGID_BODY
+    shape = BOX
+    mass = 0.0
+    friction = 0.1
+    restitution = 1.0
+    linearDamping = 0.025
+    angularDamping = 0.16
+}
+
+collisionObject Ball
+{
+    type = RIGID_BODY
+    shape = SPHERE
+    mass = 205
+    friction = 0.1
+    restitution = 0.9
+    linearDamping = 0.1
+    angularDamping = 0.1
+}
+
+collisionObject Cue
+{
+	type = RIGID_BODY
+    shape = BOX
+    mass = 500
+    friction = 0.0
+    restitution = 1.0
+    linearDamping = 0.1
+    angularDamping = 0.1
+}

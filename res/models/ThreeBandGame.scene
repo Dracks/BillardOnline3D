@@ -1,0 +1,28 @@
+scene
+{
+    path = res/models/ThreeBandGame.gpb
+	
+	node Table
+    {
+        material = res/models/ThreeBandGame.material#Table
+        collisionObject = res/models/ThreeBandGame.physics#Table
+    }
+	
+	node Ball
+	{
+		material = res/models/ThreeBandGame.material#WhiteBall
+		collisionObject = res/models/ThreeBandGame.physics#Ball
+	}
+	
+	node Cue
+	{
+		material = res/models/ThreeBandGame.material#Cue
+		collisionObject = res/models/ThreeBandGame.physics#Cue
+	}
+	
+	physics
+    {
+        // Note: Gravity is set to 3x normal gravity to compenate for larger scale of scene.
+        gravity = 0.0, 0.0, -9.81
+    }
+}

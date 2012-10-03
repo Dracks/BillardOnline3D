@@ -13,7 +13,7 @@ using namespace gameplay;
 /**
  * Main game class.
  */
-class BillardMainClass: public Game
+class BillardMainClass: public gameplay::Game
 {
 public:
 

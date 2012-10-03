@@ -1,0 +1,61 @@
+material BasicMonoColor
+{
+    technique
+    {
+        pass
+        {
+
+            // shaders
+            vertexShader = res/shaders/colored.vert
+            fragmentShader = res/shaders/colored.frag
+            
+            // uniforms
+            u_worldViewProjectionMatrix = WORLD_VIEW_PROJECTION_MATRIX
+            u_inverseTransposeWorldViewMatrix = INVERSE_TRANSPOSE_WORLD_VIEW_MATRIX
+
+            // render state
+            renderState
+            {
+                cullFace = true
+                depthTest = true
+            }
+        }
+    }
+}
+
+material Table : BasicMonoColor
+{
+	technique
+    {
+        pass
+        {
+            u_ambientColor = 0.1, 0.3, 0.1
+            u_diffuseColor = 0.0, 0.5, 0.2, 1.0
+
+        }
+    }
+}
+
+material WhiteBall : BasicMonoColor
+{
+	technique
+	{
+		pass
+		{
+			u_ambientColor = 0.8, 0.8, 0.8
+			u_diffuseColor = 0.9, 0.9, 0.9, 1.0
+		}
+	}
+}
+
+material Cue : BasicMonoColor
+{
+	technique
+	{
+		pass
+		{
+			u_ambientColor = 0.5, 0.3, 0.1
+			u_diffuseColor = 0.69, 0.45, 0.29, 1.0
+		}
+	}
+}
