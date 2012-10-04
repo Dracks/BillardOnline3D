@@ -108,7 +108,8 @@ namespace Menus{
 	void GameHud::render(gameplay::Scene*){
 		if (_gameController!=NULL){
 			//_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
-			
+			Vector3 p=_gameController->getPlayerBall()->getTranslation();
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
 			_gameController->getScene()->visit(this, &GameHud::drawScene);
 		}
 		
@@ -157,7 +158,7 @@ namespace Menus{
 			_playerController=player;
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
 			Node* cue=_playerController->getCue();
-			//cue->setTranslation(ballPosition);
+			cue->setTranslation(ballPosition);
 			_gameController->getScene()->addNode(cue);
 		}
 	}

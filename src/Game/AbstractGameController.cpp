@@ -38,9 +38,12 @@ namespace Game{
 		_cueGroup=cueGroup;
 		
 		_cueGroup->addRef();
+		cue->addRef();
 		
 		_scene->removeNode(cue);
 		_scene->removeNode(cueGroup);
+		
+		_scene->findNode("Ball")->setTranslationZ(0.0829773f);
 		
 		//Quaternion quaternion=_scene->findNode("CameraTop")->getRotation();
 		//std::cout << quaternion.x << ","<< quaternion.y <<","<< quaternion.z <<","<< quaternion.w<< std::endl;
