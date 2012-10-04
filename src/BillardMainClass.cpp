@@ -22,7 +22,7 @@ void BillardMainClass::initialize()
     cameraNode->setCamera(camera);
     cameraNode->setTranslation(0.0f, 0.0f, 40.0f);
     _scene->setActiveCamera(camera);
-    SAFE_RELEASE(camera);
+    SAFE_RELEASE(camera);//*/
 	
 	_screen= new Menus::MainMenu(this);
 	//_newScreen = new Menus::SelectGame(this);
@@ -52,7 +52,7 @@ void BillardMainClass::initialize()
 
 void BillardMainClass::finalize()
 {
-    SAFE_RELEASE(_scene);
+    //SAFE_RELEASE(_scene);
 	delete _screen;
 	if (_oldScreen!=NULL)
 		delete _oldScreen;
@@ -73,7 +73,7 @@ void BillardMainClass::render(float elapsedTime)
 	_screen->render(_scene);
 
     // Visit all the nodes in the scene for drawing
-    _scene->visit(this, &BillardMainClass::drawScene);
+    //_scene->visit(this, &BillardMainClass::drawScene);
 }
 
 bool BillardMainClass::drawScene(Node* node)
@@ -102,6 +102,7 @@ void BillardMainClass::keyEvent(Keyboard::KeyEvent evt, int key)
 
 void BillardMainClass::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex)
 {
+	_screen->touchEvent(evt, x, y, contactIndex);
     switch (evt)
     {
     case Touch::TOUCH_PRESS:

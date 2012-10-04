@@ -24,10 +24,10 @@ namespace Game{
 		
 		virtual void move()=0;
 		
-		virtual int getPlayer();
+		virtual char getPlayer();
 	protected:
-		int player;
-		AbstractGameController* gameController;
+		char _player;
+		AbstractGameController* _gameController;
 	};
 }
 

@@ -9,8 +9,11 @@
 #include "SelectGame.h"
 #include "MainMenu.h"
 #include "GameHud.h"
+#include "DevicePlayer.h"
 
 using namespace gameplay;
+using namespace ::Game;
+using namespace Players;
 
 namespace Menus{
 	//class SelectGame: public MenuInterface{
@@ -45,7 +48,12 @@ namespace Menus{
 	}
 	
 	void SelectGame::createGame(gameplay::Control::Listener::EventType){
-		this->_controller->changeToScreen(new GameHud(this->_controller, new ::Game::AbstractGameController("res/models/ThreeBandGame.scene")));
+		AbstractGameController* gc=new ::Game::AbstractGameController("res/models/ThreeBandGame.scene");
+		GameHud* gh=new GameHud(this->_controller, gc);
+		gc->setPlayer(new DevicePlayer(gc, 0, gh));
+		
+		gc->start();
+		this->_controller->changeToScreen(gh);
 	}
 	
 	void SelectGame::disable(){

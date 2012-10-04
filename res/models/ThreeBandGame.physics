@@ -23,8 +23,8 @@ collisionObject Ball
 collisionObject Cue
 {
 	type = RIGID_BODY
-    shape = BOX
-    mass = 500
+    shape = MESH
+    mass = 0
     friction = 0.0
     restitution = 1.0
     linearDamping = 0.1

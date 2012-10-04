@@ -19,12 +19,14 @@ namespace Players{
 namespace Players{
 	class DevicePlayer: public ::Game::AbstractPlayerController{
 	public:
-		DevicePlayer(::Game::AbstractGameController*, int player, ::Menus::GameHub*);
+		DevicePlayer(::Game::AbstractGameController*, int player, ::Menus::GameHud*);
 		~DevicePlayer();
 		
 		void move();
+		
+		gameplay::Node* getCue();
 	protected:
-		::Menus::GameHub* gameHud;
+		::Menus::GameHud* _gameHud;
 	};
 }
 

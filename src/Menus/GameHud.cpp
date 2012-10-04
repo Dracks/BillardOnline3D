@@ -10,7 +10,17 @@
 #include "MainMenu.h"
 
 using namespace gameplay;
-
+/*
+ *vec3 p = entity2->getPosition();
+ vec3 r = entity1->getPosition();
+ float xdistance = p[0] - r[0];
+ float ydistance = p[1] - r[1];
+ float zdistance = p[2] - r[2];
+ float xzdistance = sqrt(xdistance * xdistance + zdistance * zdistance);
+ entitity1->setHeading(atan2(xdistance, zdistance)); // rotation around y
+ entitity1->setPitch(-atan2(ydistance, xzdistance)); // rotation around x
+ entitity1->setBank(0);
+ */
 namespace Menus{
 	//enum GameStatus {PAUSE, WAIT, RUNING,LOOK, SHOT, DIRECT, MOVE};
 	
@@ -20,6 +30,8 @@ namespace Menus{
 		_hud=NULL;
 		_gameController=gameController;
 		_status=WAIT;
+		
+		_activeCamera=_gameController->getScene()->getActiveCamera();
 		
 		//Scene* scena=_gameController->getScene();
 		//_topCamera=scena->findNode("CameraTop")->getCamera();
@@ -32,10 +44,57 @@ namespace Menus{
 			SAFE_RELEASE(_hud)
 	}
 	
+	void GameHud::keyEvent(Keyboard::KeyEvent evt, int key){
+		
+	}
+	
+	void GameHud::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex){
+		int difX, difY;
+		float mx, my;
+		if (_status!=RUNING){
+			switch (evt) {
+				case Touch::TOUCH_MOVE:
+					difX=x-_oldX;
+					difY=y-_oldY;
+					switch (_status) {
+						case POINT:
+							this->onMovePoint(difX, difY);
+							break;
+						case EFFECT:
+							this->onMoveEffect(difX, difY);
+							break;
+						case SHOT:
+							this->onMoveShot(difX, difY);
+						default:
+							break;
+					}// Warning not used BREAK!!!!
+				case Touch::TOUCH_PRESS:
+					_oldX=x;
+					_oldY=y;
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+	
 	void GameHud::update(float timeElapsed){
 		if (_hud==NULL){
 			_hud = Form::create("res/menus/GameHud.form");
 			_hud->setConsumeInputEvents(false);
+			
+			((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
+			((Button*) _hud->getControl("look"))->addListener(kNewSelector(&GameHud::actionLook), Control::Listener::CLICK);
+			((Button*) _hud->getControl("point"))->addListener(kNewSelector(&GameHud::actionPoint), Control::Listener::CLICK);
+			((Button*) _hud->getControl("effect"))->addListener(kNewSelector(&GameHud::actionEffect), Control::Listener::CLICK);
+			((Button*) _hud->getControl("shoot"))->addListener(kNewSelector(&GameHud::actionShoot), Control::Listener::CLICK);
+			//((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
+			
+			
+			((Button*) _hud->getControl("free"))->addListener(kNewSelector(&GameHud::lookFree), Control::Listener::CLICK);
+			((Button*) _hud->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
+			((Button*) _hud->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
 			
 			_exit = Form::create("res/menus/ExitAsk.form");
 			_exit->setConsumeInputEvents(false);
@@ -43,24 +102,13 @@ namespace Menus{
 			
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
-			
-			
-			((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
-			
-			((Button*) _hud->getControl("free"))->addListener(kNewSelector(&GameHud::lookFree), Control::Listener::CLICK);
-			((Button*) _hud->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
-			((Button*) _hud->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
-			
-			Container* c=((Container*) _hud->getControl("containerPause"));
-			
-			/*std::cout << c->getX() << "," << c->getY() << "," << c->getWidth() << "," << c->getHeight() << std::endl;
-			
-			c=((Container*) _hud->getControl("views"));
-			std::cout << c->getX() << "," << c->getY() << std::endl;*/
 		}
 	}
+	
 	void GameHud::render(gameplay::Scene*){
 		if (_gameController!=NULL){
+			//_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
+			
 			_gameController->getScene()->visit(this, &GameHud::drawScene);
 		}
 		
@@ -82,6 +130,20 @@ namespace Menus{
 		return true;
 	}
 	
+	void GameHud::onMovePoint(int difX,int difY){
+		float mx=(float)difX/20.0f;
+		//float my=(float)difY;
+		//std::cout << mx << ", " << my << std::endl;
+		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
+		cueGroup->rotateZ(mx);
+	}
+	void GameHud::onMoveEffect(int difX,int difY){
+		
+	}
+	void GameHud::onMoveShot(int difX,int difY){
+		
+	}
+	
 	void GameHud::disable(){
 		_hud->disable();
 	}
@@ -90,8 +152,14 @@ namespace Menus{
 	/**
 	 * @brief register the user as the actual user controlling the game (checking that)
 	 */
-	void GameHud::registerPlayerRound(Players::DevicePlayer*){
-		
+	void GameHud::registerPlayerRound(Players::DevicePlayer* player){
+		if (_gameController->getPlayerActive()==player->getPlayer()){
+			_playerController=player;
+			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
+			Node* cue=_playerController->getCue();
+			//cue->setTranslation(ballPosition);
+			_gameController->getScene()->addNode(cue);
+		}
 	}
 	
 	void GameHud::exit(gameplay::Control::Listener::EventType){
@@ -104,18 +172,39 @@ namespace Menus{
 		_hud->enable();
 	}
 	
+	/*
+	 * Actions
+	 */
+	void GameHud::actionLook(gameplay::Control::Listener::EventType){
+		_status=LOOK;
+	}
+	void GameHud::actionPoint(gameplay::Control::Listener::EventType){
+		_status=POINT;
+	}
+	void GameHud::actionEffect(gameplay::Control::Listener::EventType){
+		_status=EFFECT;
+	}
+	void GameHud::actionShoot(gameplay::Control::Listener::EventType){
+		_status=SHOT;
+	}
 	
 	/*
 	 * Views
 	 */
 	void GameHud::lookTop(gameplay::Control::Listener::EventType){
-		_gameController->getScene()->setActiveCamera(_gameController->getScene()->findNode("CameraTop")->getCamera());
+		_activeCamera=_gameController->getScene()->findNode("CameraTop")->getCamera();
+		_gameController->getScene()->setActiveCamera(_activeCamera);
 	}
 	void GameHud::lookFree(gameplay::Control::Listener::EventType){
-		_gameController->getScene()->setActiveCamera(_gameController->getScene()->findNode("CameraFree")->getCamera());
+		_activeCamera=_gameController->getScene()->findNode("CameraFree")->getCamera();
+		_gameController->getScene()->setActiveCamera(_activeCamera);
 	}
 	void GameHud::lookOverCue(gameplay::Control::Listener::EventType){
-		
+		Node* tmp=_gameController->getScene()->findNode("CameraCue");
+		if (tmp!=NULL){
+			_activeCamera=tmp->getCamera();
+			_gameController->getScene()->setActiveCamera(_activeCamera);
+		}
 	}
 	
 	void GameHud::pause(gameplay::Control::Listener::EventType){

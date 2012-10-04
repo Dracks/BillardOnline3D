@@ -26,6 +26,16 @@ namespace Menus{
 		}
 	}
 	
+
+	void MenuInterface::keyEvent(Keyboard::KeyEvent evt, int key){
+		
+	}
+	
+
+    void MenuInterface::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex){
+		
+	}
+	
 	void MenuInterface::update(float elapsedTime){
 		
 	}

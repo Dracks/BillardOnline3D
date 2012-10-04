@@ -10,7 +10,7 @@
 #define __BillardOnline3D__GameHub__
 
 namespace Menus{
-	class GameHub;
+	class GameHud;
 }
 
 #include <iostream>
@@ -19,27 +19,43 @@ namespace Menus{
 #include "DevicePlayer.h"
 
 namespace Menus{
-	enum GameStatus {PAUSE, WAIT, RUNING,LOOK, SHOT, DIRECT, MOVE};
+	enum GameStatus {PAUSE, WAIT, RUNING,LOOK, SHOT, EFFECT, POINT};
 	
 	class GameHud: public Menus::MenuInterface{
 	public:
 		GameHud(::BillardMainClass*, ::Game::AbstractGameController*);
 		~GameHud();
 		
+		void keyEvent(Keyboard::KeyEvent evt, int key);
+		void touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex);
 		void update(float timeElapsed);
 		void render(gameplay::Scene*);
 		bool drawScene(gameplay::Node*);
 		void disable();
 		
+		
 		/**
 		 * @brief register the user as the actual user controlling the game (checking that)
 		 */
 		void registerPlayerRound(Players::DevicePlayer*);
+		
+		void onMovePoint(int difX,int difY);
+		void onMoveEffect(int difX,int difY);
+		void onMoveShot(int difX,int difY);
+		
 		/*
 		 * AskExitMethods
 		 */
 		void exit(gameplay::Control::Listener::EventType);
 		void cancelPause(gameplay::Control::Listener::EventType);
+		
+		/*
+		 * Actions
+		 */
+		void actionLook(gameplay::Control::Listener::EventType);
+		void actionPoint(gameplay::Control::Listener::EventType);
+		void actionEffect(gameplay::Control::Listener::EventType);
+		void actionShoot(gameplay::Control::Listener::EventType);
 		
 		/*
 		 * Views
@@ -68,9 +84,9 @@ namespace Menus{
 		gameplay::Form* _hud;
 		gameplay::Form* _exit;
 		
-		gameplay::Camera* _freeCamera;
-		gameplay::Camera* _topCamera;
+		gameplay::Camera* _activeCamera;
 		
+		int _oldX, _oldY;
 	};
 }
 

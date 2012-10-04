@@ -31,6 +31,11 @@ namespace Menus{
 	public:
 		MenuInterface(BillardMainClass* controller);
 		virtual ~MenuInterface();
+		
+		virtual void keyEvent(gameplay::Keyboard::KeyEvent evt, int key);
+		
+		virtual void touchEvent(gameplay::Touch::TouchEvent evt, int x, int y, unsigned int contactIndex);
+		
 		virtual void update(float elapsedTime);
 		virtual void render(gameplay::Scene*)=0;
 		

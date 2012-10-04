@@ -22,17 +22,28 @@ namespace Game{
 		AbstractGameController(std::string);
 		~AbstractGameController();
 		
+		void start();
+		
 		void setPlayer(AbstractPlayerController*);
 		
 		gameplay::Scene* getScene();
 		
+		char getPlayerActive();
+		
+		gameplay::Node* getPlayerBall();
+		
+		gameplay::Node* getCue();
 	protected:
 		gameplay::Scene* _scene;
+		std::vector<gameplay::Node*> balls;
+		
+		gameplay::Node* _cueGroup;
 		
 	private:
 		char _playerActive;
 		char _statusGame;
 		std::vector<AbstractPlayerController*> _players;
+		
 		
 	};
 }
