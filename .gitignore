@@ -1,0 +1,6 @@
+/.settings/
+/BillardOnline3D.xcodeproj/project.xcworkspace/xcuserdata/
+/BillardOnline3D.xcodeproj/xcuserdata/
+/Device-Debug/
+*.xml
+*.dae
