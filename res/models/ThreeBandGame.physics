@@ -4,7 +4,7 @@ collisionObject Table
     shape = BOX
     mass = 0.0
     friction = 0.1
-    restitution = 1.0
+    restitution = 0.0
     linearDamping = 0.025
     angularDamping = 0.16
 }
@@ -15,7 +15,7 @@ collisionObject Frame
     shape = MESH
     mass = 0.0
     friction = 0.1
-    restitution = 1.0
+    restitution = 0.4
     linearDamping = 0.025
     angularDamping = 0.16
 }

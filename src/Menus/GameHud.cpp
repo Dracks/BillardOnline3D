@@ -130,8 +130,10 @@ namespace Menus{
 				_gameController->getScene()->visit(this, &GameHud::drawScene);
 			if (_drawStatus>0)
 				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
-			//Vector3 p=_gameController->getPlayerBall()->getTranslation();
-			//std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			Vector3 p=_gameController->getPlayerBall()->getTranslation();
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			p=_playerController->getCue()->getTranslation();
+			std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
 			
 		}
 		
@@ -154,7 +156,7 @@ namespace Menus{
 	}
 	
 	void GameHud::onMovePoint(int difX,int difY){
-		float mx=(float)difX/20.0f;
+		float mx=(float)difX/30.0f;
 		float my=(float)difY;
 		//std::cout << mx << ", " << my << std::endl;
 		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
@@ -167,8 +169,12 @@ namespace Menus{
 		
 	}
 	void GameHud::onMoveShot(int difX,int difY){
-		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
+		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
+			float my=(float)difY/30.0f;
+			Vector3 direction=cueGroup->getForwardVector()*my;
+			std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
+			cueGroup->translate(direction);
 			
 		}
 	}
@@ -187,8 +193,8 @@ namespace Menus{
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
 			Node* cue=_playerController->getCue();
 			cue->setTranslation(ballPosition);
-			std::cout << cue << std::endl;
-			std::cout << cue->getId() << std::endl;
+			//std::cout << cue << std::endl;
+			//std::cout << cue->getId() << std::endl;
 			_gameController->getScene()->addNode(cue);
 		}
 	}

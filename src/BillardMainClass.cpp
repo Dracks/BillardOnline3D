@@ -89,6 +89,7 @@ bool BillardMainClass::drawScene(Node* node)
 
 void BillardMainClass::keyEvent(Keyboard::KeyEvent evt, int key)
 {
+	_screen->keyEvent(evt, key);
     if (evt == Keyboard::KEY_PRESS)
     {
         switch (key)
@@ -98,8 +99,6 @@ void BillardMainClass::keyEvent(Keyboard::KeyEvent evt, int key)
             break;
         }
     }
-	
-	_screen->keyEvent(evt, key);
 }
 
 void BillardMainClass::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex)

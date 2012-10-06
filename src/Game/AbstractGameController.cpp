@@ -34,7 +34,7 @@ namespace Game{
 		cameraCueNode->setId("CameraCue");
 		//cameraCueNode->getParent()->removeChild(cameraCueNode);
 		cueGroup->addChild(cameraCueNode);
-		cameraCueNode->setTranslation(1.5, 0.1, 0.2);
+		cameraCueNode->setTranslation(2.0, 0.1, 0.2);
 		cameraCueNode->setRotation(0.498, 0.502, 0.498, 0.502);
 		
 		//_scene->addNode(cueGroup);
@@ -49,7 +49,7 @@ namespace Game{
 		//_scene->removeNode(cue);
 		_scene->removeNode(cueGroup);
 		
-		_scene->findNode("Ball")->setTranslationZ(0.0829773f);
+		//_scene->findNode("Ball")->setTranslationZ(0.0829773f);
 		
 		//Quaternion quaternion=_scene->findNode("CameraTop")->getRotation();
 		//std::cout << quaternion.x << ","<< quaternion.y <<","<< quaternion.z <<","<< quaternion.w<< std::endl;
@@ -67,6 +67,7 @@ namespace Game{
 	}
 	
 	void AbstractGameController::start(){
+		_playerActive=0;
 		_players[0]->move();
 	}
 		

@@ -27,6 +27,7 @@ namespace Players{
 	}
 	
 	gameplay::Node* DevicePlayer::getCue(){
+		
 		return _gameController->getCue();
 	}
 }

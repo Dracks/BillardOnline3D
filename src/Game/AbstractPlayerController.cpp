@@ -15,6 +15,7 @@ namespace Game{
 	AbstractPlayerController::AbstractPlayerController(AbstractGameController* gameController, int player){
 		_player=player;
 		_gameController=gameController;
+		assert(gameController!=NULL);
 	}
 	AbstractPlayerController::~AbstractPlayerController(){
 		
