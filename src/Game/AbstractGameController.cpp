@@ -20,9 +20,12 @@ namespace Game{
 		_scene->removeNode(cueBase);
 		//cueBase->getParent()->removeChild(cueBase);
 		
+		std::cout << "isKinematic" << cueBase->getCollisionObject()->isKinematic() << std::endl;
+		((PhysicsRigidBody*)cueBase->getCollisionObject())->setKinematic(true);
+		
 		Node* cueGroup=_scene->addNode();
 		cueGroup->addChild(cueBase);
-		cueBase->setTranslation(1, 0, 0);
+		cueBase->setTranslation(1.5, 0, 0);
 		cueGroup->setId("CueGroup");
 		cueGroup->setTranslation(0,0,0);
 		

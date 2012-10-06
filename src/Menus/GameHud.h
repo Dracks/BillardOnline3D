@@ -87,6 +87,8 @@ namespace Menus{
 		gameplay::Camera* _activeCamera;
 		
 		int _oldX, _oldY;
+		
+		char _drawStatus;
 	};
 }
 

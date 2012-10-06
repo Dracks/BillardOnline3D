@@ -98,6 +98,8 @@ void BillardMainClass::keyEvent(Keyboard::KeyEvent evt, int key)
             break;
         }
     }
+	
+	_screen->keyEvent(evt, key);
 }
 
 void BillardMainClass::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex)

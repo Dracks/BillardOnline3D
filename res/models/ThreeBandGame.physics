@@ -35,7 +35,7 @@ collisionObject Cue
 {
 	type = RIGID_BODY
     shape = MESH
-    mass = 0
+    mass = 605
     friction = 0.0
     restitution = 1.0
     linearDamping = 0.1

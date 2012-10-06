@@ -32,6 +32,7 @@ namespace Menus{
 		_status=WAIT;
 		
 		_activeCamera=_gameController->getScene()->getActiveCamera();
+		_drawStatus=0;
 		
 		//Scene* scena=_gameController->getScene();
 		//_topCamera=scena->findNode("CameraTop")->getCamera();
@@ -45,7 +46,25 @@ namespace Menus{
 	}
 	
 	void GameHud::keyEvent(Keyboard::KeyEvent evt, int key){
-		
+		if (evt==Keyboard::KEY_PRESS){
+			switch (key) {
+				case Keyboard::KEY_C:
+					this->lookOverCue(Control::Listener::CLICK);
+					break;
+				case Keyboard::KEY_T:
+					this->lookTop(Control::Listener::CLICK);
+					break;
+				case Keyboard::KEY_F:
+					this->lookFree(Control::Listener::CLICK);
+					break;
+				case Keyboard::KEY_D:
+					_drawStatus++;
+					_drawStatus=_drawStatus%3;
+					break;
+				default:
+					break;
+			}
+		}
 	}
 	
 	void GameHud::touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex){
@@ -107,9 +126,10 @@ namespace Menus{
 	
 	void GameHud::render(gameplay::Scene*){
 		if (_gameController!=NULL){
-			_gameController->getScene()->visit(this, &GameHud::drawScene);
-			
-			_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
+			if (_drawStatus<2)
+				_gameController->getScene()->visit(this, &GameHud::drawScene);
+			if (_drawStatus>0)
+				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
 			//Vector3 p=_gameController->getPlayerBall()->getTranslation();
 			//std::cout << p.x << "," << p.y << "," << p.z << std::endl;
 			
@@ -147,7 +167,10 @@ namespace Menus{
 		
 	}
 	void GameHud::onMoveShot(int difX,int difY){
-		
+		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
+		if (cueGroup!=NULL){
+			
+		}
 	}
 	
 	void GameHud::disable(){
