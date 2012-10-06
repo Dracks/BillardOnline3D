@@ -8,6 +8,12 @@ scene
         collisionObject = res/models/ThreeBandGame.physics#Table
     }
 	
+	node Frame
+    {
+        material = res/models/ThreeBandGame.material#Table
+        collisionObject = res/models/ThreeBandGame.physics#Frame
+    }
+	
 	node Ball
 	{
 		material = res/models/ThreeBandGame.material#WhiteBall

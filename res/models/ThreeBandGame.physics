@@ -9,6 +9,17 @@ collisionObject Table
     angularDamping = 0.16
 }
 
+collisionObject Frame
+{
+    type = RIGID_BODY
+    shape = MESH
+    mass = 0.0
+    friction = 0.1
+    restitution = 1.0
+    linearDamping = 0.025
+    angularDamping = 0.16
+}
+
 collisionObject Ball
 {
     type = RIGID_BODY

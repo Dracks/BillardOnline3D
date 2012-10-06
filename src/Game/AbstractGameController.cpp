@@ -13,10 +13,11 @@ namespace Game{
 	//class AbstractGameController{
 	AbstractGameController::AbstractGameController(std::string scene){
 		_scene=Scene::load(scene.c_str());
-		Node* cue=_scene->findNode("Cue");
-		Node* cueBase=cue->clone();
+		//Node* cue=_scene->findNode("Cue");
+		Node* cueBase=_scene->findNode("Cue");
+		cueBase->addRef();
 		//_scene->removeNode(_scene->findNode("Cue"));
-		//_scene->removeNode(cueBase);
+		_scene->removeNode(cueBase);
 		//cueBase->getParent()->removeChild(cueBase);
 		
 		Node* cueGroup=_scene->addNode();
@@ -38,9 +39,11 @@ namespace Game{
 		_cueGroup=cueGroup;
 		
 		_cueGroup->addRef();
-		cue->addRef();
+		//cue->addRef();
 		
-		_scene->removeNode(cue);
+		//cueBase->setCollisionObject(cue->getCollisionObject());
+		
+		//_scene->removeNode(cue);
 		_scene->removeNode(cueGroup);
 		
 		_scene->findNode("Ball")->setTranslationZ(0.0829773f);
