@@ -14,30 +14,42 @@ namespace Game{
 #include <iostream>
 #include "gameplay.h"
 #include "AbstractPlayerController.h"
+// Aquest ens crea el deadlock
+#include "GameHud.h"
 #include <vector>
 
 namespace Game{
-	class AbstractGameController{
+	class AbstractGameController: public gameplay::PhysicsCollisionObject::CollisionListener{
 	public:
 		AbstractGameController(std::string);
 		~AbstractGameController();
 		
 		void start();
 		
+		void setGameHud(Menus::GameHud*);
 		void setPlayer(AbstractPlayerController*);
 		
 		gameplay::Scene* getScene();
 		
 		char getPlayerActive();
 		
-		gameplay::Node* getPlayerBall();
+		virtual gameplay::Node* getPlayerBall();
 		
-		gameplay::Node* getCue();
+		virtual gameplay::Node* getCue();
+		
+		virtual void update(float timeElapsed);
+		
+		virtual void collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
+                                    const gameplay::PhysicsCollisionObject::CollisionPair& collisionPair,
+                                    const gameplay::Vector3& contactPointA = gameplay::Vector3::zero(),
+                                    const gameplay::Vector3& contactPointB = gameplay::Vector3::zero());
+		
 	protected:
 		gameplay::Scene* _scene;
-		std::vector<gameplay::Node*> balls;
+		std::vector<gameplay::Node*> _ballsList;
 		
 		gameplay::Node* _cueGroup;
+		Menus::GameHud* _gameHud;
 		
 	private:
 		char _playerActive;

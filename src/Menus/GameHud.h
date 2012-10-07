@@ -38,7 +38,14 @@ namespace Menus{
 		 * @brief register the user as the actual user controlling the game (checking that)
 		 */
 		void registerPlayerRound(Players::DevicePlayer*);
+		/**
+		 * @brief disable user actions and show the actions.
+    	 */
+		void startRuning();
 		
+		/*
+		 * Control the Cue
+		 */
 		void onMovePoint(int difX,int difY);
 		void onMoveEffect(int difX,int difY);
 		void onMoveShot(int difX,int difY);
@@ -68,12 +75,6 @@ namespace Menus{
 		 * Game Methods
 		 */
 		void pause(gameplay::Control::Listener::EventType);
-		
-		
-		/**
-		 * @brief disable user actions and show the actions.
-    	 */
-		void startRuning();
 		
 	private:
 		GameStatus _status, _oldStatus;

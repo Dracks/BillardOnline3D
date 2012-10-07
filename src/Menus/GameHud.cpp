@@ -34,6 +34,9 @@ namespace Menus{
 		_activeCamera=_gameController->getScene()->getActiveCamera();
 		_drawStatus=0;
 		
+		
+		_gameController->setGameHud(this);
+		
 		//Scene* scena=_gameController->getScene();
 		//_topCamera=scena->findNode("CameraTop")->getCamera();
 		//_freeCamera=scena->findNode("CameraFree")->getCamera();
@@ -122,6 +125,9 @@ namespace Menus{
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
 		}
+		
+		_gameController->update(timeElapsed);
+		
 	}
 	
 	void GameHud::render(gameplay::Scene*){
@@ -131,9 +137,9 @@ namespace Menus{
 			if (_drawStatus>0)
 				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
 			Vector3 p=_gameController->getPlayerBall()->getTranslation();
-			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			//std::cout << p.x << "," << p.y << "," << p.z << std::endl;
 			p=_playerController->getCue()->getTranslation();
-			std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
+			//std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
 			
 		}
 		
@@ -172,9 +178,16 @@ namespace Menus{
 		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
 			float my=(float)difY/30.0f;
-			Vector3 direction=cueGroup->getForwardVector()*my;
+			Vector3 direction=cueGroup->getBackVector()*my;
 			std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
+			//cueGroup->getCollisionObject()->setEnabled(true);
+			Vector3 nullDirection(0.000001,0,0);
+			((PhysicsRigidBody*)cueGroup->getCollisionObject())->setLinearVelocity(nullDirection);
+			
 			cueGroup->translate(direction);
+			
+			//direction=((PhysicsRigidBody*)_gameController->getPlayerBall()->getCollisionObject())->getLinearVelocity();
+			//std::cout << "BallVelocity" <<direction.x << "," << direction.y << ","  << direction.z << std::endl;
 			
 		}
 	}
@@ -198,6 +211,14 @@ namespace Menus{
 			_gameController->getScene()->addNode(cue);
 		}
 	}
+	
+	void GameHud::startRuning(){
+		if (strcmp(_activeCamera->getNode()->getId(), "CameraCue")==0){
+			this->lookTop(Control::Listener::CLICK);
+		}
+		_status=RUNING;
+	}
+	
 	
 	void GameHud::exit(gameplay::Control::Listener::EventType){
 		_controller->changeToScreen(new MainMenu(this->_controller));
@@ -249,10 +270,6 @@ namespace Menus{
 		_status=PAUSE;
 		_exit->enable();
 		_hud->disable();
-	}
-	
-	void GameHud::startRuning(){
-		
 	}
 	
 }

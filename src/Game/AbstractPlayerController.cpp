@@ -6,6 +6,7 @@
 //
 //
 
+#include "DevicePlayer.h" // Trencar el deadlock
 #include "AbstractPlayerController.h"
 
 

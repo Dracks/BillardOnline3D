@@ -13,15 +13,12 @@ namespace Game{
 	//class AbstractGameController{
 	AbstractGameController::AbstractGameController(std::string scene){
 		_scene=Scene::load(scene.c_str());
-		//Node* cue=_scene->findNode("Cue");
 		Node* cueBase=_scene->findNode("Cue");
 		cueBase->addRef();
-		//_scene->removeNode(_scene->findNode("Cue"));
 		_scene->removeNode(cueBase);
-		//cueBase->getParent()->removeChild(cueBase);
 		
-		std::cout << "isKinematic" << cueBase->getCollisionObject()->isKinematic() << std::endl;
 		((PhysicsRigidBody*)cueBase->getCollisionObject())->setKinematic(true);
+		//((PhysicsRigidBody*)cueBase->getCollisionObject())->set
 		
 		Node* cueGroup=_scene->addNode();
 		cueGroup->addChild(cueBase);
@@ -30,35 +27,25 @@ namespace Game{
 		cueGroup->setTranslation(0,0,0);
 		
 		Node* cameraCueNode=_scene->findNode("CameraFree")->clone();
-		//_scene->removeNode(cameraCueNode);
 		cameraCueNode->setId("CameraCue");
-		//cameraCueNode->getParent()->removeChild(cameraCueNode);
 		cueGroup->addChild(cameraCueNode);
 		cameraCueNode->setTranslation(2.0, 0.1, 0.2);
 		cameraCueNode->setRotation(0.498, 0.502, 0.498, 0.502);
 		
-		//_scene->addNode(cueGroup);
-		
 		_cueGroup=cueGroup;
 		
 		_cueGroup->addRef();
-		//cue->addRef();
-		
-		//cueBase->setCollisionObject(cue->getCollisionObject());
-		
-		//_scene->removeNode(cue);
 		_scene->removeNode(cueGroup);
 		
-		//_scene->findNode("Ball")->setTranslationZ(0.0829773f);
+		std::cout << "enabled" << cueBase->getCollisionObject()->isEnabled() << std::endl;
+		std::cout << "kinematic" << cueBase->getCollisionObject()->isKinematic() << std::endl;
+		std::cout << "dynamic" << cueBase->getCollisionObject()->isDynamic() << std::endl;
+		_ballsList.push_back(_scene->findNode("Ball"));
 		
-		//Quaternion quaternion=_scene->findNode("CameraTop")->getRotation();
-		//std::cout << quaternion.x << ","<< quaternion.y <<","<< quaternion.z <<","<< quaternion.w<< std::endl;
+		_ballsList[0]->getCollisionObject()->addCollisionListener(this);
 		
-		//quaternion=cueBase->getRotation();
-		//std::cout << quaternion.x << ","<< quaternion.y <<","<< quaternion.z <<","<< quaternion.w<< std::endl;
+		_statusGame=0;
 		
-		//std::cout << cueGroup->getScene() << std::endl;
-		//_scene->removeNode(cue);
 	}
 	
 	AbstractGameController::~AbstractGameController(){
@@ -70,7 +57,11 @@ namespace Game{
 		_playerActive=0;
 		_players[0]->move();
 	}
-		
+	
+	void AbstractGameController::setGameHud(Menus::GameHud* gh){
+		_gameHud=gh;
+	}
+	
 	void AbstractGameController::setPlayer(AbstractPlayerController*player){
 		_players.push_back(player);
 	}
@@ -90,5 +81,46 @@ namespace Game{
 	gameplay::Node* AbstractGameController::getCue(){
 		return _cueGroup;
 	}
+	
+	void AbstractGameController::update(float timeElapsed){
+		bool moving=false;
+		int i;
+		for (i=0; i<_ballsList.size() && !moving; i++){
+			Vector3 velocity=((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->getLinearVelocity();
+			float vSquare=velocity.x*velocity.x+velocity.y*velocity.y+velocity.y*velocity.z;
+			std::cout << "Velocity Square:" << vSquare << std::endl;
+			
+			if (vSquare>0.00001f){
+				moving=true;
+			}
+		}
+		if (_statusGame==1 && !moving){
+			_players[0]->move();
+			Vector3 nullVelocity(0,0,0);
+			_statusGame=0;
+			for (i=0;i<_ballsList.size(); i++){
+				PhysicsRigidBody* co=(PhysicsRigidBody*)_ballsList[i]->getCollisionObject();
+				co->setLinearVelocity(nullVelocity);
+				co->setAngularVelocity(nullVelocity);
+			}
+		} else if (_statusGame==0 && moving) {
+			_gameHud->startRuning();
+			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
+			_scene->removeNode(_cueGroup);
+			_cueGroup->setTranslation(0, 0, -10);
+			_statusGame=1;
+		}//*/
+	}
+	
+	void AbstractGameController::collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
+						const gameplay::PhysicsCollisionObject::CollisionPair& collisionPair,
+						const gameplay::Vector3& contactPointA,
+						const gameplay::Vector3& contactPointB){
 		
+		Node* nodeA=collisionPair.objectA->getNode();
+		Node* nodeB=collisionPair.objectB->getNode();
+		std::cout << "Collision!" << std::endl;
+		std::cout << nodeA->getId() << std::endl;
+		std::cout << nodeB->getId() << std::endl;
+	}
 }
