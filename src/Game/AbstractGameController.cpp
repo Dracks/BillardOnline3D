@@ -12,7 +12,21 @@ using namespace gameplay;
 namespace Game{
 	//class AbstractGameController{
 	AbstractGameController::AbstractGameController(std::string scene){
+		
 		_scene=Scene::load(scene.c_str());
+		
+		Vector3 color(0.5,0.5,0.5);
+		
+		//std::cout << color.x << "," << color.y << "," << color.z << std::endl;
+		_scene->setAmbientColor(0.5, 0.5, 0.5);
+		
+		Node* lightNode=_scene->findNode("Lamp");
+		lightNode->getLight()->setColor(color);
+		this->initializeMaterial(_scene, _scene->findNode("Frame"), _scene->findNode("Frame")->getModel()->getMaterial());
+		this->initializeMaterial(_scene, _scene->findNode("Cue"), _scene->findNode("Cue")->getModel()->getMaterial());
+		this->initializeMaterial(_scene, _scene->findNode("Ball"), _scene->findNode("Ball")->getModel()->getMaterial());
+		
+		
 		Node* cueBase=_scene->findNode("Cue");
 		cueBase->addRef();
 		_scene->removeNode(cueBase);
@@ -43,9 +57,21 @@ namespace Game{
 		_ballsList.push_back(_scene->findNode("Ball"));
 		
 		_ballsList[0]->getCollisionObject()->addCollisionListener(this);
+		_ballsList[0]->getCollisionObject()->addCollisionListener(this, cueBase->getCollisionObject());
 		
 		_statusGame=0;
-		
+	}
+	
+	void AbstractGameController::initializeMaterial(Scene* scene, Node* node, Material* material)
+	{
+		// Bind light shader parameters to dynamic objects only
+		if (node->isDynamic())
+		{
+			Node* lightNode = scene->findNode("Lamp");
+			material->getParameter("u_ambientColor")->bindValue(scene, &Scene::getAmbientColor);
+			material->getParameter("u_lightColor")->bindValue(lightNode->getLight(), &Light::getColor);
+			material->getParameter("u_lightDirection")->bindValue(lightNode, &Node::getForwardVectorView);
+		}
 	}
 	
 	AbstractGameController::~AbstractGameController(){
@@ -85,10 +111,18 @@ namespace Game{
 	void AbstractGameController::update(float timeElapsed){
 		bool moving=false;
 		int i;
+		if (_statusGame==2){
+			_gameHud->startRuning();
+			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
+			_scene->removeNode(_cueGroup);
+			//_cueGroup->setTranslation(0, 0, -10);
+			_cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(false);
+			_statusGame=1;
+		}
 		for (i=0; i<_ballsList.size() && !moving; i++){
 			Vector3 velocity=((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->getLinearVelocity();
 			float vSquare=velocity.x*velocity.x+velocity.y*velocity.y+velocity.y*velocity.z;
-			std::cout << "Velocity Square:" << vSquare << std::endl;
+			//std::cout << "Velocity Square:" << vSquare << std::endl;
 			
 			if (vSquare>0.00001f){
 				moving=true;
@@ -104,11 +138,7 @@ namespace Game{
 				co->setAngularVelocity(nullVelocity);
 			}
 		} else if (_statusGame==0 && moving) {
-			_gameHud->startRuning();
-			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
-			_scene->removeNode(_cueGroup);
-			_cueGroup->setTranslation(0, 0, -10);
-			_statusGame=1;
+			_statusGame=2;
 		}//*/
 	}
 	
@@ -122,5 +152,6 @@ namespace Game{
 		std::cout << "Collision!" << std::endl;
 		std::cout << nodeA->getId() << std::endl;
 		std::cout << nodeB->getId() << std::endl;
+		
 	}
 }

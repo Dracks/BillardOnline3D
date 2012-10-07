@@ -50,6 +50,7 @@ namespace Menus{
 	
 	void GameHud::keyEvent(Keyboard::KeyEvent evt, int key){
 		if (evt==Keyboard::KEY_PRESS){
+			bool match=true;
 			switch (key) {
 				case Keyboard::KEY_C:
 					this->lookOverCue(Control::Listener::CLICK);
@@ -65,7 +66,27 @@ namespace Menus{
 					_drawStatus=_drawStatus%3;
 					break;
 				default:
+					match=false;
 					break;
+			}
+			if (_status!=RUNING && not match){
+				switch (key) {
+					case Keyboard::KEY_S:
+						_status=SHOT;
+						break;
+					case Keyboard::KEY_P:
+						_status=POINT;
+						break;
+					case Keyboard::KEY_E:
+						_status=EFFECT;
+						break;
+					case Keyboard::KEY_L:
+						_status=LOOK;
+						break;
+						
+					default:
+						break;
+				}
 			}
 		}
 	}
@@ -138,7 +159,7 @@ namespace Menus{
 				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
 			Vector3 p=_gameController->getPlayerBall()->getTranslation();
 			//std::cout << p.x << "," << p.y << "," << p.z << std::endl;
-			p=_playerController->getCue()->getTranslation();
+			//p=_playerController->getCue()->getTranslation();
 			//std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
 			
 		}
@@ -177,14 +198,19 @@ namespace Menus{
 	void GameHud::onMoveShot(int difX,int difY){
 		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
-			float my=(float)difY/30.0f;
+			float my=(float)difY/50.f;
 			Vector3 direction=cueGroup->getBackVector()*my;
 			std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
 			//cueGroup->getCollisionObject()->setEnabled(true);
-			Vector3 nullDirection(0.000001,0,0);
-			((PhysicsRigidBody*)cueGroup->getCollisionObject())->setLinearVelocity(nullDirection);
-			
+			//Vector3 nullDirection(0.000001,0,0);
+			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setKinematic(false);
+			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setLinearVelocity(direction);
 			cueGroup->translate(direction);
+			/*cueGroup->translate(direction);
+			cueGroup->translate(direction);
+			cueGroup->translate(direction);//*/
+			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setKinematic(true);
+			//cueGroup->translate(direction);
 			
 			//direction=((PhysicsRigidBody*)_gameController->getPlayerBall()->getCollisionObject())->getLinearVelocity();
 			//std::cout << "BallVelocity" <<direction.x << "," << direction.y << ","  << direction.z << std::endl;
@@ -204,11 +230,14 @@ namespace Menus{
 		if (_gameController->getPlayerActive()==player->getPlayer()){
 			_playerController=player;
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
-			Node* cue=_playerController->getCue();
-			cue->setTranslation(ballPosition);
+			Node* cueGroup=_playerController->getCue();
+			cueGroup->setTranslation(ballPosition);
 			//std::cout << cue << std::endl;
 			//std::cout << cue->getId() << std::endl;
-			_gameController->getScene()->addNode(cue);
+			_gameController->getScene()->addNode(cueGroup);
+			//if (cue->getCollisionObject()!=NULL)
+			cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(true);
+			_status=LOOK;
 		}
 	}
 	

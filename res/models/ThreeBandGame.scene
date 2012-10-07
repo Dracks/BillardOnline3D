@@ -12,18 +12,21 @@ scene
     {
         material = res/models/ThreeBandGame.material#Table
         collisionObject = res/models/ThreeBandGame.physics#Frame
+		dynamic = true
     }
 	
 	node Ball
 	{
 		material = res/models/ThreeBandGame.material#WhiteBall
 		collisionObject = res/models/ThreeBandGame.physics#Ball
+		dynamic = true
 	}
 	
 	node Cue
 	{
 		material = res/models/ThreeBandGame.material#Cue
 		collisionObject = res/models/ThreeBandGame.physics#Cue
+		dynamic = true
 	}
 	
 	physics
