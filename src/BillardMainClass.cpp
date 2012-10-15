@@ -13,7 +13,7 @@ BillardMainClass::BillardMainClass()
 
 void BillardMainClass::initialize()
 {
-	_scene=Scene::create();
+	/*_scene=Scene::create();
 	
     Node* cameraNode = _scene->addNode("Camera");
     _cameraParent = _scene->addNode("CameraParent");
@@ -23,6 +23,16 @@ void BillardMainClass::initialize()
     cameraNode->setTranslation(0.0f, 0.0f, 40.0f);
     _scene->setActiveCamera(camera);
     SAFE_RELEASE(camera);//*/
+	
+	_scene = Scene::create();
+    Node* cameraNode = _scene->addNode("Camera");
+    _cameraParent = _scene->addNode("CameraParent");
+    _cameraParent->addChild(cameraNode);
+    Camera* camera = Camera::createPerspective(45.0f, (float)getWidth() / (float)getHeight(), 0.25f, 1000.0f);
+    cameraNode->setCamera(camera);
+    cameraNode->setTranslation(0.0f, 0.0f, 40.0f);
+    _scene->setActiveCamera(camera);
+    SAFE_RELEASE(camera);
 	
 	_screen= new Menus::MainMenu(this);
 	//_newScreen = new Menus::SelectGame(this);
@@ -48,6 +58,7 @@ void BillardMainClass::initialize()
     boxMaterial->getParameter("u_ambientColor")->setValue(_scene->getAmbientColor());
     boxMaterial->getParameter("u_lightColor")->setValue(light->getColor());
     boxMaterial->getParameter("u_lightDirection")->setValue(lightNode->getForwardVectorView());*/
+	std::cout << _scene->getActiveCamera() << std::endl;
 }
 
 void BillardMainClass::finalize()
@@ -69,7 +80,7 @@ void BillardMainClass::render(float elapsedTime)
 {
     // Clear the color and depth buffers
     clear(CLEAR_COLOR_DEPTH, Vector4::zero(), 1.0f, 0);
-	
+
 	_screen->render(_scene);
 
     // Visit all the nodes in the scene for drawing

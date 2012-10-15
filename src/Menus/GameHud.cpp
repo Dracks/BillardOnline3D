@@ -152,6 +152,9 @@ namespace Menus{
 			_isMoving=false;
 		}
 		
+		
+		_hud->update(timeElapsed);
+		_exit->update(timeElapsed);
 		_gameController->update(timeElapsed);
 		
 	}
@@ -212,7 +215,7 @@ namespace Menus{
 			_oldTimeMove=time;
 			
 			Vector3 direction=cueGroup->getBackVector()*my;
-			std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
+			//std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
 			//cueGroup->getCollisionObject()->setEnabled(true);
 			//Vector3 nullDirection(0.000001,0,0);
 			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setKinematic(false);

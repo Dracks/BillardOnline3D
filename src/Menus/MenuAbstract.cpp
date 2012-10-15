@@ -37,7 +37,6 @@ namespace Menus{
 	}
 	
 	void MenuInterface::update(float elapsedTime){
-		
 	}
 	
 	

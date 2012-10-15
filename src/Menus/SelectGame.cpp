@@ -38,6 +38,7 @@ namespace Menus{
 			((Button*) _form->getControl("threeBand"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
 			
 		}
+		_form->update(timeElapsed);
 	}
 		
 	void SelectGame::render(gameplay::Scene*){

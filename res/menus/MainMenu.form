@@ -2,8 +2,7 @@ form particleEditor
 {
     theme = res/theme/editor.theme
     autoWidth = true
-    autoHeight = true	
-	alignment = ALIGN_VCENTER_HCENTER
+    autoHeight = true
 
     container presets
     {
