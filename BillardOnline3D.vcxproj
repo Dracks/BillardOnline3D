@@ -82,7 +82,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>lua.lib;OpenAL32.lib;OpenGL32.lib;GLU32.lib;glew32.lib;libpng14.lib;zlib.lib;gameplay.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/win32;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/windows;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -114,7 +114,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>lua.lib;OpenAL32.lib;OpenGL32.lib;GLU32.lib;glew32.lib;libpng14.lib;zlib.lib;gameplay.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/win32;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/windows;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -146,7 +146,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>lua.lib;OpenAL32.lib;OpenGL32.lib;GLU32.lib;glew32.lib;libpng14.lib;zlib.lib;gameplay.lib;BulletDynamics.lib;BulletCollision.lib;LinearMath.lib;libogg.lib;libvorbis.lib;libvorbisfile.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/win32;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/win32;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../../../Applications/blackberry-GamePlay/external-deps/lua/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/openal/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/glew/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/windows;../../../../Applications/blackberry-GamePlay/external-deps/zlib/lib/windows;../../../../Applications/blackberry-GamePlay/gameplay/$(Configuration)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>

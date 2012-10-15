@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
     <key>CFBundleDisplayName</key>
-	<string>Billard OnLine 3D</string>
+	<string>Billard Online 3D</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>

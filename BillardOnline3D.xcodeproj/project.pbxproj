@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		42438B531491AD2000D218B8 /* libgameplay.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42438B521491AD2000D218B8 /* libgameplay.a */; };
+		424CC03C161FCBDD00577827 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 424CC03B161FCBDD00577827 /* IOKit.framework */; };
 		428F7BDE15CB131A009ED24C /* game.config in Resources */ = {isa = PBXBuildFile; fileRef = 428F7BDD15CB131A009ED24C /* game.config */; };
 		42C932C11491A0DB0098216A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42C932C01491A0DB0098216A /* Cocoa.framework */; };
 		42C932EE1491A4CB0098216A /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 42C932ED1491A4CB0098216A /* icon.png */; };
@@ -40,27 +41,17 @@
 		5BAF2070152F2DDD003E2AC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206A152F2DDD003E2AC3 /* OpenGLES.framework */; };
 		5BAF2071152F2DDD003E2AC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206B152F2DDD003E2AC3 /* QuartzCore.framework */; };
 		5BAF2072152F2DDD003E2AC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206C152F2DDD003E2AC3 /* UIKit.framework */; };
-		A4616C48161B6EB300BE5C9A /* ThreeBandGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */; };
-		A4A09AF51618606500509476 /* AbstractPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF31618606400509476 /* AbstractPlayerController.cpp */; };
-		A4A09AF81618608400509476 /* DevicePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF61618608400509476 /* DevicePlayer.cpp */; };
-		A4A09AFB161862C200509476 /* AbstractGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4A09AF9161862C200509476 /* AbstractGameController.cpp */; };
-		A4C9444116177F1000CB8518 /* MenuAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C9443F16177F0F00CB8518 /* MenuAbstract.cpp */; };
-		A4C944451617A2F900CB8518 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C944431617A2F800CB8518 /* SelectGame.cpp */; };
-		A4C944461617A2F900CB8518 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4C944431617A2F800CB8518 /* SelectGame.cpp */; };
-		A4DFE30E161A1CE90096CF53 /* GameHud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4DFE30C161A1CE90096CF53 /* GameHud.cpp */; };
-		A4E7B91B1615A80D0045F040 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4E7B9191615A80D0045F040 /* MainMenu.cpp */; };
-		A4E7B91C1615A80D0045F040 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4E7B9191615A80D0045F040 /* MainMenu.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A4E7B9071615A5EA0045F040 /* PBXContainerItemProxy */ = {
+		A43A0792162C6A370026EC09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4234D99A14686C52003031B3;
 			remoteInfo = "gameplay-macosx";
 		};
-		A4E7B9091615A5EA0045F040 /* PBXContainerItemProxy */ = {
+		A43A0794162C6A370026EC09 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 			proxyType = 2;
@@ -71,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		42438B521491AD2000D218B8 /* libgameplay.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgameplay.a; path = "~/Library/Developer/Xcode/DerivedData/gameplay-exiunaubxxjndaapmcqkaoeboiob/Build/Products/Debug/libgameplay.a"; sourceTree = "<group>"; };
+		424CC03B161FCBDD00577827 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		428F7BDD15CB131A009ED24C /* game.config */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = game.config; sourceTree = "<group>"; };
 		42C932BC1491A0DB0098216A /* BillardOnline3D-macosx.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BillardOnline3D-macosx.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		42C932C01491A0DB0098216A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -99,22 +91,6 @@
 		5BAF206C152F2DDD003E2AC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = "../../../../Applications/blackberry-GamePlay/gameplay/gameplay.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = text; name = shaders; path = "../../../../Applications/blackberry-GamePlay/gameplay/res/shaders"; sourceTree = SOURCE_ROOT; };
-		A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ThreeBandGame.cpp; path = Game/ModeGames/ThreeBandGame.cpp; sourceTree = "<group>"; };
-		A4616C47161B6EB300BE5C9A /* ThreeBandGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThreeBandGame.h; path = Game/ModeGames/ThreeBandGame.h; sourceTree = "<group>"; };
-		A4A09AF31618606400509476 /* AbstractPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbstractPlayerController.cpp; path = Game/AbstractPlayerController.cpp; sourceTree = "<group>"; };
-		A4A09AF41618606500509476 /* AbstractPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractPlayerController.h; path = Game/AbstractPlayerController.h; sourceTree = "<group>"; };
-		A4A09AF61618608400509476 /* DevicePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DevicePlayer.cpp; path = Players/DevicePlayer.cpp; sourceTree = "<group>"; };
-		A4A09AF71618608400509476 /* DevicePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DevicePlayer.h; path = Players/DevicePlayer.h; sourceTree = "<group>"; };
-		A4A09AF9161862C200509476 /* AbstractGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AbstractGameController.cpp; path = Game/AbstractGameController.cpp; sourceTree = "<group>"; };
-		A4A09AFA161862C200509476 /* AbstractGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AbstractGameController.h; path = Game/AbstractGameController.h; sourceTree = "<group>"; };
-		A4C9443F16177F0F00CB8518 /* MenuAbstract.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MenuAbstract.cpp; path = Menus/MenuAbstract.cpp; sourceTree = "<group>"; };
-		A4C9444016177F1000CB8518 /* MenuAbstract.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuAbstract.h; path = Menus/MenuAbstract.h; sourceTree = "<group>"; };
-		A4C944431617A2F800CB8518 /* SelectGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SelectGame.cpp; path = Menus/SelectGame.cpp; sourceTree = "<group>"; };
-		A4C944441617A2F800CB8518 /* SelectGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelectGame.h; path = Menus/SelectGame.h; sourceTree = "<group>"; };
-		A4DFE30C161A1CE90096CF53 /* GameHud.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GameHud.cpp; path = Menus/GameHud.cpp; sourceTree = "<group>"; };
-		A4DFE30D161A1CE90096CF53 /* GameHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameHud.h; path = Menus/GameHud.h; sourceTree = "<group>"; };
-		A4E7B9191615A80D0045F040 /* MainMenu.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MainMenu.cpp; path = Menus/MainMenu.cpp; sourceTree = "<group>"; };
-		A4E7B91A1615A80D0045F040 /* MainMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainMenu.h; path = Menus/MainMenu.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +106,7 @@
 				42C933291491A6E50098216A /* libvorbisfile.a in Frameworks */,
 				42C9332C1491A7680098216A /* libpng.a in Frameworks */,
 				42C9332F1491A78D0098216A /* libz.dylib in Frameworks */,
+				424CC03C161FCBDD00577827 /* IOKit.framework in Frameworks */,
 				42C932C11491A0DB0098216A /* Cocoa.framework in Frameworks */,
 				42C9331D1491A6750098216A /* QuartzCore.framework in Frameworks */,
 				42C933171491A5EB0098216A /* OpenGL.framework in Frameworks */,
@@ -198,9 +175,6 @@
 		42C932C61491A0DB0098216A /* src */ = {
 			isa = PBXGroup;
 			children = (
-				A4A09AF216185FD800509476 /* Players */,
-				A4A09AEB16185F6500509476 /* Game */,
-				A4E7B9181615A7E40045F040 /* Menus */,
 				42C932EF1491A5160098216A /* BillardMainClass.cpp */,
 				42C932F01491A5160098216A /* BillardMainClass.h */,
 			);
@@ -238,6 +212,7 @@
 		5B61613A14CCC3590073B857 /* MacOSX */ = {
 			isa = PBXGroup;
 			children = (
+				424CC03B161FCBDD00577827 /* IOKit.framework */,
 				42C932C01491A0DB0098216A /* Cocoa.framework */,
 				42C9331C1491A6750098216A /* QuartzCore.framework */,
 				42C933161491A5EB0098216A /* OpenGL.framework */,
@@ -255,58 +230,13 @@
 			name = GamePlay;
 			sourceTree = "<group>";
 		};
-		A4616C45161B6E8400BE5C9A /* ModeGames */ = {
+		A43A078E162C6A370026EC09 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A4616C46161B6EB300BE5C9A /* ThreeBandGame.cpp */,
-				A4616C47161B6EB300BE5C9A /* ThreeBandGame.h */,
-			);
-			name = ModeGames;
-			sourceTree = "<group>";
-		};
-		A4A09AEB16185F6500509476 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				A4616C45161B6E8400BE5C9A /* ModeGames */,
-				A4A09AF9161862C200509476 /* AbstractGameController.cpp */,
-				A4A09AFA161862C200509476 /* AbstractGameController.h */,
-				A4A09AF31618606400509476 /* AbstractPlayerController.cpp */,
-				A4A09AF41618606500509476 /* AbstractPlayerController.h */,
-			);
-			name = Game;
-			sourceTree = "<group>";
-		};
-		A4A09AF216185FD800509476 /* Players */ = {
-			isa = PBXGroup;
-			children = (
-				A4A09AF61618608400509476 /* DevicePlayer.cpp */,
-				A4A09AF71618608400509476 /* DevicePlayer.h */,
-			);
-			name = Players;
-			sourceTree = "<group>";
-		};
-		A4E7B9031615A5EA0045F040 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A4E7B9081615A5EA0045F040 /* libgameplay.a */,
-				A4E7B90A1615A5EA0045F040 /* libgameplay.a */,
+				A43A0793162C6A370026EC09 /* libgameplay.a */,
+				A43A0795162C6A370026EC09 /* libgameplay.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		A4E7B9181615A7E40045F040 /* Menus */ = {
-			isa = PBXGroup;
-			children = (
-				A4E7B9191615A80D0045F040 /* MainMenu.cpp */,
-				A4E7B91A1615A80D0045F040 /* MainMenu.h */,
-				A4C9443F16177F0F00CB8518 /* MenuAbstract.cpp */,
-				A4C9444016177F1000CB8518 /* MenuAbstract.h */,
-				A4C944431617A2F800CB8518 /* SelectGame.cpp */,
-				A4C944441617A2F800CB8518 /* SelectGame.h */,
-				A4DFE30C161A1CE90096CF53 /* GameHud.cpp */,
-				A4DFE30D161A1CE90096CF53 /* GameHud.h */,
-			);
-			name = Menus;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,7 +250,6 @@
 				42C932B91491A0DB0098216A /* Frameworks */,
 				42C933301491A7B50098216A /* ShellScript */,
 				42C932BA1491A0DB0098216A /* Resources */,
-				5BAF20D7152F30C3003E2AC3 /* Copy Gameplay Resources - Run Script */,
 			);
 			buildRules = (
 			);
@@ -339,7 +268,6 @@
 				5B61611714CCC24C0073B857 /* Frameworks */,
 				5B61612414CCC24C0073B857 /* ShellScript */,
 				5B61612514CCC24C0073B857 /* Resources */,
-				5BAF20A3152F2FCE003E2AC3 /* Copy Gameplay Reousrces Run Script */,
 			);
 			buildRules = (
 			);
@@ -370,7 +298,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A4E7B9031615A5EA0045F040 /* Products */;
+					ProductGroup = A43A078E162C6A370026EC09 /* Products */;
 					ProjectRef = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 				},
 			);
@@ -383,18 +311,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A4E7B9081615A5EA0045F040 /* libgameplay.a */ = {
+		A43A0793162C6A370026EC09 /* libgameplay.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libgameplay.a;
-			remoteRef = A4E7B9071615A5EA0045F040 /* PBXContainerItemProxy */;
+			remoteRef = A43A0792162C6A370026EC09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A4E7B90A1615A5EA0045F040 /* libgameplay.a */ = {
+		A43A0795162C6A370026EC09 /* libgameplay.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libgameplay.a;
-			remoteRef = A4E7B9091615A5EA0045F040 /* PBXContainerItemProxy */;
+			remoteRef = A43A0794162C6A370026EC09 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -433,7 +361,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch -cm ${SRCROOT}/res";
+			shellScript = "cp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
 		};
 		5B61612414CCC24C0073B857 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -446,35 +374,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "touch -cm ${SRCROOT}/res";
-		};
-		5BAF20A3152F2FCE003E2AC3 /* Copy Gameplay Reousrces Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Gameplay Reousrces Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -rn ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
-		};
-		5BAF20D7152F30C3003E2AC3 /* Copy Gameplay Resources - Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Gameplay Resources - Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -rn ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rn ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
+			shellScript = "cp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -484,14 +384,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				42C932F11491A5160098216A /* BillardMainClass.cpp in Sources */,
-				A4E7B91B1615A80D0045F040 /* MainMenu.cpp in Sources */,
-				A4C9444116177F1000CB8518 /* MenuAbstract.cpp in Sources */,
-				A4C944451617A2F900CB8518 /* SelectGame.cpp in Sources */,
-				A4A09AF51618606500509476 /* AbstractPlayerController.cpp in Sources */,
-				A4A09AF81618608400509476 /* DevicePlayer.cpp in Sources */,
-				A4A09AFB161862C200509476 /* AbstractGameController.cpp in Sources */,
-				A4DFE30E161A1CE90096CF53 /* GameHud.cpp in Sources */,
-				A4616C48161B6EB300BE5C9A /* ThreeBandGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,8 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B61611614CCC24C0073B857 /* BillardMainClass.cpp in Sources */,
-				A4E7B91C1615A80D0045F040 /* MainMenu.cpp in Sources */,
-				A4C944461617A2F900CB8518 /* SelectGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
