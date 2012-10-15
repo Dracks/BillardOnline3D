@@ -18,7 +18,16 @@ namespace Game{
 
 namespace Game{
 	class ThreeBandGame: public AbstractGameController{
+	public:
+		ThreeBandGame();
+		~ThreeBandGame();
 		
+		Node* getPlayerBall();
+		
+		virtual void collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
+                                    const gameplay::PhysicsCollisionObject::CollisionPair& collisionPair,
+                                    const gameplay::Vector3& contactPointA = gameplay::Vector3::zero(),
+                                    const gameplay::Vector3& contactPointB = gameplay::Vector3::zero());
 	};
 }
 

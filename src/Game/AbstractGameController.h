@@ -22,8 +22,8 @@ namespace Game{
 	class AbstractGameController: public gameplay::PhysicsCollisionObject::CollisionListener{
 	public:
 		AbstractGameController(std::string);
-		void initializeMaterial(Scene* scene, Node* node, Material* material);
-		~AbstractGameController();
+		void initializeMaterial(Node* node, Material* material);
+		virtual ~AbstractGameController();
 		
 		void start();
 		
@@ -34,7 +34,7 @@ namespace Game{
 		
 		char getPlayerActive();
 		
-		virtual gameplay::Node* getPlayerBall();
+		virtual gameplay::Node* getPlayerBall()=0;
 		
 		virtual gameplay::Node* getCue();
 		

@@ -48,6 +48,30 @@ material WhiteBall : BasicMonoColor
 	}
 }
 
+material YellowBall : BasicMonoColor
+{
+	technique
+	{
+		pass
+		{
+			u_ambientColor = 0.8, 0.8, 0.4
+			u_diffuseColor = 0.9, 0.9, 0.5, 0.8
+		}
+	}
+}
+
+material RedBall : BasicMonoColor
+{
+	technique
+	{
+		pass
+		{
+			u_ambientColor = 0.8, 0.4, 0.4
+			u_diffuseColor = 0.9, 0.5, 0.5, 0.8
+		}
+	}
+}
+
 material Cue : BasicMonoColor
 {
 	technique

@@ -90,6 +90,9 @@ namespace Menus{
 		int _oldX, _oldY;
 		
 		char _drawStatus;
+		
+		double _oldTimeMove;
+		bool _isMoving;
 	};
 }
 

@@ -25,6 +25,8 @@ namespace Game{
 		virtual void move()=0;
 		
 		virtual char getPlayer();
+		
+		virtual float getVelocityCue()=0;
 	protected:
 		char _player;
 		AbstractGameController* _gameController;

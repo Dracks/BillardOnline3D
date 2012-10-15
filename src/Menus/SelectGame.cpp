@@ -10,6 +10,7 @@
 #include "MainMenu.h"
 #include "GameHud.h"
 #include "DevicePlayer.h"
+#include "ThreeBandGame.h"
 
 using namespace gameplay;
 using namespace ::Game;
@@ -48,7 +49,7 @@ namespace Menus{
 	}
 	
 	void SelectGame::createGame(gameplay::Control::Listener::EventType){
-		AbstractGameController* gc=new ::Game::AbstractGameController("res/models/ThreeBandGame.scene");
+		AbstractGameController* gc=new ThreeBandGame();
 		GameHud* gh=new GameHud(this->_controller, gc);
 		gc->setPlayer(new DevicePlayer(gc, 0, gh));
 		

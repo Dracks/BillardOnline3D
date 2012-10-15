@@ -30,4 +30,12 @@ namespace Players{
 		
 		return _gameController->getCue();
 	}
+	
+	float DevicePlayer::getVelocityCue(){
+		return _cueVelocity;
+	}
+	void DevicePlayer::setCueVelocity(float v){
+		_cueVelocity=v;
+	}
+
 }

@@ -13,7 +13,7 @@ BillardMainClass::BillardMainClass()
 
 void BillardMainClass::initialize()
 {
-	_scene=Scene::createScene();
+	_scene=Scene::create();
 	
     Node* cameraNode = _scene->addNode("Camera");
     _cameraParent = _scene->addNode("CameraParent");

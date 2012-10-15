@@ -22,9 +22,9 @@ namespace Game{
 		
 		Node* lightNode=_scene->findNode("Lamp");
 		lightNode->getLight()->setColor(color);
-		this->initializeMaterial(_scene, _scene->findNode("Frame"), _scene->findNode("Frame")->getModel()->getMaterial());
-		this->initializeMaterial(_scene, _scene->findNode("Cue"), _scene->findNode("Cue")->getModel()->getMaterial());
-		this->initializeMaterial(_scene, _scene->findNode("Ball"), _scene->findNode("Ball")->getModel()->getMaterial());
+		this->initializeMaterial(_scene->findNode("Frame"), _scene->findNode("Frame")->getModel()->getMaterial());
+		this->initializeMaterial(_scene->findNode("Cue"), _scene->findNode("Cue")->getModel()->getMaterial());
+		this->initializeMaterial(_scene->findNode("Ball"), _scene->findNode("Ball")->getModel()->getMaterial());
 		
 		
 		Node* cueBase=_scene->findNode("Cue");
@@ -62,13 +62,13 @@ namespace Game{
 		_statusGame=0;
 	}
 	
-	void AbstractGameController::initializeMaterial(Scene* scene, Node* node, Material* material)
+	void AbstractGameController::initializeMaterial(Node* node, Material* material)
 	{
 		// Bind light shader parameters to dynamic objects only
-		if (node->isDynamic())
+		if (node->getCollisionObject()->isDynamic())
 		{
-			Node* lightNode = scene->findNode("Lamp");
-			material->getParameter("u_ambientColor")->bindValue(scene, &Scene::getAmbientColor);
+			Node* lightNode = _scene->findNode("Lamp");
+			material->getParameter("u_ambientColor")->bindValue(_scene, &Scene::getAmbientColor);
 			material->getParameter("u_lightColor")->bindValue(lightNode->getLight(), &Light::getColor);
 			material->getParameter("u_lightDirection")->bindValue(lightNode, &Node::getForwardVectorView);
 		}
@@ -100,9 +100,9 @@ namespace Game{
 		return _playerActive;
 	}
 	
-	Node* AbstractGameController::getPlayerBall(){
+	/*Node* AbstractGameController::getPlayerBall(){
 		return _scene->findNode("Ball");
-	}
+	}*/
 	
 	gameplay::Node* AbstractGameController::getCue(){
 		return _cueGroup;
@@ -152,6 +152,10 @@ namespace Game{
 		std::cout << "Collision!" << std::endl;
 		std::cout << nodeA->getId() << std::endl;
 		std::cout << nodeB->getId() << std::endl;
-		
+		if (nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue")){
+			float cueVelocity=_players[_playerActive]->getVelocityCue();
+			((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getBackVector().normalize()*cueVelocity,&contactPointA);
+			std::cout << cueVelocity << std::endl;
+		}
 	}
 }

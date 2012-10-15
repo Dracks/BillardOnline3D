@@ -146,6 +146,11 @@ namespace Menus{
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
 		}
+		if (!_isMoving){
+			_oldTimeMove=_controller->getAbsoluteTime();
+		} else {
+			_isMoving=false;
+		}
 		
 		_gameController->update(timeElapsed);
 		
@@ -198,7 +203,14 @@ namespace Menus{
 	void GameHud::onMoveShot(int difX,int difY){
 		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
+			
 			float my=(float)difY/50.f;
+			_isMoving=true;
+			double time=_controller->getAbsoluteTime();
+			
+			_playerController->setCueVelocity(my/(time-_oldTimeMove));
+			_oldTimeMove=time;
+			
 			Vector3 direction=cueGroup->getBackVector()*my;
 			std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
 			//cueGroup->getCollisionObject()->setEnabled(true);

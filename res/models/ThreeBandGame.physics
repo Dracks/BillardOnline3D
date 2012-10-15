@@ -33,7 +33,7 @@ collisionObject Ball
 
 collisionObject Cue
 {
-	type = RIGID_BODY
+	type = GHOST_OBJECT
     shape = MESH
     mass = 605
     friction = 0.0

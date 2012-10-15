@@ -25,8 +25,12 @@ namespace Players{
 		void move();
 		
 		gameplay::Node* getCue();
+		
+		float getVelocityCue();
+		void setCueVelocity(float);
 	protected:
 		::Menus::GameHud* _gameHud;
+		float _cueVelocity;
 	};
 }
 
