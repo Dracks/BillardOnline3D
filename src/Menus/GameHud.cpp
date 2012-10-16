@@ -191,8 +191,13 @@ namespace Menus{
 	}
 	
 	void GameHud::onMovePoint(int difX,int difY){
-		float mx=(float)difX/30.0f;
-		float my=(float)difY;
+		float mx=(float)difX/25.0f;
+		//float my=(float)difY;
+		if (mx<0){
+			mx=-mx*mx;
+		} else {
+			mx=mx*mx;
+		}
 		//std::cout << mx << ", " << my << std::endl;
 		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
 		if (cueGroup!=NULL){
@@ -201,15 +206,39 @@ namespace Menus{
 		}
 	}
 	void GameHud::onMoveEffect(int difX,int difY){
+		float mx=(float)difX/25.0f;
+		float my=(float)difY/25.0f;
+		if (my<0){
+			my=-my*my;
+		} else {
+			my=my*my;
+		}
+		if (mx<0){
+			mx=-mx*mx;
+		} else {
+			mx=mx*mx;
+		}
 		
+		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
+		if (cueGroup!=NULL){
+			cueGroup->translateUp(mx);
+			cueGroup->translateForward(my);
+		}
 	}
 	void GameHud::onMoveShot(int difX,int difY){
 		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
 			
-			float my=(float)difY/50.f;
+			float my=(float)difY/25.f;
+			if (my<0){
+				my=-my*my;
+			} else {
+				my=my*my;
+			}
 			_isMoving=true;
 			double time=_controller->getAbsoluteTime();
+			
+			//std::cout << my << " => "<< my*my <<std::endl;
 			
 			_playerController->setCueVelocity(my/(time-_oldTimeMove));
 			_oldTimeMove=time;

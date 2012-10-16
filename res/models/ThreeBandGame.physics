@@ -3,7 +3,7 @@ collisionObject Table
     type = RIGID_BODY
     shape = BOX
     mass = 0.0
-    friction = 0.2
+    friction = 0.3
     restitution = 0.0
     linearDamping = 0.025
     angularDamping = 0.16
@@ -14,8 +14,8 @@ collisionObject Frame
     type = RIGID_BODY
     shape = MESH
     mass = 0.0
-    friction = 0.2
-    restitution = 0.4
+    friction = 0.3
+    restitution = 0.6
     linearDamping = 0.025
     angularDamping = 0.16
 }
@@ -25,10 +25,10 @@ collisionObject Ball
     type = RIGID_BODY
     shape = SPHERE
     mass = 205
-    friction = 0.0
+    friction = 0.9
     restitution = 0.9
-    linearDamping = 0.1
-    angularDamping = 0.2
+    linearDamping = 0.25
+    angularDamping = 0.25
 	dynamic = true
 }
 

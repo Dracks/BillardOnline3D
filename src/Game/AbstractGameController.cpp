@@ -111,14 +111,6 @@ namespace Game{
 	void AbstractGameController::update(float timeElapsed){
 		bool moving=false;
 		int i;
-		if (_statusGame==2){
-			_gameHud->startRuning();
-			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
-			_scene->removeNode(_cueGroup);
-			//_cueGroup->setTranslation(0, 0, -10);
-			_cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(false);
-			_statusGame=1;
-		}//*/
 		for (i=0; i<_ballsList.size() && !moving; i++){
 			Vector3 velocity=((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->getLinearVelocity();
 			float vSquare=velocity.x*velocity.x+velocity.y*velocity.y+velocity.y*velocity.z;
@@ -137,9 +129,7 @@ namespace Game{
 				co->setLinearVelocity(nullVelocity);
 				co->setAngularVelocity(nullVelocity);
 			}
-		} else if (_statusGame==0 && moving) {
-			_statusGame=2;
-		}//*/
+		} 
 	}
 	
 	void AbstractGameController::collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
@@ -152,12 +142,24 @@ namespace Game{
 		std::cout << "Collision!" << std::endl;
 		std::cout << nodeA->getId() << std::endl;
 		std::cout << nodeB->getId() << std::endl;
-		if (nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue")){
-			float cueVelocity=_players[_playerActive]->getVelocityCue()*50000;
+		if (nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue") && _statusGame==0){
+			float cueVelocity=_players[_playerActive]->getVelocityCue()*30000;
 			((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&contactPointA);
 			//((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity);
+			Vector3 p=nodeB->getTranslation()-nodeA->getTranslation();
+			//((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&p);
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			std::cout << contactPointA.x << "," << contactPointA.y << "," << contactPointA.z << std::endl;
+			
 			//((PhysicsRigidBody*) nodeA->getCollisionObject())->setLinearVelocity(_cueGroup->getRightVector().normalize()*cueVelocity);
 			std::cout << cueVelocity << std::endl;
+			_statusGame=1;
+			
+			_gameHud->startRuning();
+			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
+			_scene->removeNode(_cueGroup);
+			_cueGroup->setTranslation(0, 0, -10);
+			_cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(false);
 		}
 	}
 }
