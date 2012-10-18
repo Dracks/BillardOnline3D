@@ -23,6 +23,7 @@ namespace Players{
 	}
 		
 	void DevicePlayer::move(){
+		std::cout << "Moving: " << _player << std::endl;
 		_gameHud->registerPlayerRound(this);
 	}
 	

@@ -17,10 +17,13 @@ namespace Game{
 #include "AbstractGameController.h"
 
 namespace Game{
+	enum GamePointStatus {NONE, FIRST, CUSHION, END};
 	class ThreeBandGame: public AbstractGameController{
 	public:
-		ThreeBandGame();
+		ThreeBandGame(int minFrameCount);
 		~ThreeBandGame();
+		
+		void endRound();
 		
 		Node* getPlayerBall();
 		
@@ -28,7 +31,15 @@ namespace Game{
                                     const gameplay::PhysicsCollisionObject::CollisionPair& collisionPair,
                                     const gameplay::Vector3& contactPointA = gameplay::Vector3::zero(),
                                     const gameplay::Vector3& contactPointB = gameplay::Vector3::zero());
+	private:
+		GamePointStatus _pointStatus;
+		//std::vector<Node*> _listOtherBalls;
+		Node* _firstBallTouch;
+		char _frameCount;
+		char _minFrameCount;
+		std::vector<int> userPoints;
 	};
+
 }
 
 

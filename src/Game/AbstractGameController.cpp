@@ -57,9 +57,8 @@ namespace Game{
 		_ballsList.push_back(_scene->findNode("Ball"));
 		
 		_ballsList[0]->getCollisionObject()->addCollisionListener(this);
-		_ballsList[0]->getCollisionObject()->addCollisionListener(this, cueBase->getCollisionObject());
 		
-		_statusGame=0;
+		_statusGame=WAIT;
 	}
 	
 	void AbstractGameController::initializeMaterial(Node* node, Material* material)
@@ -100,9 +99,10 @@ namespace Game{
 		return _playerActive;
 	}
 	
-	/*Node* AbstractGameController::getPlayerBall(){
-		return _scene->findNode("Ball");
-	}*/
+	void AbstractGameController::nextPlayer(){
+		_playerActive++;
+		_playerActive=_playerActive % _players.size();
+	}
 	
 	gameplay::Node* AbstractGameController::getCue(){
 		return _cueGroup;
@@ -111,6 +111,7 @@ namespace Game{
 	void AbstractGameController::update(float timeElapsed){
 		bool moving=false;
 		int i;
+		//std::cout << _statusGame << std::endl;
 		for (i=0; i<_ballsList.size() && !moving; i++){
 			Vector3 velocity=((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->getLinearVelocity();
 			float vSquare=velocity.x*velocity.x+velocity.y*velocity.y+velocity.y*velocity.z;
@@ -120,16 +121,25 @@ namespace Game{
 				moving=true;
 			}
 		}
-		if (_statusGame==1 && !moving){
-			_players[0]->move();
+		if (_statusGame==MOVE && !moving){
+			this->endRound();
+			_players[_playerActive]->move();
 			Vector3 nullVelocity(0,0,0);
-			_statusGame=0;
+			_statusGame=WAIT;
 			for (i=0;i<_ballsList.size(); i++){
 				PhysicsRigidBody* co=(PhysicsRigidBody*)_ballsList[i]->getCollisionObject();
 				co->setLinearVelocity(nullVelocity);
 				co->setAngularVelocity(nullVelocity);
 			}
-		} 
+		} else if (_statusGame==TOUCH && moving){
+			
+			_gameHud->startRuning();
+			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
+			_scene->removeNode(_cueGroup);
+			_cueGroup->setTranslation(0, 0, -10);
+			_cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(false);
+			_statusGame=MOVE;
+		}
 	}
 	
 	void AbstractGameController::collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
@@ -142,7 +152,7 @@ namespace Game{
 		std::cout << "Collision!" << std::endl;
 		std::cout << nodeA->getId() << std::endl;
 		std::cout << nodeB->getId() << std::endl;
-		if (nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue") && _statusGame==0){
+		if (nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue") && _statusGame==WAIT){
 			float cueVelocity=_players[_playerActive]->getVelocityCue()*30000;
 			((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&contactPointA);
 			//((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity);
@@ -153,13 +163,7 @@ namespace Game{
 			
 			//((PhysicsRigidBody*) nodeA->getCollisionObject())->setLinearVelocity(_cueGroup->getRightVector().normalize()*cueVelocity);
 			std::cout << cueVelocity << std::endl;
-			_statusGame=1;
-			
-			_gameHud->startRuning();
-			_cueGroup->findNode("Cue")->setTranslation(1.5, 0, 0);
-			_scene->removeNode(_cueGroup);
-			_cueGroup->setTranslation(0, 0, -10);
-			_cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(false);
+			_statusGame=TOUCH;
 		}
 	}
 }

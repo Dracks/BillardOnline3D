@@ -19,6 +19,8 @@ namespace Game{
 #include <vector>
 
 namespace Game{
+	enum GameStatus {WAIT, MOVE, TOUCH};
+	
 	class AbstractGameController: public gameplay::PhysicsCollisionObject::CollisionListener{
 	public:
 		AbstractGameController(std::string);
@@ -29,10 +31,12 @@ namespace Game{
 		
 		void setGameHud(Menus::GameHud*);
 		void setPlayer(AbstractPlayerController*);
+		virtual void endRound()=0;
 		
 		gameplay::Scene* getScene();
 		
 		char getPlayerActive();
+		void nextPlayer();
 		
 		virtual gameplay::Node* getPlayerBall()=0;
 		
@@ -54,7 +58,7 @@ namespace Game{
 		
 	private:
 		char _playerActive;
-		char _statusGame;
+		GameStatus _statusGame;
 		std::vector<AbstractPlayerController*> _players;
 		
 		

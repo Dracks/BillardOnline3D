@@ -50,9 +50,10 @@ namespace Menus{
 	}
 	
 	void SelectGame::createGame(gameplay::Control::Listener::EventType){
-		AbstractGameController* gc=new ThreeBandGame();
+		AbstractGameController* gc=new ThreeBandGame(1);
 		GameHud* gh=new GameHud(this->_controller, gc);
 		gc->setPlayer(new DevicePlayer(gc, 0, gh));
+		gc->setPlayer(new DevicePlayer(gc, 1, gh));
 		
 		gc->start();
 		this->_controller->changeToScreen(gh);
