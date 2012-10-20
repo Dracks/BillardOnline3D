@@ -75,13 +75,15 @@ namespace Game{
 		
 		switch (_pointStatus) {
 			case NONE:
-				if (nodeA==getPlayerBall() && (nodeB==_ballsList[(getPlayerActive()+1)%2] || nodeB==_ballsList[2])){
+				if ((nodeA==getPlayerBall() && (nodeB==_ballsList[(getPlayerActive()+1)%2] || nodeB==_ballsList[2])) ||
+					(nodeB==getPlayerBall() && (nodeA==_ballsList[(getPlayerActive()+1)%2] || nodeA==_ballsList[2]))){
 					_firstBallTouch=nodeB;
 					_pointStatus=FIRST;
 				}
 				break;
 			case FIRST:
-				if (nodeA==getPlayerBall() && nodeB==_scene->findNode("frame")){
+				if ((nodeA==getPlayerBall() && nodeB==_scene->findNode("frame")) ||
+					(nodeB==getPlayerBall() && nodeA==_scene->findNode("frame"))){
 					_frameCount++;
 					if (_frameCount==_minFrameCount){
 						_pointStatus=CUSHION;
@@ -89,7 +91,8 @@ namespace Game{
 				}
 				break;
 			case CUSHION:
-				if (nodeA==getPlayerBall() && nodeB!=_firstBallTouch && (nodeB==_ballsList[(getPlayerActive()+1)%2] || nodeB==_ballsList[2])){
+				if ((nodeA==getPlayerBall() && nodeB!=_firstBallTouch && (nodeB==_ballsList[(getPlayerActive()+1)%2] || nodeB==_ballsList[2])) ||
+					(nodeB==getPlayerBall() && nodeA!=_firstBallTouch && (nodeA==_ballsList[(getPlayerActive()+1)%2] || nodeA==_ballsList[2]))){
 					_pointStatus=END;
 				}
 				break;

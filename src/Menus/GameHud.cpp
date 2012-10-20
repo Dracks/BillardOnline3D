@@ -113,12 +113,17 @@ namespace Menus{
 							break;
 						case SHOT:
 							this->onMoveShot(difX, difY);
+							break;
 						default:
 							break;
 					}// Warning not used BREAK!!!!
+					_oldX=x;
+					_oldY=y;
+					break;
 				case Touch::TOUCH_PRESS:
 					_oldX=x;
 					_oldY=y;
+					_oldTimeMove=_controller->getAbsoluteTime();
 					break;
 
 				default:
@@ -151,11 +156,11 @@ namespace Menus{
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
 		}
-		if (!_isMoving){
+		/*if (!_isMoving){
 			_oldTimeMove=_controller->getAbsoluteTime();
 		} else {
 			_isMoving=false;
-		}
+		}*/
 		
 		
 		_hud->update(timeElapsed);
@@ -196,13 +201,6 @@ namespace Menus{
 	}
 	
 	void GameHud::onMovePoint(int difX,int difY){
-		/*float mx=(float)difX/25.0f;
-		//float my=(float)difY;
-		if (mx<0){
-			mx=-mx*mx;
-		} else {
-			mx=mx*mx;
-		}*/
 		float mx=getMovement((float) difX);
 		//std::cout << mx << ", " << my << std::endl;
 		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
@@ -212,19 +210,6 @@ namespace Menus{
 		}
 	}
 	void GameHud::onMoveEffect(int difX,int difY){
-		/*float mx=(float)difX/25.0f;
-		float my=(float)difY/25.0f;
-		if (my<0){
-			my=-my*my;
-		} else {
-			my=my*my;
-		}
-		if (mx<0){
-			mx=-mx*mx;
-		} else {
-			mx=mx*mx;
-		}*/
-		
 		float mx=getMovement(difX);
 		float my=getMovement(difY);
 		
@@ -238,17 +223,11 @@ namespace Menus{
 		Node* cueGroup=_gameController->getScene()->findNode("Cue");
 		if (cueGroup!=NULL){
 			float my=getMovement(difY);
-			/*float my=(float)difY/25.f;
-			if (my<0){
-				my=-my*my;
-			} else {
-				my=my*my;
-			}*/
 			_isMoving=true;
 			double time=_controller->getAbsoluteTime();
 			
 			//std::cout << my << " => "<< my*my <<std::endl;
-			
+			//std::cout << my << "/" << time << "-" << _oldTimeMove << "=" << my/(time-_oldTimeMove) <<  std::endl;
 			_playerController->setCueVelocity(my/(time-_oldTimeMove));
 			_oldTimeMove=time;
 			

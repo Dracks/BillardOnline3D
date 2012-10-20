@@ -23,7 +23,7 @@ namespace Players{
 	}
 		
 	void DevicePlayer::move(){
-		std::cout << "Moving: " << _player << std::endl;
+		std::cout << "Moving: " << (int) _player << std::endl;
 		_gameHud->registerPlayerRound(this);
 	}
 	
@@ -35,8 +35,14 @@ namespace Players{
 	float DevicePlayer::getVelocityCue(){
 		return _cueVelocity;
 	}
+
 	void DevicePlayer::setCueVelocity(float v){
-		_cueVelocity=v;
+		/**
+		 * @todo solucionar el problema del infinit!!!
+		 */
+		if (abs(v)!=std::numeric_limits<float>::infinity()){
+			_cueVelocity=v;
+		}
 	}
 
 }
