@@ -32,7 +32,9 @@ namespace Menus{
 	}
 	
 	GameHud::GameHud(::BillardMainClass* base, ::Game::AbstractGameController* gameController):Menus::MenuInterface(base) {
-		_hud=NULL;
+		_hudActions=NULL;
+		_hudViews=NULL;
+		_hudPlaceBall=NULL;
 		_gameController=gameController;
 		_status=WAIT;
 		
@@ -49,8 +51,12 @@ namespace Menus{
 	}
 	
 	GameHud::~GameHud(){
-		if (_hud!=NULL)
-			SAFE_RELEASE(_hud)
+		if (_hudActions!=NULL){
+			SAFE_RELEASE(_hudActions)
+			SAFE_RELEASE(_hudViews)
+			SAFE_RELEASE(_hudPlaceBall)
+			SAFE_RELEASE(_exit)
+		}
 	}
 	
 	void GameHud::keyEvent(Keyboard::KeyEvent evt, int key){
@@ -74,7 +80,7 @@ namespace Menus{
 					match=false;
 					break;
 			}
-			if (_status!=RUNING && not match){
+			if ((_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT) || not match){
 				switch (key) {
 					case Keyboard::KEY_S:
 						_status=SHOT;
@@ -114,9 +120,12 @@ namespace Menus{
 						case SHOT:
 							this->onMoveShot(difX, difY);
 							break;
+						case PLACE_BALL:
+							this->onMoveBall(difX, difY);
+							break;
 						default:
 							break;
-					}// Warning not used BREAK!!!!
+					}
 					_oldX=x;
 					_oldY=y;
 					break;
@@ -133,21 +142,31 @@ namespace Menus{
 	}
 	
 	void GameHud::update(float timeElapsed){
-		if (_hud==NULL){
-			_hud = Form::create("res/menus/GameHud.form");
-			_hud->setConsumeInputEvents(false);
+		if (_hudViews==NULL){
+			_hudActions = Form::create("res/menus/GameHud.form#ActionButtons");
+			_hudActions->setConsumeInputEvents(false);
+			_hudActions->disable();
 			
-			((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
-			((Button*) _hud->getControl("look"))->addListener(kNewSelector(&GameHud::actionLook), Control::Listener::CLICK);
-			((Button*) _hud->getControl("point"))->addListener(kNewSelector(&GameHud::actionPoint), Control::Listener::CLICK);
-			((Button*) _hud->getControl("effect"))->addListener(kNewSelector(&GameHud::actionEffect), Control::Listener::CLICK);
-			((Button*) _hud->getControl("shoot"))->addListener(kNewSelector(&GameHud::actionShoot), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("look"))->addListener(kNewSelector(&GameHud::actionLook), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("point"))->addListener(kNewSelector(&GameHud::actionPoint), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("effect"))->addListener(kNewSelector(&GameHud::actionEffect), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("shoot"))->addListener(kNewSelector(&GameHud::actionShoot), Control::Listener::CLICK);
 			//((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			
+			_hudPlaceBall = Form::create("res/menus/GameHud.form#PlaceBall");
+			_hudPlaceBall->setConsumeInputEvents(false);
+			_hudPlaceBall->disable();
 			
-			((Button*) _hud->getControl("free"))->addListener(kNewSelector(&GameHud::lookFree), Control::Listener::CLICK);
-			((Button*) _hud->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
-			((Button*) _hud->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
+			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
+			((Button*) _hudPlaceBall->getControl("placeBallOk"))->addListener(kNewSelector(&GameHud::actionPlaceBall), Control::Listener::CLICK);
+			
+			_hudViews = Form::create("res/menus/GameHud.form#ViewButtons");
+			_hudViews->setConsumeInputEvents(false);
+			
+			((Button*) _hudViews->getControl("free"))->addListener(kNewSelector(&GameHud::lookFree), Control::Listener::CLICK);
+			((Button*) _hudViews->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
+			((Button*) _hudViews->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
 			
 			_exit = Form::create("res/menus/ExitAsk.form");
 			_exit->setConsumeInputEvents(false);
@@ -163,7 +182,9 @@ namespace Menus{
 		}*/
 		
 		
-		_hud->update(timeElapsed);
+		_hudViews->update(timeElapsed);
+		_hudActions->update(timeElapsed);
+		_hudPlaceBall->update(timeElapsed);
 		_exit->update(timeElapsed);
 		_gameController->update(timeElapsed);
 		
@@ -185,7 +206,12 @@ namespace Menus{
 		if (_status==PAUSE){
 			_exit->draw();
 		} else {
-			_hud->draw();
+			_hudViews->draw();
+			if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT){
+				_hudActions->draw();
+			} else if (_status==PLACE_BALL){
+				_hudPlaceBall->draw();
+			}
 		}
 		
 	}
@@ -250,10 +276,16 @@ namespace Menus{
 		}
 	}
 	
-	void GameHud::disable(){
-		_hud->disable();
+	void GameHud::onMoveBall(int difX,int difY){
+		_ballOut->translate(difX/500.0f, -difY/500.0f, 0);
 	}
-
+	
+	void GameHud::disable(){
+		_hudActions->disable();
+		_hudViews->disable();
+		_hudPlaceBall->disable();
+		_exit->disable();
+	}
 	
 	/**
 	 * @brief register the user as the actual user controlling the game (checking that)
@@ -261,6 +293,24 @@ namespace Menus{
 	void GameHud::registerPlayerRound(Players::DevicePlayer* player){
 		if (_gameController->getPlayerActive()==player->getPlayer()){
 			_playerController=player;
+			this->nextStepPlayer();
+		}
+	}
+	
+	void GameHud::nextStepPlayer(){
+		Node* ballOut=_gameController->getOutBall();
+		if (ballOut!=NULL){
+			PhysicsRigidBody* body=((PhysicsRigidBody*)ballOut->getCollisionObject());
+			body->setKinematic(true);
+			body->setLinearVelocity(0, 0, 0);
+			body->setAngularVelocity(0, 0, 0);
+			ballOut->setTranslation(0, 0, 0);
+			_ballOut=ballOut;
+			
+			_status=PLACE_BALL;
+			if (_hudPlaceBall!=NULL)
+				_hudPlaceBall->enable();
+		} else {
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
 			Node* cueGroup=_playerController->getCue();
 			cueGroup->setTranslation(ballPosition);
@@ -270,7 +320,10 @@ namespace Menus{
 			//if (cue->getCollisionObject()!=NULL)
 			cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(true);
 			_status=LOOK;
+			if (_hudActions!=NULL)
+				_hudActions->enable();
 		}
+
 	}
 	
 	void GameHud::startRuning(){
@@ -288,7 +341,12 @@ namespace Menus{
 	void GameHud::cancelPause(gameplay::Control::Listener::EventType){
 		_status=_oldStatus;
 		_exit->disable();
-		_hud->enable();
+		_hudViews->enable();
+		if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT){
+			_hudActions->enable();
+		} else if (_status==PLACE_BALL){
+			_hudPlaceBall->enable();
+		}
 	}
 	
 	/*
@@ -305,6 +363,12 @@ namespace Menus{
 	}
 	void GameHud::actionShoot(gameplay::Control::Listener::EventType){
 		_status=SHOT;
+	}
+	void GameHud::actionPlaceBall(gameplay::Control::Listener::EventType){
+		((PhysicsRigidBody*)_ballOut->getCollisionObject())->setKinematic(false);
+		_ballOut=NULL;
+		_hudPlaceBall->disable();
+		this->nextStepPlayer();
 	}
 	
 	/*
@@ -330,7 +394,9 @@ namespace Menus{
 		_oldStatus=_status;
 		_status=PAUSE;
 		_exit->enable();
-		_hud->disable();
+		_hudViews->disable();
+		_hudPlaceBall->disable();
+		_hudViews->disable();
 	}
 	
 }

@@ -1,4 +1,4 @@
-form particleEditor
+form ViewButtons
 {
     theme = res/theme/editor.theme
     autoWidth = true
@@ -37,6 +37,13 @@ form particleEditor
 			text = Free
 		}
 	}
+}
+
+form ActionButtons
+{	
+	theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
 	
 	container actions
 	{
@@ -87,4 +94,35 @@ form particleEditor
 			text = Shoot
 		}
 	}
+}
+
+form PlaceBall
+{
+	theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+	
+	container placeBall
+	{
+		style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_RIGHT
+        width = 80
+		height = 320
+		
+		button pause
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = X
+		}
+		
+		button placeBallOk
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = Ok
+		}
 }

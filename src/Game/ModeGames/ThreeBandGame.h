@@ -37,7 +37,6 @@ namespace Game{
 		Node* _firstBallTouch;
 		char _frameCount;
 		char _minFrameCount;
-		std::vector<int> userPoints;
 	};
 
 }

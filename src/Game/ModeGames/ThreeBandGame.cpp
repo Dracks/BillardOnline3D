@@ -50,18 +50,39 @@ namespace Game{
 	}
 	
 	void ThreeBandGame::endRound(){
-		_frameCount=0;
-		_pointStatus=NONE;
-		if (_pointStatus==END){
-			userPoints[this->getPlayerActive()]++;
+		if (_pointStatus==END && this->_ballsOut.empty()){
+			//this->_players[this->getPlayerActive()];
+			this->getPlayer(this->getPlayerActive())->addPoint();
 		} else {
 			this->nextPlayer();
 		}
+		
+		_frameCount=0;
+		_pointStatus=NONE;
+		
+		/*
+		for (unsigned int i=0; i<this->_ballsOut.size(); i++){
+			Node* ball=this->getBall(this->_ballsOut[i]);
+			PhysicsRigidBody* body=(PhysicsRigidBody*) ball->getCollisionObject();
+			Vector3 p=body->getLinearVelocity();
+			body->setEnabled(true);
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			body->setKinematic(true);
+			body->setLinearVelocity(0, 0, 0);
+			body->setAngularVelocity(0, 0, 0);
+			//body->setKinematic(false);
+			p=body->getLinearVelocity();
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			ball->setTranslation(-1,0.5,0);
+		}
+		this->ballsOut.clear();
+		*/
 	}
 	
 	Node* ThreeBandGame::getPlayerBall(){
 		return _ballsList[this->getPlayerActive()];
 	}
+
 		
 	void ThreeBandGame::collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
                                     const gameplay::PhysicsCollisionObject::CollisionPair& collisionPair,

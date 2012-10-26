@@ -19,7 +19,7 @@ namespace Menus{
 #include "DevicePlayer.h"
 
 namespace Menus{
-	enum GameStatus {PAUSE, WAIT, RUNING,LOOK, SHOT, EFFECT, POINT};
+	enum GameStatus {PAUSE, WAIT, RUNING, PLACE_BALL, LOOK, SHOT, EFFECT, POINT};
 	
 	class GameHud: public Menus::MenuInterface{
 	public:
@@ -38,6 +38,8 @@ namespace Menus{
 		 * @brief register the user as the actual user controlling the game (checking that)
 		 */
 		void registerPlayerRound(Players::DevicePlayer*);
+		
+		void nextStepPlayer();
 		/**
 		 * @brief disable user actions and show the actions.
     	 */
@@ -49,6 +51,7 @@ namespace Menus{
 		void onMovePoint(int difX,int difY);
 		void onMoveEffect(int difX,int difY);
 		void onMoveShot(int difX,int difY);
+		void onMoveBall(int difX, int difY);
 		
 		/*
 		 * AskExitMethods
@@ -63,6 +66,7 @@ namespace Menus{
 		void actionPoint(gameplay::Control::Listener::EventType);
 		void actionEffect(gameplay::Control::Listener::EventType);
 		void actionShoot(gameplay::Control::Listener::EventType);
+		void actionPlaceBall(gameplay::Control::Listener::EventType);
 		
 		/*
 		 * Views
@@ -82,10 +86,15 @@ namespace Menus{
 		
 		::Game::AbstractGameController* _gameController;
 		
-		gameplay::Form* _hud;
+		gameplay::Form* _hudViews;
+		gameplay::Form* _hudActions;
+		gameplay::Form* _hudPlaceBall;
+		
 		gameplay::Form* _exit;
 		
 		gameplay::Camera* _activeCamera;
+		
+		gameplay::Node* _ballOut;
 		
 		int _oldX, _oldY;
 		

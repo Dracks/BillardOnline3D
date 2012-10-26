@@ -27,9 +27,14 @@ namespace Game{
 		virtual char getPlayer();
 		
 		virtual float getVelocityCue()=0;
+		
+		virtual int getPoints();
+		virtual void addPoint(int=1);
+		virtual void resetPoints();
 	protected:
 		char _player;
 		AbstractGameController* _gameController;
+		int points;
 	};
 }
 

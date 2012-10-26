@@ -17,6 +17,9 @@ namespace Game{
 		
 		_scene=Scene::load(scene.c_str());
 		
+		//VertexFormat vertexList=_scene->findNode("Table")->getModel()->getMesh()->getVertexFormat();
+		
+        
 		Vector3 color(0.5,0.5,0.5);
 		
 		//std::cout << color.x << "," << color.y << "," << color.z << std::endl;
@@ -74,6 +77,15 @@ namespace Game{
 			material->getParameter("u_lightDirection")->bindValue(lightNode, &Node::getForwardVectorView);
 		}
 	}
+
+	bool AbstractGameController::isBallOut(int vi){
+		for (unsigned int i=0; i<this->_ballsOut.size();i++){
+			if (_ballsOut[i]==vi){
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	AbstractGameController::~AbstractGameController(){
 		SAFE_RELEASE(_scene);
@@ -101,9 +113,31 @@ namespace Game{
 		return _playerActive;
 	}
 	
+	AbstractPlayerController* AbstractGameController::getPlayer(int i){
+		assert(this->_players.size()>i);
+		return this->_players[i];
+	}
+	
 	void AbstractGameController::nextPlayer(){
 		_playerActive++;
 		_playerActive=_playerActive % _players.size();
+	}
+	
+	gameplay::Node* AbstractGameController::getBall(int i){
+		assert(i<_ballsList.size());
+		return _ballsList[i];
+	}
+	
+	gameplay::Node* AbstractGameController::getOutBall(){
+		if (_ballsOut.empty())
+			return NULL;
+		else {
+			int i=_ballsOut.front();
+			_ballsOut.erase(_ballsOut.begin());
+			gameplay::Node* r=_ballsList[i];
+			((PhysicsRigidBody*)r->getCollisionObject())->setEnabled(true);
+			return r;
+		}
 	}
 	
 	gameplay::Node* AbstractGameController::getCue(){
@@ -118,9 +152,16 @@ namespace Game{
 			Vector3 velocity=((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->getLinearVelocity();
 			float vSquare=velocity.x*velocity.x+velocity.y*velocity.y+velocity.y*velocity.z;
 			//std::cout << "Velocity Square:" << vSquare << std::endl;
-			
-			if (vSquare>0.00001f){
-				moving=true;
+			if (_ballsList[i]->getTranslationZ()<-1.0f){
+				if (this->_ballsOut.empty() || !this->isBallOut(i)){
+					std::cout << "ball " << i << " is out " << std::endl;
+					((PhysicsRigidBody*)_ballsList[i]->getCollisionObject())->setEnabled(false);
+					_ballsOut.push_back(i);
+				}
+			} else {
+				if (vSquare>0.00001f){
+					moving=true;
+				}
 			}
 		}
 		if (_statusGame==MOVE && !moving){
@@ -163,8 +204,8 @@ namespace Game{
 		std::cout << _statusGame << std::endl;
 
 		if (_statusGame==WAIT && (
-				(nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue")) ||
-				(nodeB==getPlayerBall() && nodeA==_cueGroup->findNode("Cue")))){
+				(nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue")) /*||
+				(nodeB==getPlayerBall() && nodeA==_cueGroup->findNode("Cue"))*/)){
 			float cueVelocity=_players[_playerActive]->getVelocityCue()*30000;
 			if (abs(cueVelocity)!=std::numeric_limits<float>::infinity()){
 				((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&contactPointA);

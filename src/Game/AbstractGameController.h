@@ -25,6 +25,7 @@ namespace Game{
 	public:
 		AbstractGameController(std::string);
 		void initializeMaterial(Node* node, Material* material);
+		bool isBallOut(int);
 		virtual ~AbstractGameController();
 		
 		void start();
@@ -36,9 +37,13 @@ namespace Game{
 		gameplay::Scene* getScene();
 		
 		char getPlayerActive();
+		AbstractPlayerController* getPlayer(int);
 		void nextPlayer();
 		
 		virtual gameplay::Node* getPlayerBall()=0;
+		virtual gameplay::Node* getBall(int i);
+		
+		virtual gameplay::Node* getOutBall();
 		
 		virtual gameplay::Node* getCue();
 		
@@ -55,6 +60,8 @@ namespace Game{
 		
 		gameplay::Node* _cueGroup;
 		Menus::GameHud* _gameHud;
+		
+		std::vector<int> _ballsOut;
 		
 	private:
 		char _playerActive;
