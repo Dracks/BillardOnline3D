@@ -52,10 +52,10 @@ namespace Menus{
 	
 	GameHud::~GameHud(){
 		if (_hudActions!=NULL){
-			SAFE_RELEASE(_hudActions)
-			SAFE_RELEASE(_hudViews)
-			SAFE_RELEASE(_hudPlaceBall)
-			SAFE_RELEASE(_exit)
+			SAFE_RELEASE(_hudActions);
+			SAFE_RELEASE(_hudViews);
+			SAFE_RELEASE(_hudPlaceBall);
+			SAFE_RELEASE(_exit);
 		}
 	}
 	
@@ -145,7 +145,6 @@ namespace Menus{
 		if (_hudViews==NULL){
 			_hudActions = Form::create("res/menus/GameHud.form#ActionButtons");
 			_hudActions->setConsumeInputEvents(false);
-			_hudActions->disable();
 			
 			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			((Button*) _hudActions->getControl("look"))->addListener(kNewSelector(&GameHud::actionLook), Control::Listener::CLICK);
@@ -156,7 +155,6 @@ namespace Menus{
 			
 			_hudPlaceBall = Form::create("res/menus/GameHud.form#PlaceBall");
 			_hudPlaceBall->setConsumeInputEvents(false);
-			_hudPlaceBall->disable();
 			
 			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			((Button*) _hudPlaceBall->getControl("placeBallOk"))->addListener(kNewSelector(&GameHud::actionPlaceBall), Control::Listener::CLICK);
@@ -174,6 +172,12 @@ namespace Menus{
 			
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
+
+			if (_status==PLACE_BALL){
+				_hudActions->disable();
+			} else {
+				_hudPlaceBall->disable();
+			}
 		}
 		/*if (!_isMoving){
 			_oldTimeMove=_controller->getAbsoluteTime();
