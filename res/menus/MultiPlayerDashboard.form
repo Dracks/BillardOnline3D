@@ -1,0 +1,121 @@
+form ListOptions
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+
+    container views
+    {
+		style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_LEFT
+        position = 0, 0
+		height = 300
+		width = 200
+		
+		button back
+		{
+			style = buttonStyle
+			width = 180
+			height = 80
+			text = Back
+		}
+		
+	}
+}
+
+form Login
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+
+    container popup
+    {
+		style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_HCENTER
+        position = 0, 0
+		height = 300
+		width = 200
+		
+		label title
+        {
+            style = title
+            autoWidth=true
+			height=60
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Login
+        }
+		
+		textbox user
+		{
+			style = buttonStyle
+            autoWidth=true
+			height=40
+			alignment = ALIGN_VCENTER_LEFT
+		}
+		
+		textbox password
+		{
+			style = buttonStyle
+            autoWidth=true
+			height=40
+			alignment = ALIGN_VCENTER_LEFT
+		}
+		
+		button login
+		{
+			style = buttonStyle
+			width = 180
+			height = 50
+			text = Ok
+		}
+
+		button cancel
+		{
+			style = buttonStyle
+			width = 180
+			height = 50
+			text = Back
+		}
+	}
+}
+
+
+form Wait
+{
+    theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+
+    container popup
+    {
+		style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_HCENTER
+        position = 0, 0
+		height = 100
+		width = 400
+		
+		
+		label title
+        {
+            style = title
+            autoWidth=true
+			height=60
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Login
+        }
+		
+		
+		label text
+        {
+            style = title
+            autoWidth=true
+			height=40
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Wait please...
+        }
+		
+	}

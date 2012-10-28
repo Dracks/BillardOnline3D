@@ -36,6 +36,7 @@ namespace Menus{
 		void disable();
 		
 		void singlePlayer(gameplay::Control::Listener::EventType evt);
+		void multiPlayer(gameplay::Control::Listener::EventType evt);
 	};
 }
 

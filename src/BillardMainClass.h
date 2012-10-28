@@ -7,6 +7,7 @@ class BillardMainClass;
 
 #include "gameplay.h"
 #include "MenuAbstract.h"
+#include "OnlineConnector.h"
 
 using namespace gameplay;
 
@@ -33,7 +34,12 @@ public:
     void touchEvent(Touch::TouchEvent evt, int x, int y, unsigned int contactIndex);
 	
 	void changeToScreen(Menus::MenuInterface* newScreen);
+	
+	/*
+	 * Controller getters;
+	 */
 
+	Utils::OnlineConnector* getConnector();
 protected:
 
     /**
@@ -63,6 +69,8 @@ private:
      */
     bool drawScene(Node* node);
 
+	Utils::OnlineConnector* _connector;
+	
     Scene* _scene;
 	Node* _cameraParent;
 	Menus::MenuInterface* _screen, *_oldScreen, *_newScreen;

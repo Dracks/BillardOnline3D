@@ -2,6 +2,8 @@
 <projectDescription>
 	<name>BillardOnline3D</name>
 	<comment></comment>
+	<projects>
+	</projects>
 	<buildSpec>
 		<buildCommand>
 			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>

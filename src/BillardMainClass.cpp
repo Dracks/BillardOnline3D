@@ -35,30 +35,8 @@ void BillardMainClass::initialize()
     SAFE_RELEASE(camera);
 	
 	_screen= new Menus::MainMenu(this);
-	//_newScreen = new Menus::SelectGame(this);
-	//_oldScreen=NULL;
-	//std::cout << this << std::endl;
 	
-	
-    /*// Load game scene from file
-    Bundle* bundle = Bundle::create("res/box.gpb");
-    _scene = bundle->loadScene();
-    SAFE_RELEASE(bundle);
-
-    // Set the aspect ratio for the scene's camera to match the current resolution
-    
-    // Get light node
-    Node* lightNode = _scene->findNode("directionalLight");
-    Light* light = lightNode->getLight();
-
-    // Initialize box model
-    Node* boxNode = _scene->findNode("box");
-    Model* boxModel = boxNode->getModel();
-    Material* boxMaterial = boxModel->setMaterial("res/box.material");
-    boxMaterial->getParameter("u_ambientColor")->setValue(_scene->getAmbientColor());
-    boxMaterial->getParameter("u_lightColor")->setValue(light->getColor());
-    boxMaterial->getParameter("u_lightDirection")->setValue(lightNode->getForwardVectorView());*/
-	std::cout << _scene->getActiveCamera() << std::endl;
+	_connector=new Utils::OnlineConnector();
 }
 
 void BillardMainClass::finalize()
@@ -67,6 +45,8 @@ void BillardMainClass::finalize()
 	delete _screen;
 	if (_oldScreen!=NULL)
 		delete _oldScreen;
+	
+	delete _connector;
 }
 
 void BillardMainClass::update(float elapsedTime)
@@ -140,5 +120,9 @@ void BillardMainClass::changeToScreen(Menus::MenuInterface* newScreen){
 	_screen=newScreen;
 	//_screen->setForeground(true);
 	//_newScreen=newScreen;
+}
+
+Utils::OnlineConnector* BillardMainClass::getConnector(){
+	return this->_connector;
 }
 

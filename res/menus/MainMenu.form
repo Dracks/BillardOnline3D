@@ -29,7 +29,7 @@ form particleEditor
             text = Single Player
         }
 		
-		button OnLine
+		button multiPlayer
         {
             style = buttonStyle
             autoWidth = true
