@@ -3,24 +3,66 @@ form ListOptions
     theme = res/theme/editor.theme
     autoWidth = true
     autoHeight = true
-
-    container views
-    {
+	
+	container
+	{
 		style = basic
-        layout = LAYOUT_VERTICAL
-		alignment = ALIGN_VCENTER_LEFT
+        layout = LAYOUT_HORIZONTAL
+		alignment = ALIGN_VCENTER_HCENTER
         position = 0, 0
-		height = 300
-		width = 200
+		autoHeight = true
+		width = 480
 		
-		button back
+		container actions
 		{
-			style = buttonStyle
-			width = 180
-			height = 80
-			text = Back
+			style = basic
+			layout = LAYOUT_VERTICAL
+			alignment = ALIGN_VCENTER_HCENTER
+			position = 0, 0
+			autoHeight = true
+			width = 200
+			scroll = SCROLL_VERTICAL
+			
+			button ListMatches
+			{
+				style = buttonStyle
+				width = 180
+				height = 40
+				text = List Match
+			}
+
+			button new
+			{
+				style = buttonStyle
+				width = 180
+				height = 40
+				text = New Match
+			}
+
+			button friends
+			{
+				style = buttonStyle
+				width = 180
+				height = 40
+				text = Friends
+			}
+			
+			button profile
+			{
+				style = buttonStyle
+				width = 180
+				height = 40
+				text = Profile
+			}
+
+			button back
+			{
+				style = buttonStyle
+				width = 180
+				height = 40
+				text = Back
+			}
 		}
-		
 	}
 }
 
@@ -119,3 +161,4 @@ form Wait
         }
 		
 	}
+}

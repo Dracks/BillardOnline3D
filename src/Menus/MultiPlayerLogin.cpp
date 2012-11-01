@@ -69,6 +69,8 @@ namespace Menus{
 			
 			_passwordInput=((TextBox*) _login->getControl("password"));
 			_passwordInput->addListener(kNewSelector(&MultiPlayerLogin::passwordChangeText), Control::Listener::TEXT_CHANGED);
+			//_passwordInput->setPassword(true);
+			
 
 			((Button*) _login->getControl("cancel"))->addListener(kNewSelector(&MultiPlayerLogin::actionCancel), Control::Listener::CLICK);
 			((Button*) _login->getControl("login"))->addListener(kNewSelector(&MultiPlayerLogin::actionLogin), Control::Listener::CLICK);

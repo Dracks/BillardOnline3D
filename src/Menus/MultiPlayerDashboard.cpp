@@ -62,13 +62,16 @@ namespace Menus{
 		 */
 	void MultiPlayerDashboard::update(float elapsedTime){
 		if (_options==NULL){
-			_options=gameplay::Form::create("res/menus/MultiPlayerDashboard.form#ListOptions");
+			_options=Form::create("res/menus/MultiPlayerDashboard.form#ListOptions");
 			_options->setConsumeInputEvents(false);
+			
+			((Button*) _options->getControl("back"))->addListener(kNewSelector(&MultiPlayerDashboard::actionBack), Control::Listener::CLICK);
+			
 			if (_popup!=NULL){
 				_options->disable();
 			}
 		}
-		_options->draw();
+		_options->update(elapsedTime);
 		if (_popup!=NULL){
 			_popup->update(elapsedTime);
 		}

@@ -29,13 +29,14 @@ namespace Menus{
 	
 	void SelectGame::update(float timeElapsed){
 		if (_form==NULL){
-			_form = Form::create("res/menus/SelectGame.form");
+			_form = Form::create("res/menus/SelectGame.form#Menu");
 			_form->setConsumeInputEvents(false);
 			
 			((Button*) _form->getControl("back"))->addListener(kNewSelector(&SelectGame::back), Control::Listener::CLICK);
+			
 			((Button*) _form->getControl("eightBall"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
 			((Button*) _form->getControl("nineBall"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
-			((Button*) _form->getControl("threeBand"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);
+			((Button*) _form->getControl("threeBand"))->addListener(kNewSelector(&SelectGame::createGame), Control::Listener::CLICK);//*/
 			
 		}
 		_form->update(timeElapsed);

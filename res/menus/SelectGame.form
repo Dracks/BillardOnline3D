@@ -1,34 +1,36 @@
-form particleEditor
+form Menu
 {
     theme = res/theme/editor.theme
     autoWidth = true
-    autoHeight = true	
-	alignment = ALIGN_VCENTER_HCENTER
-
-    container presets
-    {
-        style = basic
-        layout = LAYOUT_VERTICAL
+    autoHeight = true
+	
+	container
+	{
+		style = basic
+        layout = LAYOUT_HORIZONTAL
 		alignment = ALIGN_VCENTER_HCENTER
-		width = 800
-		height =200
-
+        position = 0, 0
+		height = 300
+		width = 300
+		
 		label title
         {
             style = title
             autoWidth=true
 			height=40
-			alignment = ALIGN_VCENTER_HCENTER
+			alignment = ALIGN_TOP_HCENTER
             text = Select the Game Mode
         }
-		container gameMode
+		
+		container actions
 		{
 			style = noBorder
-			layout = LAYOUT_FLOW
+			layout = LAYOUT_VERTICAL
 			alignment = ALIGN_VCENTER_HCENTER
-			height = 80
-			width = 600
-
+			position = 0, 0
+			height = 200
+			width = 170
+			
 			button eightBall
 			{
 				style = buttonStyle
@@ -52,14 +54,15 @@ form particleEditor
 				height = 50
 				text = 3 Band
 			}
-		}
-		button back
-		{
-			style = buttonStyle
-			alignment = ALIGN_VCENTER_HCENTER
-			width= 200
-			height = 50
-			text = Back
+
+			button back
+			{
+				style = buttonStyle
+				width = 150
+				height = 40
+				text = Back
+			}
 		}
 	}
 }
+
