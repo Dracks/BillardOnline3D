@@ -125,4 +125,101 @@ form PlaceBall
 			height = 60
 			text = Ok
 		}
+	}
+}
+
+form ScoreView
+{
+
+	theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+
+	container score
+    {
+        style = noBorder
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_TOP_HCENTER
+        position = 0, 0
+        width = 200
+		height = 80
+		
+		label scorePlayer1
+		{
+			style = title
+            autoWidth=true
+			height=30
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Player 1: 0
+		}
+		
+		label scorePlayer2
+		{
+			style = title
+            autoWidth=true
+			height=30
+			alignment = ALIGN_VCENTER_HCENTER
+            text = Player 2: 0
+		}
+	}
+}
+
+form EndGame
+{
+	theme = res/theme/editor.theme
+    autoWidth = true
+    autoHeight = true
+	
+	container views
+    {
+        style = basic
+        layout = LAYOUT_VERTICAL
+		alignment = ALIGN_VCENTER_HCENTER
+        position = 0, 0
+        width = 400
+		height = 160
+		
+		label title
+		{
+			style = title
+            autoWidth=true
+			height=40
+			alignment = ALIGN_VCENTER_HCENTER
+            text = GameOver/Winner!
+		}
+		
+		label text
+		{
+			style = title
+            autoWidth=true
+			height=30
+			alignment = ALIGN_VCENTER_HCENTER
+            text = The player <unkown> win the match
+		}
+		
+		container views
+		{
+			style = basic
+			layout = LAYOUT_FLOW
+			alignment = ALIGN_VCENTER_HCENTER
+			position = 0, 0
+			width = 360
+			height = 100
+			
+			button exit
+			{
+				style = buttonStyle
+				width= 100
+				height = 60
+				text = Exit
+			}
+			button replay
+			{
+				style = buttonStyle
+				width= 100
+				height = 60
+				text = Replay
+			}
+		}
+	}
 }

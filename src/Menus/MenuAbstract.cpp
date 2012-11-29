@@ -20,6 +20,7 @@ namespace Menus{
 	MenuInterface::MenuInterface(::BillardMainClass* controller){
 		this->_controller=controller;
 	}
+	
 	MenuInterface::~MenuInterface(){
 		for (int i=0; i<_formListenerList.size(); i++){
 			delete _formListenerList[i];

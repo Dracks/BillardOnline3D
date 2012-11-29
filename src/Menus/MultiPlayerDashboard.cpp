@@ -88,5 +88,4 @@ namespace Menus{
 			_popup->disable();
 		}
 	}
-	
 }

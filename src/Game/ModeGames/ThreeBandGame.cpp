@@ -8,6 +8,8 @@
 
 #include "ThreeBandGame.h"
 
+#define kMaxPoints 1
+
 
 namespace Game{
 	//class ThreeBandGame: public AbstractGameController{
@@ -50,9 +52,14 @@ namespace Game{
 	}
 	
 	void ThreeBandGame::endRound(){
-		if (_pointStatus==END && this->_ballsOut.empty()){
+		if (_pointStatus==END_GAME && this->_ballsOut.empty()){
 			//this->_players[this->getPlayerActive()];
-			this->getPlayer(this->getPlayerActive())->addPoint();
+			AbstractPlayerController* player=this->getPlayer(this->getPlayerActive());
+			player->addPoint();
+			if (player->getPoints()==kMaxPoints){
+				_gameHud->endGame();
+			}
+			
 		} else {
 			this->nextPlayer();
 		}
@@ -100,6 +107,7 @@ namespace Game{
 					(nodeB==getPlayerBall() && (nodeA==_ballsList[(getPlayerActive()+1)%2] || nodeA==_ballsList[2]))){
 					_firstBallTouch=nodeB;
 					_pointStatus=FIRST;
+					_pointStatus=END_GAME;
 				}
 				break;
 			case FIRST:
@@ -114,10 +122,10 @@ namespace Game{
 			case CUSHION:
 				if ((nodeA==getPlayerBall() && nodeB!=_firstBallTouch && (nodeB==_ballsList[(getPlayerActive()+1)%2] || nodeB==_ballsList[2])) ||
 					(nodeB==getPlayerBall() && nodeA!=_firstBallTouch && (nodeA==_ballsList[(getPlayerActive()+1)%2] || nodeA==_ballsList[2]))){
-					_pointStatus=END;
+					_pointStatus=END_GAME;
 				}
 				break;
-			case END:
+			case END_GAME:
 				break;
 		}
 		

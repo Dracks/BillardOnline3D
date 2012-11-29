@@ -8,6 +8,7 @@
 
 #include "GameHud.h"
 #include "MainMenu.h"
+#include "String.h"
 
 using namespace gameplay;
 /*
@@ -21,6 +22,7 @@ using namespace gameplay;
  entitity1->setPitch(-atan2(ydistance, xzdistance)); // rotation around x
  entitity1->setBank(0);
  */
+
 namespace Menus{
 	//enum GameStatus {PAUSE, WAIT, RUNING,LOOK, SHOT, DIRECT, MOVE};
 	
@@ -55,6 +57,8 @@ namespace Menus{
 			SAFE_RELEASE(_hudActions);
 			SAFE_RELEASE(_hudViews);
 			SAFE_RELEASE(_hudPlaceBall);
+			SAFE_RELEASE(_hudEndGame);
+			SAFE_RELEASE(_hudScore);
 			SAFE_RELEASE(_exit);
 		}
 	}
@@ -166,6 +170,18 @@ namespace Menus{
 			((Button*) _hudViews->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
 			((Button*) _hudViews->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
 			
+			_hudScore = Form::create("res/menus/GameHud.form#ScoreView");
+			_hudScore->setConsumeInputEvents(false);
+			_scorePlayer1=(Label*)_hudScore->getControl("scorePlayer1");
+			_scorePlayer2=(Label*)_hudScore->getControl("scorePlayer2");
+			
+			_hudEndGame = Form::create("res/menus/GameHud.form#EndGame");
+			_hudEndGame->setConsumeInputEvents(false);
+			_hudEndGame->disable();
+			
+			((Button*) _hudEndGame->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
+			((Button*) _hudEndGame->getControl("replay"))->addListener(kNewSelector(&GameHud::replay), Control::Listener::CLICK);
+			
 			_exit = Form::create("res/menus/ExitAsk.form");
 			_exit->setConsumeInputEvents(false);
 			_exit->disable();
@@ -189,8 +205,11 @@ namespace Menus{
 		_hudViews->update(timeElapsed);
 		_hudActions->update(timeElapsed);
 		_hudPlaceBall->update(timeElapsed);
+		_hudScore->update(timeElapsed);
 		_exit->update(timeElapsed);
 		_gameController->update(timeElapsed);
+		_hudEndGame->update(timeElapsed);
+		
 		
 	}
 	
@@ -211,13 +230,15 @@ namespace Menus{
 			_exit->draw();
 		} else {
 			_hudViews->draw();
+			_hudScore->draw();
 			if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT){
 				_hudActions->draw();
 			} else if (_status==PLACE_BALL){
 				_hudPlaceBall->draw();
+			} else if (_status==END){
+				_hudEndGame->draw();
 			}
 		}
-		
 	}
 	
 	bool GameHud::drawScene(gameplay::Node* node){
@@ -256,27 +277,11 @@ namespace Menus{
 			_isMoving=true;
 			double time=_controller->getAbsoluteTime();
 			
-			//std::cout << my << " => "<< my*my <<std::endl;
-			//std::cout << my << "/" << time << "-" << _oldTimeMove << "=" << my/(time-_oldTimeMove) <<  std::endl;
 			_playerController->setCueVelocity(my/(time-_oldTimeMove));
 			_oldTimeMove=time;
 			
 			Vector3 direction=cueGroup->getBackVector()*my;
-			//std::cout << "OnMoveShot" << direction.x << "," << direction.y << ","  << direction.z << std::endl;
-			//cueGroup->getCollisionObject()->setEnabled(true);
-			//Vector3 nullDirection(0.000001,0,0);
-			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setKinematic(false);
-			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setLinearVelocity(direction);
 			cueGroup->translate(direction);
-			/*cueGroup->translate(direction);
-			cueGroup->translate(direction);
-			cueGroup->translate(direction);//*/
-			//((PhysicsRigidBody*)cueGroup->getCollisionObject())->setKinematic(true);
-			//cueGroup->translate(direction);
-			
-			//direction=((PhysicsRigidBody*)_gameController->getPlayerBall()->getCollisionObject())->getLinearVelocity();
-			//std::cout << "BallVelocity" <<direction.x << "," << direction.y << ","  << direction.z << std::endl;
-			
 		}
 	}
 	
@@ -296,7 +301,21 @@ namespace Menus{
 	 */
 	void GameHud::registerPlayerRound(Players::DevicePlayer* player){
 		if (_gameController->getPlayerActive()==player->getPlayer()){
-			_playerController=player;
+			if (player==_playerController){
+				Label* score=NULL;
+				std::string playerStr;
+				if (player->getPlayer()==0){
+					playerStr="Player 1: ";
+					score=_scorePlayer1;
+				} else {
+					score=_scorePlayer2;
+					playerStr="Player 2: ";
+				}
+				std::string result=playerStr+utils::NumberToString<int>(player->getPoints());
+				score->setText(result.c_str());
+			} else {
+				_playerController=player;
+			}
 			this->nextStepPlayer();
 		}
 	}
@@ -316,16 +335,20 @@ namespace Menus{
 				_hudPlaceBall->enable();
 		} else {
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
-			Node* cueGroup=_playerController->getCue();
-			cueGroup->setTranslation(ballPosition);
-			//std::cout << cue << std::endl;
-			//std::cout << cue->getId() << std::endl;
-			_gameController->getScene()->addNode(cueGroup);
-			//if (cue->getCollisionObject()!=NULL)
-			cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(true);
-			_status=LOOK;
+			if (_status!=END){
+				Node* cueGroup=_playerController->getCue();
+				cueGroup->setTranslation(ballPosition);
+				//std::cout << cue << std::endl;
+				//std::cout << cue->getId() << std::endl;
+				_gameController->getScene()->addNode(cueGroup);
+				//if (cue->getCollisionObject()!=NULL)
+				cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(true);
+				_status=LOOK;
 			if (_hudActions!=NULL)
 				_hudActions->enable();
+			} else {
+				_hudEndGame->enable();
+			}
 		}
 
 	}
@@ -335,6 +358,21 @@ namespace Menus{
 			this->lookTop(Control::Listener::CLICK);
 		}
 		_status=RUNING;
+	}
+	
+	void GameHud::endGame(){
+		_status=END;
+		std::string title;
+		std::string text;
+		if (dynamic_cast<Players::DevicePlayer*>(_playerController)){
+			title="Winner!";
+		} else {
+			title="GameOver!";
+		}
+		text="Player ";
+		text+=utils::NumberToString<int>(_playerController->getPlayer()+1)+" win the match!";
+		((Label*)_hudEndGame->getControl("title"))->setText(title.c_str());
+		((Label*)_hudEndGame->getControl("text"))->setText(text.c_str());
 	}
 	
 	

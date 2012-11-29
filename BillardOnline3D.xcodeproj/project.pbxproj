@@ -41,6 +41,8 @@
 		5BAF2070152F2DDD003E2AC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206A152F2DDD003E2AC3 /* OpenGLES.framework */; };
 		5BAF2071152F2DDD003E2AC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206B152F2DDD003E2AC3 /* QuartzCore.framework */; };
 		5BAF2072152F2DDD003E2AC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206C152F2DDD003E2AC3 /* UIKit.framework */; };
+		A4230F27163D908000E49A2B /* OnlineConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4230F25163D908000E49A2B /* OnlineConnector.cpp */; };
+		A4230F28163D908000E49A2B /* OnlineConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4230F25163D908000E49A2B /* OnlineConnector.cpp */; };
 		A43A07AB162C6CCD0026EC09 /* AbstractGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A0798162C6CCD0026EC09 /* AbstractGameController.cpp */; };
 		A43A07AC162C6CCD0026EC09 /* AbstractPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079A162C6CCD0026EC09 /* AbstractPlayerController.cpp */; };
 		A43A07AD162C6CCD0026EC09 /* ThreeBandGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079D162C6CCD0026EC09 /* ThreeBandGame.cpp */; };
@@ -49,17 +51,25 @@
 		A43A07B0162C6CCD0026EC09 /* MenuAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A4162C6CCD0026EC09 /* MenuAbstract.cpp */; };
 		A43A07B1162C6CCD0026EC09 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A6162C6CCD0026EC09 /* SelectGame.cpp */; };
 		A43A07B2162C6CCD0026EC09 /* DevicePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A9162C6CCD0026EC09 /* DevicePlayer.cpp */; };
+		A45A35C6165E930900004018 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45A35C4165E930900004018 /* String.cpp */; };
+		A45A35C7165E930900004018 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45A35C4165E930900004018 /* String.cpp */; };
+		A45A35CD165E957B00004018 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = A45A35CA165E957B00004018 /* sqlite3.c */; };
+		A45A35CE165E957B00004018 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = A45A35CA165E957B00004018 /* sqlite3.c */; };
+		A48D31EB163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48D31E9163ABEAC00D250A8 /* MultiPlayerDashboard.cpp */; };
+		A48D31EC163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48D31E9163ABEAC00D250A8 /* MultiPlayerDashboard.cpp */; };
+		A48D31F3163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48D31F1163ACB5A00D250A8 /* MultiPlayerLogin.cpp */; };
+		A48D31F4163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48D31F1163ACB5A00D250A8 /* MultiPlayerLogin.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A43A0792162C6A370026EC09 /* PBXContainerItemProxy */ = {
+		A47A89BC16344E8400516EDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4234D99A14686C52003031B3;
 			remoteInfo = "gameplay-macosx";
 		};
-		A43A0794162C6A370026EC09 /* PBXContainerItemProxy */ = {
+		A47A89BE16344E8400516EDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 			proxyType = 2;
@@ -81,12 +91,12 @@
 		42C933161491A5EB0098216A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		42C9331C1491A6750098216A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		42C9331E1491A67F0098216A /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
-		42C933201491A6C70098216A /* libbullet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbullet.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/macosx/libbullet.a"; sourceTree = "<group>"; };
-		42C933221491A6E50098216A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libogg.a"; sourceTree = "<group>"; };
-		42C933231491A6E50098216A /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbis.a"; sourceTree = "<group>"; };
-		42C933241491A6E50098216A /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbisenc.a"; sourceTree = "<group>"; };
-		42C933251491A6E50098216A /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbisfile.a"; sourceTree = "<group>"; };
-		42C9332A1491A7390098216A /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = "../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/macosx/libpng.a"; sourceTree = "<group>"; };
+		42C933201491A6C70098216A /* libbullet.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libbullet.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/bullet/lib/macosx/libbullet.a"; sourceTree = "<group>"; };
+		42C933221491A6E50098216A /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libogg.a"; sourceTree = "<group>"; };
+		42C933231491A6E50098216A /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbis.a"; sourceTree = "<group>"; };
+		42C933241491A6E50098216A /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbisenc.a"; sourceTree = "<group>"; };
+		42C933251491A6E50098216A /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx/libvorbisfile.a"; sourceTree = "<group>"; };
+		42C9332A1491A7390098216A /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = "../../../../Developer/blackberry-GamePlay/external-deps/libpng/lib/macosx/libpng.a"; sourceTree = "<group>"; };
 		42C9332D1491A7810098216A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		5B61611214CCC2200073B857 /* BillardOnline3D-macosx.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "BillardOnline3D-macosx.plist"; sourceTree = "<group>"; };
 		5B61612C14CCC24C0073B857 /* BillardOnline3D-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BillardOnline3D-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,8 +107,11 @@
 		5BAF206A152F2DDD003E2AC3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/OpenGLES.framework; sourceTree = DEVELOPER_DIR; };
 		5BAF206B152F2DDD003E2AC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		5BAF206C152F2DDD003E2AC3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = "../../../../Applications/blackberry-GamePlay/gameplay/gameplay.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = text; name = shaders; path = "../../../../Applications/blackberry-GamePlay/gameplay/res/shaders"; sourceTree = SOURCE_ROOT; };
+		5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = gameplay.xcodeproj; path = "../../../../Developer/blackberry-GamePlay/gameplay/gameplay.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		5BC4E849150F911D00CBE1C0 /* shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; name = shaders; path = "../../../../Developer/blackberry-GamePlay/gameplay/res/shaders"; sourceTree = SOURCE_ROOT; };
+		A4230F25163D908000E49A2B /* OnlineConnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnlineConnector.cpp; path = Utils/OnlineConnector.cpp; sourceTree = "<group>"; };
+		A4230F26163D908000E49A2B /* OnlineConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnlineConnector.h; path = Utils/OnlineConnector.h; sourceTree = "<group>"; };
+		A4230F29163D95B700E49A2B /* RestConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RestConstants.h; path = Utils/RestConstants.h; sourceTree = "<group>"; };
 		A43A0798162C6CCD0026EC09 /* AbstractGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractGameController.cpp; sourceTree = "<group>"; };
 		A43A0799162C6CCD0026EC09 /* AbstractGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractGameController.h; sourceTree = "<group>"; };
 		A43A079A162C6CCD0026EC09 /* AbstractPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractPlayerController.cpp; sourceTree = "<group>"; };
@@ -115,6 +128,15 @@
 		A43A07A7162C6CCD0026EC09 /* SelectGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGame.h; sourceTree = "<group>"; };
 		A43A07A9162C6CCD0026EC09 /* DevicePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DevicePlayer.cpp; sourceTree = "<group>"; };
 		A43A07AA162C6CCD0026EC09 /* DevicePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePlayer.h; sourceTree = "<group>"; };
+		A45A35C4165E930900004018 /* String.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = String.cpp; path = Utils/String.cpp; sourceTree = "<group>"; };
+		A45A35C5165E930900004018 /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = String.h; path = Utils/String.h; sourceTree = "<group>"; };
+		A45A35CA165E957B00004018 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = "lib-src/sqlite3/sqlite3.c"; sourceTree = "<group>"; };
+		A45A35CB165E957B00004018 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "lib-src/sqlite3/sqlite3.h"; sourceTree = "<group>"; };
+		A45A35CC165E957B00004018 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "lib-src/sqlite3/sqlite3ext.h"; sourceTree = "<group>"; };
+		A48D31E9163ABEAC00D250A8 /* MultiPlayerDashboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiPlayerDashboard.cpp; sourceTree = "<group>"; };
+		A48D31EA163ABEAC00D250A8 /* MultiPlayerDashboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPlayerDashboard.h; sourceTree = "<group>"; };
+		A48D31F1163ACB5A00D250A8 /* MultiPlayerLogin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiPlayerLogin.cpp; sourceTree = "<group>"; };
+		A48D31F2163ACB5A00D250A8 /* MultiPlayerLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiPlayerLogin.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +193,7 @@
 				428F7BDD15CB131A009ED24C /* game.config */,
 				42C932F21491A53E0098216A /* res */,
 				42C932C61491A0DB0098216A /* src */,
+				A45A35C8165E942400004018 /* lib-src */,
 				42C932DD1491A1050098216A /* Libraries */,
 				42C932BF1491A0DB0098216A /* Frameworks */,
 				42C932BD1491A0DB0098216A /* Products */,
@@ -202,6 +225,7 @@
 				A43A0797162C6CCD0026EC09 /* Game */,
 				A43A079F162C6CCD0026EC09 /* Menus */,
 				A43A07A8162C6CCD0026EC09 /* Players */,
+				A48D31ED163AC54C00D250A8 /* Utils */,
 				42C932EF1491A5160098216A /* BillardMainClass.cpp */,
 				42C932F01491A5160098216A /* BillardMainClass.h */,
 			);
@@ -257,15 +281,6 @@
 			name = GamePlay;
 			sourceTree = "<group>";
 		};
-		A43A078E162C6A370026EC09 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				A43A0793162C6A370026EC09 /* libgameplay.a */,
-				A43A0795162C6A370026EC09 /* libgameplay.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		A43A0797162C6CCD0026EC09 /* Game */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,6 +313,10 @@
 				A43A07A5162C6CCD0026EC09 /* MenuAbstract.h */,
 				A43A07A6162C6CCD0026EC09 /* SelectGame.cpp */,
 				A43A07A7162C6CCD0026EC09 /* SelectGame.h */,
+				A48D31E9163ABEAC00D250A8 /* MultiPlayerDashboard.cpp */,
+				A48D31EA163ABEAC00D250A8 /* MultiPlayerDashboard.h */,
+				A48D31F1163ACB5A00D250A8 /* MultiPlayerLogin.cpp */,
+				A48D31F2163ACB5A00D250A8 /* MultiPlayerLogin.h */,
 			);
 			path = Menus;
 			sourceTree = "<group>";
@@ -309,6 +328,45 @@
 				A43A07AA162C6CCD0026EC09 /* DevicePlayer.h */,
 			);
 			path = Players;
+			sourceTree = "<group>";
+		};
+		A45A35C8165E942400004018 /* lib-src */ = {
+			isa = PBXGroup;
+			children = (
+				A45A35C9165E953500004018 /* sqlite3 */,
+			);
+			name = "lib-src";
+			sourceTree = "<group>";
+		};
+		A45A35C9165E953500004018 /* sqlite3 */ = {
+			isa = PBXGroup;
+			children = (
+				A45A35CA165E957B00004018 /* sqlite3.c */,
+				A45A35CB165E957B00004018 /* sqlite3.h */,
+				A45A35CC165E957B00004018 /* sqlite3ext.h */,
+			);
+			name = sqlite3;
+			sourceTree = "<group>";
+		};
+		A47A89B816344E8400516EDA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A47A89BD16344E8400516EDA /* libgameplay.a */,
+				A47A89BF16344E8400516EDA /* libgameplay.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A48D31ED163AC54C00D250A8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A4230F25163D908000E49A2B /* OnlineConnector.cpp */,
+				A4230F26163D908000E49A2B /* OnlineConnector.h */,
+				A4230F29163D95B700E49A2B /* RestConstants.h */,
+				A45A35C4165E930900004018 /* String.cpp */,
+				A45A35C5165E930900004018 /* String.h */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -370,7 +428,7 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = A43A078E162C6A370026EC09 /* Products */;
+					ProductGroup = A47A89B816344E8400516EDA /* Products */;
 					ProjectRef = 5BC4E77F150F879E00CBE1C0 /* gameplay.xcodeproj */;
 				},
 			);
@@ -383,18 +441,18 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		A43A0793162C6A370026EC09 /* libgameplay.a */ = {
+		A47A89BD16344E8400516EDA /* libgameplay.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libgameplay.a;
-			remoteRef = A43A0792162C6A370026EC09 /* PBXContainerItemProxy */;
+			remoteRef = A47A89BC16344E8400516EDA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A43A0795162C6A370026EC09 /* libgameplay.a */ = {
+		A47A89BF16344E8400516EDA /* libgameplay.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libgameplay.a;
-			remoteRef = A43A0794162C6A370026EC09 /* PBXContainerItemProxy */;
+			remoteRef = A47A89BE16344E8400516EDA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -433,7 +491,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
+			shellScript = "cp -rf ../../../../Developer/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Developer/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
 		};
 		5B61612414CCC24C0073B857 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -446,7 +504,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Applications/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
+			shellScript = "cp -rf ../../../../Developer/blackberry-GamePlay/gameplay/res/shaders ${SRCROOT}/res\ncp -rf ../../../../Developer/blackberry-GamePlay/gameplay/res/logo_powered_white.png ${SRCROOT}/res\ntouch -cm ${SRCROOT}/res";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -464,6 +522,11 @@
 				A43A07B0162C6CCD0026EC09 /* MenuAbstract.cpp in Sources */,
 				A43A07B1162C6CCD0026EC09 /* SelectGame.cpp in Sources */,
 				A43A07B2162C6CCD0026EC09 /* DevicePlayer.cpp in Sources */,
+				A48D31EB163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */,
+				A48D31F3163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */,
+				A4230F27163D908000E49A2B /* OnlineConnector.cpp in Sources */,
+				A45A35C6165E930900004018 /* String.cpp in Sources */,
+				A45A35CD165E957B00004018 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +535,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5B61611614CCC24C0073B857 /* BillardMainClass.cpp in Sources */,
+				A48D31EC163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */,
+				A48D31F4163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */,
+				A4230F28163D908000E49A2B /* OnlineConnector.cpp in Sources */,
+				A45A35C7165E930900004018 /* String.cpp in Sources */,
+				A45A35CE165E957B00004018 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,18 +605,18 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"../../../../Applications/blackberry-GamePlay/gameplay/src",
-					"../../../../Applications/blackberry-GamePlay/external-deps/libpng/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/bullet/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/lua/include",
+					"../../../../Developer/blackberry-GamePlay/gameplay/src",
+					"../../../../Developer/blackberry-GamePlay/external-deps/libpng/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/bullet/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/lua/include",
 				);
 				INFOPLIST_FILE = "BillardOnline3D-macosx.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/macosx\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/macosx\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/libpng/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/bullet/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -564,18 +632,18 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"../../../../Applications/blackberry-GamePlay/gameplay/src",
-					"../../../../Applications/blackberry-GamePlay/external-deps/libpng/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/bullet/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/lua/include",
+					"../../../../Developer/blackberry-GamePlay/gameplay/src",
+					"../../../../Developer/blackberry-GamePlay/external-deps/libpng/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/bullet/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/lua/include",
 				);
 				INFOPLIST_FILE = "BillardOnline3D-macosx.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/macosx\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/macosx\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/libpng/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/bullet/lib/macosx\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/macosx\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "";
@@ -592,19 +660,19 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"../../../../Applications/blackberry-GamePlay/gameplay/src",
-					"../../../../Applications/blackberry-GamePlay/external-deps/libpng/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/bullet/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/lua/include",
+					"../../../../Developer/blackberry-GamePlay/gameplay/src",
+					"../../../../Developer/blackberry-GamePlay/external-deps/libpng/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/bullet/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/lua/include",
 				);
 				INFOPLIST_FILE = "BillardOnline3D-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/ios/$(CURRENT_ARCH)\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/ios/$(CURRENT_ARCH)\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/libpng/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/bullet/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/ios/$(CURRENT_ARCH)\"",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -622,19 +690,19 @@
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				HEADER_SEARCH_PATHS = (
-					"../../../../Applications/blackberry-GamePlay/gameplay/src",
-					"../../../../Applications/blackberry-GamePlay/external-deps/libpng/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/bullet/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/include",
-					"../../../../Applications/blackberry-GamePlay/external-deps/lua/include",
+					"../../../../Developer/blackberry-GamePlay/gameplay/src",
+					"../../../../Developer/blackberry-GamePlay/external-deps/libpng/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/bullet/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/include",
+					"../../../../Developer/blackberry-GamePlay/external-deps/lua/include",
 				);
 				INFOPLIST_FILE = "BillardOnline3D-ios.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/libpng/lib/ios/$(CURRENT_ARCH)\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/bullet/lib/ios/$(CURRENT_ARCH)\"",
-					"\"../../../../Applications/blackberry-GamePlay/external-deps/oggvorbis/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/libpng/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/bullet/lib/ios/$(CURRENT_ARCH)\"",
+					"\"../../../../Developer/blackberry-GamePlay/external-deps/oggvorbis/lib/ios/$(CURRENT_ARCH)\"",
 				);
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

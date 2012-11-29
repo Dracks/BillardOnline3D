@@ -6,7 +6,7 @@ form ListOptions
 	
 	container
 	{
-		style = basic
+		style = noBorder
         layout = LAYOUT_HORIZONTAL
 		alignment = ALIGN_VCENTER_HCENTER
         position = 0, 0
@@ -15,19 +15,18 @@ form ListOptions
 		
 		container actions
 		{
-			style = basic
+			style = noBorder
 			layout = LAYOUT_VERTICAL
-			alignment = ALIGN_VCENTER_HCENTER
+			alignment = ALIGN_VCENTER_LEFT
 			position = 0, 0
-			autoHeight = true
+			height = 300
 			width = 200
-			scroll = SCROLL_VERTICAL
 			
 			button ListMatches
 			{
 				style = buttonStyle
 				width = 180
-				height = 40
+				height = 30
 				text = List Match
 			}
 
@@ -35,7 +34,7 @@ form ListOptions
 			{
 				style = buttonStyle
 				width = 180
-				height = 40
+				height = 30
 				text = New Match
 			}
 
@@ -43,7 +42,7 @@ form ListOptions
 			{
 				style = buttonStyle
 				width = 180
-				height = 40
+				height = 30
 				text = Friends
 			}
 			
@@ -51,7 +50,7 @@ form ListOptions
 			{
 				style = buttonStyle
 				width = 180
-				height = 40
+				height = 30
 				text = Profile
 			}
 
@@ -59,9 +58,19 @@ form ListOptions
 			{
 				style = buttonStyle
 				width = 180
-				height = 40
+				height = 30
 				text = Back
 			}
+		}
+		container detail
+		{
+			style = basic
+			layout = LAYOUT_HORIZONTAL
+			alignment = ALIGN_VCENTER_RIGHT
+			position = 0, 0
+			autoHeight = true
+			width = 280
+			scroll = SCROLL_VERTICAL
 		}
 	}
 }

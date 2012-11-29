@@ -17,7 +17,7 @@ namespace Game{
 #include "AbstractGameController.h"
 
 namespace Game{
-	enum GamePointStatus {NONE, FIRST, CUSHION, END};
+	enum GamePointStatus {NONE, FIRST, CUSHION, END_GAME};
 	class ThreeBandGame: public AbstractGameController{
 	public:
 		ThreeBandGame(int minFrameCount);

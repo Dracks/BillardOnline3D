@@ -19,7 +19,7 @@ namespace Game{
 #include <vector>
 
 namespace Game{
-	enum GameStatus {WAIT, MOVE, TOUCH};
+	enum GameStatus {WAIT, MOVE, TOUCH, END};
 	
 	class AbstractGameController: public gameplay::PhysicsCollisionObject::CollisionListener{
 	public:

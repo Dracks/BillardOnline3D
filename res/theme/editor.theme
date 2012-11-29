@@ -215,4 +215,12 @@ theme particleEditor
             textColor = #C3D9BFff
         }
     }
+	
+	style text : title
+    {
+        stateNormal
+        {
+            fontSize = 20
+        }
+    }
 }
