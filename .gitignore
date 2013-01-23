@@ -2,5 +2,14 @@
 /BillardOnline3D.xcodeproj/project.xcworkspace/xcuserdata/
 /BillardOnline3D.xcodeproj/xcuserdata/
 /Device-Debug/
+.DS_Store
+/.cproject
+/BillardOnline3D.vcxproj
+/BillardOnline3D.vcxproj.user
+/CMakeLists.txt
+/Default-568h@2x.png
+/.project
+/BillardOnline3D.xcodeproj/
+/android/
 *.xml
 *.dae
