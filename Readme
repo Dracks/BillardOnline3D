@@ -1,0 +1,35 @@
+
+Create New Project:
+- Project Name: BillardOnline3D
+- Title: Billard Online 3D
+- Description: A multiplatform billard game online
+- Unique ID: es.jaumesingla.billardonline
+- Author: Jaume Singla Valls
+- Class name: BillardMainClass
+- Path: /Users/dracks/Documents/Programacio/Jocs/ (this is my path)
+
+
+Preparing Xcode
+* 
+* Add files.. in src group
+* select all folders inside src folder :
+  - don't copy
+  - add group for new folders
+* Build and run!
+
+Preparing qde (BBPB or BBOS10)
+* Import ...
+* existing project into workspace 
+* Select the Gameplay folder
+* Only needs the Gameplay project. (only import Gameplay)
+* Build gameplay
+* Import ...
+* Existing project into workspace
+* Select BillardOnline3D Folder
+* Import Billard only.
+* Open Billard project Properties
+* Select C/C++ Generals->Paths and symbols
+* Select all configurations and GNU C option
+* Add all the folders inside src, including Game/ModeGames
+* Build and run!
+  
