@@ -55,7 +55,13 @@ namespace Menus{
 		void onMoveBall(int difX, int difY);
 		
 		/*
-		 * AskExitMethods
+		 * Interface Action administration
+		 */
+		void refreshActionButtons(int);
+		//void showPreviousAction();
+		
+		/*
+		 * Ask Exit Methods and End Methods
 		 */
 		void exit(gameplay::Control::Listener::EventType);
 		void cancelPause(gameplay::Control::Listener::EventType);
@@ -73,14 +79,11 @@ namespace Menus{
 		/*
 		 * Views
 		 */
+		void pause(gameplay::Control::Listener::EventType);
 		void lookTop(gameplay::Control::Listener::EventType);
 		void lookFree(gameplay::Control::Listener::EventType);
 		void lookOverCue(gameplay::Control::Listener::EventType);
-		
-		/*
-		 * Game Methods
-		 */
-		void pause(gameplay::Control::Listener::EventType);
+
 		
 	private:
 		GameStatus _status, _oldStatus;
@@ -91,8 +94,9 @@ namespace Menus{
 		gameplay::Form* _hudScore;
 		gameplay::Form* _hudViews;
 		gameplay::Form* _hudActions;
-		gameplay::Form* _hudPlaceBall;
 		gameplay::Form* _hudEndGame;
+		
+		gameplay::Form* _hudHidden;
 		
 		gameplay::Label* _scorePlayer1;
 		gameplay::Label* _scorePlayer2;
@@ -109,6 +113,11 @@ namespace Menus{
 		
 		double _oldTimeMove;
 		bool _isMoving;
+		
+		std::vector<gameplay::Button*> _listActionsButton;
+		int _newOptionShowing;
+		
+		int _optionShowing;
 	};
 }
 

@@ -41,8 +41,17 @@
 		5BAF2070152F2DDD003E2AC3 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206A152F2DDD003E2AC3 /* OpenGLES.framework */; };
 		5BAF2071152F2DDD003E2AC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206B152F2DDD003E2AC3 /* QuartzCore.framework */; };
 		5BAF2072152F2DDD003E2AC3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BAF206C152F2DDD003E2AC3 /* UIKit.framework */; };
+		A420FCEC166DEA90009A6A13 /* AbstractGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A0798162C6CCD0026EC09 /* AbstractGameController.cpp */; };
+		A420FCED166DEA90009A6A13 /* AbstractPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079A162C6CCD0026EC09 /* AbstractPlayerController.cpp */; };
+		A420FCEE166DEA90009A6A13 /* ThreeBandGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079D162C6CCD0026EC09 /* ThreeBandGame.cpp */; };
+		A420FCEF166DEA90009A6A13 /* GameHud.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A0162C6CCD0026EC09 /* GameHud.cpp */; };
+		A420FCF0166DEA90009A6A13 /* MainMenu.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A2162C6CCD0026EC09 /* MainMenu.cpp */; };
+		A420FCF1166DEA90009A6A13 /* MenuAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A4162C6CCD0026EC09 /* MenuAbstract.cpp */; };
+		A420FCF2166DEA90009A6A13 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A6162C6CCD0026EC09 /* SelectGame.cpp */; };
+		A420FCF3166DEA90009A6A13 /* DevicePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A9162C6CCD0026EC09 /* DevicePlayer.cpp */; };
 		A4230F27163D908000E49A2B /* OnlineConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4230F25163D908000E49A2B /* OnlineConnector.cpp */; };
 		A4230F28163D908000E49A2B /* OnlineConnector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4230F25163D908000E49A2B /* OnlineConnector.cpp */; };
+		A435CA7116B026730083C4BE /* String_extras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A435CA7016B026730083C4BE /* String_extras.cpp */; };
 		A43A07AB162C6CCD0026EC09 /* AbstractGameController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A0798162C6CCD0026EC09 /* AbstractGameController.cpp */; };
 		A43A07AC162C6CCD0026EC09 /* AbstractPlayerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079A162C6CCD0026EC09 /* AbstractPlayerController.cpp */; };
 		A43A07AD162C6CCD0026EC09 /* ThreeBandGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A079D162C6CCD0026EC09 /* ThreeBandGame.cpp */; };
@@ -51,8 +60,6 @@
 		A43A07B0162C6CCD0026EC09 /* MenuAbstract.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A4162C6CCD0026EC09 /* MenuAbstract.cpp */; };
 		A43A07B1162C6CCD0026EC09 /* SelectGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A6162C6CCD0026EC09 /* SelectGame.cpp */; };
 		A43A07B2162C6CCD0026EC09 /* DevicePlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A43A07A9162C6CCD0026EC09 /* DevicePlayer.cpp */; };
-		A45A35C6165E930900004018 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45A35C4165E930900004018 /* String.cpp */; };
-		A45A35C7165E930900004018 /* String.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A45A35C4165E930900004018 /* String.cpp */; };
 		A45A35CD165E957B00004018 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = A45A35CA165E957B00004018 /* sqlite3.c */; };
 		A45A35CE165E957B00004018 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = A45A35CA165E957B00004018 /* sqlite3.c */; };
 		A48D31EB163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48D31E9163ABEAC00D250A8 /* MultiPlayerDashboard.cpp */; };
@@ -112,6 +119,8 @@
 		A4230F25163D908000E49A2B /* OnlineConnector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OnlineConnector.cpp; path = Utils/OnlineConnector.cpp; sourceTree = "<group>"; };
 		A4230F26163D908000E49A2B /* OnlineConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OnlineConnector.h; path = Utils/OnlineConnector.h; sourceTree = "<group>"; };
 		A4230F29163D95B700E49A2B /* RestConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RestConstants.h; path = Utils/RestConstants.h; sourceTree = "<group>"; };
+		A435CA6F16B026730083C4BE /* String_extras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = String_extras.h; path = Utils/String_extras.h; sourceTree = "<group>"; };
+		A435CA7016B026730083C4BE /* String_extras.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = String_extras.cpp; path = Utils/String_extras.cpp; sourceTree = "<group>"; };
 		A43A0798162C6CCD0026EC09 /* AbstractGameController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractGameController.cpp; sourceTree = "<group>"; };
 		A43A0799162C6CCD0026EC09 /* AbstractGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractGameController.h; sourceTree = "<group>"; };
 		A43A079A162C6CCD0026EC09 /* AbstractPlayerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AbstractPlayerController.cpp; sourceTree = "<group>"; };
@@ -128,8 +137,6 @@
 		A43A07A7162C6CCD0026EC09 /* SelectGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGame.h; sourceTree = "<group>"; };
 		A43A07A9162C6CCD0026EC09 /* DevicePlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DevicePlayer.cpp; sourceTree = "<group>"; };
 		A43A07AA162C6CCD0026EC09 /* DevicePlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePlayer.h; sourceTree = "<group>"; };
-		A45A35C4165E930900004018 /* String.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = String.cpp; path = Utils/String.cpp; sourceTree = "<group>"; };
-		A45A35C5165E930900004018 /* String.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = String.h; path = Utils/String.h; sourceTree = "<group>"; };
 		A45A35CA165E957B00004018 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = sqlite3.c; path = "lib-src/sqlite3/sqlite3.c"; sourceTree = "<group>"; };
 		A45A35CB165E957B00004018 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "lib-src/sqlite3/sqlite3.h"; sourceTree = "<group>"; };
 		A45A35CC165E957B00004018 /* sqlite3ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sqlite3ext.h; path = "lib-src/sqlite3/sqlite3ext.h"; sourceTree = "<group>"; };
@@ -360,11 +367,11 @@
 		A48D31ED163AC54C00D250A8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A435CA6F16B026730083C4BE /* String_extras.h */,
+				A435CA7016B026730083C4BE /* String_extras.cpp */,
 				A4230F25163D908000E49A2B /* OnlineConnector.cpp */,
 				A4230F26163D908000E49A2B /* OnlineConnector.h */,
 				A4230F29163D95B700E49A2B /* RestConstants.h */,
-				A45A35C4165E930900004018 /* String.cpp */,
-				A45A35C5165E930900004018 /* String.h */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -525,8 +532,8 @@
 				A48D31EB163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */,
 				A48D31F3163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */,
 				A4230F27163D908000E49A2B /* OnlineConnector.cpp in Sources */,
-				A45A35C6165E930900004018 /* String.cpp in Sources */,
 				A45A35CD165E957B00004018 /* sqlite3.c in Sources */,
+				A435CA7116B026730083C4BE /* String_extras.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,11 +541,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A420FCEC166DEA90009A6A13 /* AbstractGameController.cpp in Sources */,
+				A420FCED166DEA90009A6A13 /* AbstractPlayerController.cpp in Sources */,
+				A420FCEE166DEA90009A6A13 /* ThreeBandGame.cpp in Sources */,
+				A420FCEF166DEA90009A6A13 /* GameHud.cpp in Sources */,
+				A420FCF0166DEA90009A6A13 /* MainMenu.cpp in Sources */,
+				A420FCF1166DEA90009A6A13 /* MenuAbstract.cpp in Sources */,
+				A420FCF2166DEA90009A6A13 /* SelectGame.cpp in Sources */,
+				A420FCF3166DEA90009A6A13 /* DevicePlayer.cpp in Sources */,
 				5B61611614CCC24C0073B857 /* BillardMainClass.cpp in Sources */,
 				A48D31EC163ABEAC00D250A8 /* MultiPlayerDashboard.cpp in Sources */,
 				A48D31F4163ACB5A00D250A8 /* MultiPlayerLogin.cpp in Sources */,
 				A4230F28163D908000E49A2B /* OnlineConnector.cpp in Sources */,
-				A45A35C7165E930900004018 /* String.cpp in Sources */,
 				A45A35CE165E957B00004018 /* sqlite3.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

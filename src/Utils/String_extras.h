@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <string.h>
 
 namespace utils{
 	template <typename T>
@@ -30,6 +31,6 @@ namespace utils{
 	}
 }
 
-#include "String.cpp"
+#include "String_extras.cpp"
 
 #endif /* defined(__BillardOnline3D__String__) */

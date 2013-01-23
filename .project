@@ -3,6 +3,7 @@
 	<name>BillardOnline3D</name>
 	<comment></comment>
 	<projects>
+		<project>gameplay</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

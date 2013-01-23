@@ -8,7 +8,7 @@
 
 #include "GameHud.h"
 #include "MainMenu.h"
-#include "String.h"
+#include "String_extras.h"
 
 using namespace gameplay;
 /*
@@ -36,7 +36,6 @@ namespace Menus{
 	GameHud::GameHud(::BillardMainClass* base, ::Game::AbstractGameController* gameController):Menus::MenuInterface(base) {
 		_hudActions=NULL;
 		_hudViews=NULL;
-		_hudPlaceBall=NULL;
 		_gameController=gameController;
 		_status=WAIT;
 		
@@ -45,6 +44,9 @@ namespace Menus{
 		
 		
 		_gameController->setGameHud(this);
+		
+		_optionShowing=-1;
+		_newOptionShowing=-1;
 		
 		//Scene* scena=_gameController->getScene();
 		//_topCamera=scena->findNode("CameraTop")->getCamera();
@@ -56,10 +58,13 @@ namespace Menus{
 		if (_hudActions!=NULL){
 			SAFE_RELEASE(_hudActions);
 			SAFE_RELEASE(_hudViews);
-			SAFE_RELEASE(_hudPlaceBall);
 			SAFE_RELEASE(_hudEndGame);
 			SAFE_RELEASE(_hudScore);
 			SAFE_RELEASE(_exit);
+			
+			for (unsigned int i=0; i<_listActionsButton.size(); i++){
+				SAFE_RELEASE(_listActionsButton[i]);
+			}
 		}
 	}
 	
@@ -84,7 +89,7 @@ namespace Menus{
 					match=false;
 					break;
 			}
-			if ((_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT) || not match){
+			/*if ((_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT) && not match){
 				switch (key) {
 					case Keyboard::KEY_S:
 						_status=SHOT;
@@ -102,7 +107,7 @@ namespace Menus{
 					default:
 						break;
 				}
-			}
+			}*/
 		}
 	}
 	
@@ -150,18 +155,42 @@ namespace Menus{
 			_hudActions = Form::create("res/menus/GameHud.form#ActionButtons");
 			_hudActions->setConsumeInputEvents(false);
 			
-			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			((Button*) _hudActions->getControl("look"))->addListener(kNewSelector(&GameHud::actionLook), Control::Listener::CLICK);
 			((Button*) _hudActions->getControl("point"))->addListener(kNewSelector(&GameHud::actionPoint), Control::Listener::CLICK);
 			((Button*) _hudActions->getControl("effect"))->addListener(kNewSelector(&GameHud::actionEffect), Control::Listener::CLICK);
 			((Button*) _hudActions->getControl("shoot"))->addListener(kNewSelector(&GameHud::actionShoot), Control::Listener::CLICK);
+			
+			_listActionsButton.push_back((Button*)_hudActions->getControl("placeBall"));
+			_listActionsButton.push_back((Button*)_hudActions->getControl("look"));
+			_listActionsButton.push_back((Button*)_hudActions->getControl("point"));
+			_listActionsButton.push_back((Button*)_hudActions->getControl("effect"));
+			_listActionsButton.push_back((Button*)_hudActions->getControl("shoot"));
+			
+			
+			_hudHidden = Form::create("res/menus/GameHud.form#ActionButtons");
+			_hudHidden->setConsumeInputEvents(false);
+			_hudHidden->disable();
+			/*//_hudHidden->setAutoWidth(false);
+			_hudHidden->setAutoWidth(false);
+			_hudHidden->setAutoHeight(false);
+			_hudHidden->setSize(0, 0);
+			*/
+			for (unsigned int i=0; i<_listActionsButton.size(); i++){
+				_listActionsButton[i]->addRef();
+				_hudActions->removeControl(_listActionsButton[i]);
+				_hudHidden->removeControl((unsigned int)0);
+			}
+			
+			//_listActionsButton.push_back((Button*)_hudActions->getControl("placeBall"));
+			
+			
 			//((Button*) _hud->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			
-			_hudPlaceBall = Form::create("res/menus/GameHud.form#PlaceBall");
+			/*_hudPlaceBall = Form::create("res/menus/GameHud.form#PlaceBall");
 			_hudPlaceBall->setConsumeInputEvents(false);
 			
 			((Button*) _hudActions->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
-			((Button*) _hudPlaceBall->getControl("placeBallOk"))->addListener(kNewSelector(&GameHud::actionPlaceBall), Control::Listener::CLICK);
+			((Button*) _hudPlaceBall->getControl("placeBallOk"))->addListener(kNewSelector(&GameHud::actionPlaceBall), Control::Listener::CLICK);*/
 			
 			_hudViews = Form::create("res/menus/GameHud.form#ViewButtons");
 			_hudViews->setConsumeInputEvents(false);
@@ -169,6 +198,7 @@ namespace Menus{
 			((Button*) _hudViews->getControl("free"))->addListener(kNewSelector(&GameHud::lookFree), Control::Listener::CLICK);
 			((Button*) _hudViews->getControl("top"))->addListener(kNewSelector(&GameHud::lookTop), Control::Listener::CLICK);
 			((Button*) _hudViews->getControl("cue"))->addListener(kNewSelector(&GameHud::lookOverCue), Control::Listener::CLICK);
+			((Button*) _hudViews->getControl("pause"))->addListener(kNewSelector(&GameHud::pause), Control::Listener::CLICK);
 			
 			_hudScore = Form::create("res/menus/GameHud.form#ScoreView");
 			_hudScore->setConsumeInputEvents(false);
@@ -188,12 +218,14 @@ namespace Menus{
 			
 			((Button*) _exit->getControl("exit"))->addListener(kNewSelector(&GameHud::exit), Control::Listener::CLICK);
 			((Button*) _exit->getControl("cancel"))->addListener(kNewSelector(&GameHud::cancelPause), Control::Listener::CLICK);
+			
+			_newOptionShowing=1;
 
-			if (_status==PLACE_BALL){
+			/*if (_status==PLACE_BALL){
 				_hudActions->disable();
 			} else {
 				_hudPlaceBall->disable();
-			}
+			}*/
 		}
 		/*if (!_isMoving){
 			_oldTimeMove=_controller->getAbsoluteTime();
@@ -201,15 +233,21 @@ namespace Menus{
 			_isMoving=false;
 		}*/
 		
+		if (_newOptionShowing!=_optionShowing){
+			printf("status: %d newOption: %d\n", _status, _newOptionShowing);
+			this->refreshActionButtons(_newOptionShowing);
+		}
+		
 		
 		_hudViews->update(timeElapsed);
 		_hudActions->update(timeElapsed);
-		_hudPlaceBall->update(timeElapsed);
+		//_hudPlaceBall->update(timeElapsed);
+		_hudHidden->update(timeElapsed);
 		_hudScore->update(timeElapsed);
 		_exit->update(timeElapsed);
 		_gameController->update(timeElapsed);
 		_hudEndGame->update(timeElapsed);
-		
+
 		
 	}
 	
@@ -231,11 +269,12 @@ namespace Menus{
 		} else {
 			_hudViews->draw();
 			_hudScore->draw();
-			if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT){
+			_hudHidden->draw();
+			_hudActions->draw();
+			/*if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT || _status==PLACE_BALL){
 				_hudActions->draw();
-			} else if (_status==PLACE_BALL){
-				_hudPlaceBall->draw();
-			} else if (_status==END){
+			} else*/
+			if (_status==END){
 				_hudEndGame->draw();
 			}
 		}
@@ -292,7 +331,7 @@ namespace Menus{
 	void GameHud::disable(){
 		_hudActions->disable();
 		_hudViews->disable();
-		_hudPlaceBall->disable();
+		//_hudPlaceBall->disable();
 		_exit->disable();
 	}
 	
@@ -317,6 +356,11 @@ namespace Menus{
 				_playerController=player;
 			}
 			this->nextStepPlayer();
+			if (_status==LOOK){
+				_newOptionShowing=1;
+			} else {
+				_newOptionShowing=0;
+			}
 		}
 	}
 	
@@ -331,8 +375,6 @@ namespace Menus{
 			_ballOut=ballOut;
 			
 			_status=PLACE_BALL;
-			if (_hudPlaceBall!=NULL)
-				_hudPlaceBall->enable();
 		} else {
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
 			if (_status!=END){
@@ -358,6 +400,7 @@ namespace Menus{
 			this->lookTop(Control::Listener::CLICK);
 		}
 		_status=RUNING;
+		_newOptionShowing=-1;
 	}
 	
 	void GameHud::endGame(){
@@ -375,6 +418,95 @@ namespace Menus{
 		((Label*)_hudEndGame->getControl("text"))->setText(text.c_str());
 	}
 	
+	/*
+	 * Interface Action administration
+	 */
+	void GameHud::refreshActionButtons(int option){
+		if (_optionShowing>-1){
+			_hudActions->update(0.001f);
+			if (_optionShowing==0){
+				_listActionsButton[0]->setAlignment(Control::ALIGN_TOP_RIGHT);
+				_listActionsButton[1]->setAlignment(Control::ALIGN_TOP_RIGHT);
+				_hudActions->removeControl(_listActionsButton[0]);
+				_hudActions->removeControl(_listActionsButton[1]);
+				_listActionsButton[0]->disable();
+				_listActionsButton[1]->disable();
+				//_hudHidden->addControl(_listActionsButton[0]);
+				//_hudHidden->addControl(_listActionsButton[1]);
+			} else {
+				int ini=_optionShowing-1;
+				int end=_optionShowing+2;
+				if (ini==0){
+					ini=1;
+				}
+				if (end>_listActionsButton.size()){
+					end=_listActionsButton.size();
+				}
+				for (int i=ini; i<end; i++){
+					_listActionsButton[i]->setAlignment(Control::ALIGN_TOP_RIGHT);
+					_listActionsButton[i]->disable();
+					_hudActions->removeControl(_listActionsButton[i]);
+					//_hudHidden->addControl(_listActionsButton[i]);
+				}
+			}
+		}
+		//assert(option>=0);
+		if (_hudActions!=NULL && option>0){
+			_optionShowing=option;
+			if (option==0){
+				_hudActions->addControl(_listActionsButton[0]);
+				_listActionsButton[0]->setAlignment(Control::ALIGN_BOTTOM_HCENTER);
+				
+				_hudActions->addControl(_listActionsButton[1]);
+				_listActionsButton[1]->setAlignment(Control::ALIGN_BOTTOM_RIGHT);
+				_listActionsButton[0]->enable();
+				_listActionsButton[1]->enable();
+			} else if (option==1){
+				_hudActions->addControl(_listActionsButton[1]);
+				_listActionsButton[1]->setAlignment(Control::ALIGN_BOTTOM_HCENTER);
+				
+				_hudActions->addControl(_listActionsButton[2]);
+				_listActionsButton[2]->setAlignment(Control::ALIGN_BOTTOM_RIGHT);
+				
+				_listActionsButton[1]->enable();
+				_listActionsButton[2]->enable();
+			} else if (option==_listActionsButton.size()-1){
+				_hudActions->addControl(_listActionsButton[option-1]);
+				_listActionsButton[option-1]->setAlignment(Control::ALIGN_BOTTOM_LEFT);
+				
+				_hudActions->addControl(_listActionsButton[option]);
+				_listActionsButton[option]->setAlignment(Control::ALIGN_BOTTOM_HCENTER);
+				
+				_listActionsButton[option-1]->enable();
+				_listActionsButton[option]->enable();
+			} else {
+				_hudActions->addControl(_listActionsButton[option-1]);
+				_listActionsButton[option-1]->setAlignment(Control::ALIGN_BOTTOM_LEFT);
+				
+				_hudActions->addControl(_listActionsButton[option]);
+				_listActionsButton[option]->setAlignment(Control::ALIGN_BOTTOM_HCENTER);
+				
+				_hudActions->addControl(_listActionsButton[option+1]);
+				_listActionsButton[option+1]->setAlignment(Control::ALIGN_BOTTOM_RIGHT);
+				
+				_listActionsButton[option-1]->enable();
+				_listActionsButton[option]->enable();
+				_listActionsButton[option+1]->enable();
+			}
+		}
+		//_newOptionShowing=option;
+		std::vector<gameplay::Control*> listControls=_hudActions->getControls();
+		for (unsigned int i=0; i<listControls.size(); i++){
+			printf("Controlador: %s \n", listControls[i]->getId());
+		}
+	}
+	/*void GameHud::showPreviousAction(){
+		
+	}//*/
+	
+	/*
+	 * Ask Exit Methods and End Methods
+	 */
 	
 	void GameHud::exit(gameplay::Control::Listener::EventType){
 		_controller->changeToScreen(new MainMenu(this->_controller));
@@ -384,34 +516,41 @@ namespace Menus{
 		_status=_oldStatus;
 		_exit->disable();
 		_hudViews->enable();
-		if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT){
+		if (_status==LOOK || _status==SHOT || _status==EFFECT || _status==POINT || _status==PLACE_BALL){
 			_hudActions->enable();
-		} else if (_status==PLACE_BALL){
-			_hudPlaceBall->enable();
 		}
+	}
+	
+	void GameHud::replay(gameplay::Control::Listener::EventType){
+		
 	}
 	
 	/*
 	 * Actions
 	 */
 	void GameHud::actionLook(gameplay::Control::Listener::EventType){
+		if (_status==PLACE_BALL){
+			((PhysicsRigidBody*)_ballOut->getCollisionObject())->setKinematic(false);
+			_ballOut=NULL;
+			//_hudPlaceBall->disable();
+			this->nextStepPlayer();
+		}
+		_newOptionShowing=1;
 		_status=LOOK;
 	}
 	void GameHud::actionPoint(gameplay::Control::Listener::EventType){
+		_newOptionShowing=2;
 		_status=POINT;
 	}
 	void GameHud::actionEffect(gameplay::Control::Listener::EventType){
+		_newOptionShowing=3;
 		_status=EFFECT;
 	}
 	void GameHud::actionShoot(gameplay::Control::Listener::EventType){
+		_newOptionShowing=4;
 		_status=SHOT;
 	}
-	void GameHud::actionPlaceBall(gameplay::Control::Listener::EventType){
-		((PhysicsRigidBody*)_ballOut->getCollisionObject())->setKinematic(false);
-		_ballOut=NULL;
-		_hudPlaceBall->disable();
-		this->nextStepPlayer();
-	}
+	void GameHud::actionPlaceBall(gameplay::Control::Listener::EventType){}
 	
 	/*
 	 * Views
@@ -437,7 +576,7 @@ namespace Menus{
 		_status=PAUSE;
 		_exit->enable();
 		_hudViews->disable();
-		_hudPlaceBall->disable();
+		//_hudPlaceBall->disable();
 		_hudViews->disable();
 	}
 	

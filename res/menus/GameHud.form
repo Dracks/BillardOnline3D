@@ -11,8 +11,15 @@ form ViewButtons
 		alignment = ALIGN_VCENTER_LEFT
         position = 0, 0
         width = 80
-		height = 200
+		height = 260
 		
+		button pause
+		{
+			style = buttonStyle
+			width= 60
+			height = 60
+			text = X
+		}
 		button cue
 		{
 			style = buttonStyle
@@ -44,87 +51,45 @@ form ActionButtons
 	theme = res/theme/editor.theme
     autoWidth = true
     autoHeight = true
-	
-	container actions
+		
+	button placeBall
 	{
-		style = basic
-        layout = LAYOUT_VERTICAL
-		alignment = ALIGN_VCENTER_RIGHT
-        width = 80
-		height = 320
-		
-		
-		button pause
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = X
-		}
-
-		button look
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = Look
-		}
-		
-		button point
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = Point
-		}
-		
-		button effect
-		{
-			style = buttonStyle
-			width = 60
-			height = 60
-			text = Effect
-		}
-		
-		button shoot
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = Shoot
-		}
+		style = buttonStyle
+		width = 200
+		height = 40
+		text = Place ball
 	}
-}
 
-form PlaceBall
-{
-	theme = res/theme/editor.theme
-    autoWidth = true
-    autoHeight = true
-	
-	container placeBall
+	button look
 	{
-		style = basic
-        layout = LAYOUT_VERTICAL
-		alignment = ALIGN_VCENTER_RIGHT
-        width = 80
-		height = 320
-		
-		button pause
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = X
-		}
-		
-		button placeBallOk
-		{
-			style = buttonStyle
-			width= 60
-			height = 60
-			text = Ok
-		}
+		style = buttonStyle
+		width= 200
+		height = 40
+		text = Look
+	}
+	
+	button point
+	{
+		style = buttonStyle
+		width= 200
+		height = 40
+		text = Point
+	}
+	
+	button effect
+	{
+		style = buttonStyle
+		width = 200
+		height = 40
+		text = Effect
+	}
+	
+	button shoot
+	{
+		style = buttonStyle
+		width= 200
+		height = 40
+		text = Shoot
 	}
 }
 
