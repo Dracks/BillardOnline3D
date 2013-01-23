@@ -83,6 +83,6 @@ namespace Menus{
 	}
 		
 	void MultiPlayerLogin::disable(){
-		_login->disable();
+		_login->setEnabled(false);
 	}
 }

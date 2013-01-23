@@ -61,6 +61,6 @@ namespace Menus{
 	}
 	
 	void SelectGame::disable(){
-		_form->disable();
+		_form->setEnabled(false);
 	}
 }

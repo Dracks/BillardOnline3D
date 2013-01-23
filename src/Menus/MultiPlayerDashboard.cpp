@@ -50,7 +50,7 @@ namespace Menus{
 	void MultiPlayerDashboard::loginResponse(Utils::ResponseStatus rCode, void* data){
 		std::cout << "loginResponse:" << rCode << "," << (char*) data << std::endl;
 		if (rCode==Utils::OK){
-			_options->enable();
+			_options->setEnabled(true);
 			_popup->disable();
 			delete _popup;
 			_popup=NULL;
@@ -68,7 +68,7 @@ namespace Menus{
 			((Button*) _options->getControl("back"))->addListener(kNewSelector(&MultiPlayerDashboard::actionBack), Control::Listener::CLICK);
 			
 			if (_popup!=NULL){
-				_options->disable();
+				_options->setEnabled(false);
 			}
 		}
 		_options->update(elapsedTime);
@@ -83,7 +83,7 @@ namespace Menus{
 		}
 	}
 	void MultiPlayerDashboard::disable(){
-		_options->disable();
+		_options->setEnabled(false);
 		if (_popup!=NULL){
 			_popup->disable();
 		}

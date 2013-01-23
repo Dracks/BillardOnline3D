@@ -60,7 +60,7 @@ namespace Menus {
 	}
 	
 	void MainMenu::disable(){
-		_form->disable();
+		_form->setEnabled(false);
 	}
 	
 	void MainMenu::singlePlayer(gameplay::Control::Listener::EventType evt){
