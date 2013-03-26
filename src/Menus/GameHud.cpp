@@ -290,26 +290,33 @@ namespace Menus{
 	
 	void GameHud::onMovePoint(int difX,int difY){
 		float mx=getMovement((float) difX);
+		float my=getMovement((float) difY);
 		//std::cout << mx << ", " << my << std::endl;
-		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
-		if (cueGroup!=NULL){
-			cueGroup->rotateZ(mx);
-			//cueGroup->rotateX(my);
+		Node* CueGroupZ=_gameController->getScene()->findNode("CueGroupZ");
+		Node* CueGroupX=NULL;
+		if (CueGroupZ!=NULL){
+			CueGroupX=CueGroupZ->findNode("CueGroupX");
+			CueGroupZ->rotateZ(mx);
+			//CueGroupZ->rotateX(my);
 		}
+		if (CueGroupX!=NULL){
+			CueGroupX->rotateY(my);
+		}
+		
 	}
 	void GameHud::onMoveEffect(int difX,int difY){
 		float mx=getMovement(difX);
 		float my=getMovement(difY);
 		
-		Node* cueGroup=_gameController->getScene()->findNode("CueGroup");
-		if (cueGroup!=NULL){
-			cueGroup->translateUp(mx);
-			cueGroup->translateForward(my);
+		Node* CueGroupZ=_gameController->getScene()->findNode("CueGroupZ");
+		if (CueGroupZ!=NULL){
+			CueGroupZ->translateUp(mx);
+			CueGroupZ->translateForward(my);
 		}
 	}
 	void GameHud::onMoveShot(int difX,int difY){
-		Node* cueGroup=_gameController->getScene()->findNode("Cue");
-		if (cueGroup!=NULL){
+		Node* CueGroupZ=_gameController->getScene()->findNode("Cue");
+		if (CueGroupZ!=NULL){
 			float my=getMovement(difY);
 			_isMoving=true;
 			double time=_controller->getAbsoluteTime();
@@ -317,8 +324,8 @@ namespace Menus{
 			_playerController->setCueVelocity(my/(time-_oldTimeMove));
 			_oldTimeMove=time;
 			
-			Vector3 direction=cueGroup->getBackVector()*my;
-			cueGroup->translate(direction);
+			Vector3 direction=CueGroupZ->getBackVector()*my;
+			CueGroupZ->translate(direction);
 		}
 	}
 	
@@ -376,13 +383,13 @@ namespace Menus{
 		} else {
 			Vector3 ballPosition=_gameController->getPlayerBall()->getTranslation();
 			if (_status!=END){
-				Node* cueGroup=_playerController->getCue();
-				cueGroup->setTranslation(ballPosition);
+				Node* CueGroupZ=_playerController->getCue();
+				CueGroupZ->setTranslation(ballPosition);
 				//std::cout << cue << std::endl;
 				//std::cout << cue->getId() << std::endl;
-				_gameController->getScene()->addNode(cueGroup);
+				_gameController->getScene()->addNode(CueGroupZ);
 				//if (cue->getCollisionObject()!=NULL)
-				cueGroup->findNode("Cue")->getCollisionObject()->setEnabled(true);
+				CueGroupZ->findNode("Cue")->getCollisionObject()->setEnabled(true);
 				_status=LOOK;
 			if (_hudActions!=NULL)
 				_hudActions->setEnabled(true);

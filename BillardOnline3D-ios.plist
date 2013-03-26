@@ -4,10 +4,12 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-    <key>CFBundleDisplayName</key>
+	<key>CFBundleDisplayName</key>
 	<string>Billard Online 3D</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
+	<key>CFBundleIconFile</key>
+	<string>icon.png</string>
 	<key>CFBundleIdentifier</key>
 	<string>es.jaumesingla.billardonline</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -28,7 +30,5 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-    <key>CFBundleIconFile</key>
-	<string>icon.png</string>
 </dict>
 </plist>

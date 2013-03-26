@@ -39,22 +39,28 @@ namespace Game{
 		((PhysicsRigidBody*)cueBase->getCollisionObject())->setKinematic(true);
 		//((PhysicsRigidBody*)cueBase->getCollisionObject())->set
 		
-		Node* cueGroup=_scene->addNode();
-		cueGroup->addChild(cueBase);
+		Node* cueGroupX=_scene->addNode();
+		cueGroupX->setId("CueGroupX");
+		cueGroupX->setTranslation(0, 0, 0);
 		cueBase->setTranslation(kCueBallDistance, 0, 0);
-		cueGroup->setId("CueGroup");
-		cueGroup->setTranslation(0,0,0);
+		cueGroupX->addChild(cueBase);
+		
+		Node* cueGroupZ=_scene->addNode();
+		cueGroupZ->addChild(cueGroupX);
+		cueGroupZ->setId("CueGroupZ");
+		cueGroupZ->setTranslation(0,0,0);
 		
 		Node* cameraCueNode=_scene->findNode("CameraFree")->clone();
 		cameraCueNode->setId("CameraCue");
-		cueGroup->addChild(cameraCueNode);
+		cueGroupZ->addChild(cameraCueNode);
 		cameraCueNode->setTranslation(1.5, 0.1, 0.2);
 		cameraCueNode->setRotation(0.498, 0.502, 0.498, 0.502);
 		
-		_cueGroup=cueGroup;
+		_cueGroup=cueGroupZ;
 		
 		_cueGroup->addRef();
-		_scene->removeNode(cueGroup);
+		_scene->removeNode(cueGroupX);
+		_scene->removeNode(cueGroupZ);
 		
 		std::cout << "enabled" << cueBase->getCollisionObject()->isEnabled() << std::endl;
 		std::cout << "kinematic" << cueBase->getCollisionObject()->isKinematic() << std::endl;

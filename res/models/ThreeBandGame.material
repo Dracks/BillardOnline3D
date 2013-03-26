@@ -29,8 +29,8 @@ material Table : BasicMonoColor
     {
         pass
         {
-            u_ambientColor = 0.0, 0.1, 0.0
-            u_diffuseColor = 0.1, 0.4, 0.15, 1
+            u_ambientColor = 0.08, 0.38, 0.13
+            u_diffuseColor = 0.3, 0.3, 0.3, 1
 
         }
     }
