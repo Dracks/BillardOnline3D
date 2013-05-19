@@ -113,6 +113,7 @@ form Login
             autoWidth=true
 			height=40
 			alignment = ALIGN_VCENTER_LEFT
+			inputMode = password
 		}
 		
 		button login
