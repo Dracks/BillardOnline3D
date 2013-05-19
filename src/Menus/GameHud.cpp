@@ -553,12 +553,14 @@ namespace Menus{
 	void GameHud::actionLook(gameplay::Control::Listener::EventType){
 		if (_status==PLACE_BALL){
 			((PhysicsRigidBody*)_ballOut->getCollisionObject())->setKinematic(false);
+			_gameController->placeBall(_ballOut);
 			_ballOut=NULL;
 			//_hudPlaceBall->setEnable(false);
 			this->nextStepPlayer();
+		} else {
+			_newOptionShowing=1;
+			_status=LOOK;
 		}
-		_newOptionShowing=1;
-		_status=LOOK;
 	}
 	void GameHud::actionPoint(gameplay::Control::Listener::EventType){
 		_newOptionShowing=2;

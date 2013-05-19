@@ -16,6 +16,7 @@ namespace Game{
 #include "AbstractPlayerController.h"
 // Aquest ens crea el deadlock
 #include "GameHud.h"
+#include "AbstractGameObserver.h"
 #include <vector>
 
 namespace Game{
@@ -32,6 +33,7 @@ namespace Game{
 		
 		void setGameHud(Menus::GameHud*);
 		void setPlayer(AbstractPlayerController*);
+		void addGameObserver(AbstractGameObserver*);
 		virtual void endRound()=0;
 		
 		gameplay::Scene* getScene();
@@ -47,6 +49,10 @@ namespace Game{
 		
 		virtual gameplay::Node* getCue();
 		
+		virtual void placeBall(gameplay::Node* ball);
+		
+		virtual void shot(const gameplay::Vector3& contactPoint, const gameplay::Vector3& velocityCue);
+		
 		virtual void update(float timeElapsed);
 		
 		virtual void collisionEvent(gameplay::PhysicsCollisionObject::CollisionListener::EventType type,
@@ -58,15 +64,19 @@ namespace Game{
 		gameplay::Scene* _scene;
 		std::vector<gameplay::Node*> _ballsList;
 		
+		std::vector<AbstractGameObserver*> _observerList;
+		
 		gameplay::Node* _cueGroup;
 		Menus::GameHud* _gameHud;
 		
 		std::vector<int> _ballsOut;
+		int _round;
 		
 	private:
 		char _playerActive;
 		GameStatus _statusGame;
 		std::vector<AbstractPlayerController*> _players;
+		
 		
 		
 	};

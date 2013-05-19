@@ -52,12 +52,33 @@ namespace Game{
 	}
 	
 	void ThreeBandGame::endRound(){
+		std::vector<BallInfo> info;
+		for (unsigned int i=0; i<_ballsList.size(); i++){
+			Node* ball=_ballsList[i];
+			BallStatus status=BS_Normal;
+			
+			for (unsigned int j=0; j<_ballsOut.size() && status!=BS_Out; j++){
+				if (i==_ballsOut[j]){
+					status=BS_Out;
+				}
+			}
+			info.push_back(BallInfo(i, status, ball->getTranslation()));
+		}
+		
+		for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++) {
+			(*iter)->setResult(_round, info);
+		}
+		
 		if (_pointStatus==END_GAME && this->_ballsOut.empty()){
 			//this->_players[this->getPlayerActive()];
-			AbstractPlayerController* player=this->getPlayer(this->getPlayerActive());
+			char playerActive=this->getPlayerActive();
+			AbstractPlayerController* player=this->getPlayer(playerActive);
 			player->addPoint();
 			if (player->getPoints()==kMaxPoints){
 				_gameHud->endGame();
+				for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++) {
+					(*iter)->gameEnd(_round, playerActive);
+				}
 			}
 			
 		} else {

@@ -70,6 +70,7 @@ namespace Game{
 		_ballsList[0]->getCollisionObject()->addCollisionListener(this);
 		
 		_statusGame=WAIT;
+		_round=0;
 	}
 	
 	void AbstractGameController::initializeMaterial(Node* node, Material* material)
@@ -96,6 +97,9 @@ namespace Game{
 	AbstractGameController::~AbstractGameController(){
 		SAFE_RELEASE(_scene);
 		SAFE_RELEASE(_cueGroup);
+		for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++){
+			delete *iter;
+		}
 	}
 	
 	void AbstractGameController::start(){
@@ -109,6 +113,10 @@ namespace Game{
 	
 	void AbstractGameController::setPlayer(AbstractPlayerController*player){
 		_players.push_back(player);
+	}
+	
+	void AbstractGameController::addGameObserver(AbstractGameObserver* observer){
+		_observerList.push_back(observer);
 	}
 		
 	gameplay::Scene* AbstractGameController::getScene(){
@@ -150,6 +158,29 @@ namespace Game{
 		return _cueGroup;
 	}
 	
+	void AbstractGameController::placeBall(gameplay::Node* ball){
+		int i=0;
+		while (i<_ballsList.size() && _ballsList[i]!=ball) {
+			i++;
+		}
+		assert(_ballsList[i]==ball);
+		ActionInfo info(i, ball->getTranslation());
+		for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++) {
+			(*iter)->setAction(_round, &info);
+			(*iter)->commit(_round);
+		}
+		_round++;
+	}
+	
+	void AbstractGameController::shot(const gameplay::Vector3 &contactPoint, const gameplay::Vector3 &cueVelocity){
+		((PhysicsRigidBody*) getPlayerBall()->getCollisionObject())->applyImpulse(cueVelocity,&contactPoint);
+		ActionInfo info(contactPoint, cueVelocity);
+		for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++) {
+			(*iter)->setAction(_round, &info);
+		}
+		_statusGame=TOUCH;
+	}
+	
 	void AbstractGameController::update(float timeElapsed){
 		bool moving=false;
 		unsigned int i;
@@ -171,7 +202,12 @@ namespace Game{
 			}
 		}
 		if (_statusGame==MOVE && !moving){
+			
 			this->endRound();
+			_round++;
+			for (std::vector<AbstractGameObserver*>::iterator iter=_observerList.begin(); iter!=_observerList.end(); iter++) {
+				(*iter)->commit(_round);
+			}
 			_players[_playerActive]->move();
 			Vector3 nullVelocity(0,0,0);
 			_statusGame=WAIT;
@@ -214,16 +250,8 @@ namespace Game{
 				(nodeB==getPlayerBall() && nodeA==_cueGroup->findNode("Cue"))*/)){
 			float cueVelocity=_players[_playerActive]->getVelocityCue()*30000;
 			if (abs(cueVelocity)!=std::numeric_limits<float>::infinity()){
-				((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&contactPointA);
-				//((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity);
-				Vector3 p=nodeB->getTranslation()-nodeA->getTranslation();
-				//((PhysicsRigidBody*) nodeA->getCollisionObject())->applyImpulse(_cueGroup->getRightVector().normalize()*cueVelocity,&p);
-				std::cout << p.x << "," << p.y << "," << p.z << std::endl;
-				std::cout << contactPointA.x << "," << contactPointA.y << "," << contactPointA.z << std::endl;
-
-				//((PhysicsRigidBody*) nodeA->getCollisionObject())->setLinearVelocity(_cueGroup->getRightVector().normalize()*cueVelocity);
-				std::cout << cueVelocity << std::endl;
-				_statusGame=TOUCH;
+#warning _cueGroup is not correct to use, because we don't have the two axis
+				this->shot(contactPointA, _cueGroup->getRightVector().normalize()*cueVelocity);
 			} else {
 				std::cout << "Infinity" << _players[_playerActive]->getVelocityCue() << std::endl;
 			}
