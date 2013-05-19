@@ -248,7 +248,7 @@ namespace Game{
 		if (_statusGame==WAIT && (
 				(nodeA==getPlayerBall() && nodeB==_cueGroup->findNode("Cue")) /*||
 				(nodeB==getPlayerBall() && nodeA==_cueGroup->findNode("Cue"))*/)){
-			float cueVelocity=_players[_playerActive]->getVelocityCue()*30000;
+			float cueVelocity=_players[_playerActive]->getVelocityCue()*30;
 			if (abs(cueVelocity)!=std::numeric_limits<float>::infinity()){
 #warning _cueGroup is not correct to use, because we don't have the two axis
 				this->shot(contactPointA, _cueGroup->getRightVector().normalize()*cueVelocity);

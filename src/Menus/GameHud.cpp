@@ -321,7 +321,7 @@ namespace Menus{
 			_isMoving=true;
 			double time=_controller->getAbsoluteTime();
 			
-			_playerController->setCueVelocity(my/(time-_oldTimeMove));
+			_playerController->setCueVelocity(my,(time-_oldTimeMove)/1000);
 			_oldTimeMove=time;
 			
 			Vector3 direction=CueGroupZ->getBackVector()*my;
@@ -458,9 +458,10 @@ namespace Menus{
 				}
 			}
 		}
+		_optionShowing=option;
 		//assert(option>=0);
 		if (_hudActions!=NULL && option>0){
-			_optionShowing=option;
+			
 			if (option==0){
 				//_hudActions->addControl(_listActionsButton[0]);
 				_listActionsButton[0]->setAlignment(Control::ALIGN_BOTTOM_HCENTER);

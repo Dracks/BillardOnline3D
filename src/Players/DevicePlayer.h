@@ -27,10 +27,10 @@ namespace Players{
 		gameplay::Node* getCue();
 		
 		float getVelocityCue();
-		void setCueVelocity(float);
+		void setCueVelocity(float, float);
 	protected:
 		::Menus::GameHud* _gameHud;
-		float _cueVelocity;
+		std::vector<std::pair<float, float> > _cueVelocity;
 	};
 }
 
