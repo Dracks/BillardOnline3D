@@ -17,7 +17,6 @@ form particleEditor
             style = title
             autoWidth=true
 			height=40
-			alignment = ALIGN_VCENTER_HCENTER
             text = Are you sure?
         }
 

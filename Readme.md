@@ -1,6 +1,6 @@
 # Installation instructions
 
-My current code is tested on [Gameplay](https://github.com/blackberry/GamePlay) v1.7 
+My current code is tested on [Gameplay](https://github.com/blackberry/GamePlay) v2.0
 
 1. Create New Project:
   * Project Name: BillardOnline3D
@@ -33,4 +33,6 @@ My current code is tested on [Gameplay](https://github.com/blackberry/GamePlay) 
   * Select all configurations and GNU C option
   * Add all the folders inside src, including Game/ModeGames
   * Build and run!
+
+
   

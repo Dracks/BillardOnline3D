@@ -16,8 +16,7 @@ form particleEditor
         {
             style = title
             autoWidth=true
-			height=80
-			alignment = ALIGN_VCENTER_HCENTER
+			height=50
             text = Main Menu
         }
 		
