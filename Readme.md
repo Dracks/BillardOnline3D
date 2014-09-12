@@ -1,6 +1,12 @@
-# Installation instructions
+# Introduction
+This is a prototype of a Billard Game with 3D using [GamePlay](https://github.com/blackberry/GamePlay) to improve my C++ Skills and also learn more about 3D Games Programming. 
 
-My current code is tested on [Gameplay](https://github.com/blackberry/GamePlay) v2.0
+![](http://web.jaumesingla.es/wp-content/uploads/2014/09/Screen-Shot-2014-09-07-at-14.06.45.png)
+![](http://web.jaumesingla.es/wp-content/uploads/2014/09/Screen-Shot-2014-09-07-at-13.51.08.png)
+
+## Installation instructions
+
+My current code is tested on GamePlay v2.0
 
 1. Create New Project:
   * Project Name: BillardOnline3D
