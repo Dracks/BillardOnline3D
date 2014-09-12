@@ -133,6 +133,15 @@ namespace Menus{
 							this->onMoveBall(difX, difY);
 							break;
 						default:
+							if (_activeCamera==_gameController->getScene()->findNode("CameraFree")->getCamera()){
+								Node* camNode=_activeCamera->getNode();
+								Vector3 up=camNode->getUpVector();
+								Vector3 right = camNode->getRightVector();
+								//camNode->rotate(up, difX/100.0f);
+								//camNode->rotate(right, difY/100.0f);
+								camNode->rotateX(difY/100.0f);
+								camNode->rotateY(difX/100.0f);
+							}//*/
 							break;
 					}
 					_oldX=x;
@@ -251,12 +260,21 @@ namespace Menus{
 	
 	void GameHud::render(gameplay::Scene*){
 		if (_gameController!=NULL){
+
 			if (_drawStatus<2)
 				_gameController->getScene()->visit(this, &GameHud::drawScene);
 			if (_drawStatus>0)
 				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
 			Vector3 p=_gameController->getPlayerBall()->getTranslation();
-			//std::cout << p.x << "," << p.y << "," << p.z << std::endl;
+			/*if (_activeCamera==_gameController->getScene()->findNode("CameraFree")->getCamera()){
+				float width=_controller->getWidth();
+				float height=_controller->getHeight();
+				float x=width/2;
+				float y=height/2;
+				Rectangle r(width, height);
+				_activeCamera->project(r, p, &x, &y);
+			}*/
+			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
 			//p=_playerController->getCue()->getTranslation();
 			//std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
 			

@@ -128,7 +128,7 @@ namespace Game{
 					(nodeB==getPlayerBall() && (nodeA==_ballsList[(getPlayerActive()+1)%2] || nodeA==_ballsList[2]))){
 					_firstBallTouch=nodeB;
 					_pointStatus=FIRST;
-					_pointStatus=END_GAME;
+					//_pointStatus=END_GAME;
 				}
 				break;
 			case FIRST:
