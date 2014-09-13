@@ -132,7 +132,7 @@ namespace Menus{
 						case PLACE_BALL:
 							this->onMoveBall(difX, difY);
 							break;
-						default:
+						case LOOK:
 							if (_activeCamera==_gameController->getScene()->findNode("CameraFree")->getCamera()){
 								Node* camNode=_activeCamera->getNode();
 								Vector3 up=camNode->getUpVector();
@@ -142,6 +142,8 @@ namespace Menus{
 								camNode->rotateX(difY/100.0f);
 								camNode->rotateY(difX/100.0f);
 							}//*/
+							break;
+						default:
 							break;
 					}
 					_oldX=x;
@@ -266,14 +268,22 @@ namespace Menus{
 			if (_drawStatus>0)
 				_controller->getPhysicsController()->drawDebug(_gameController->getScene()->getActiveCamera()->getViewProjectionMatrix());
 			Vector3 p=_gameController->getPlayerBall()->getTranslation();
-			/*if (_activeCamera==_gameController->getScene()->findNode("CameraFree")->getCamera()){
-				float width=_controller->getWidth();
-				float height=_controller->getHeight();
-				float x=width/2;
-				float y=height/2;
-				Rectangle r(width, height);
-				_activeCamera->project(r, p, &x, &y);
-			}*/
+			if (_status==RUNING && _activeCamera==_gameController->getScene()->findNode("CameraFree")->getCamera()){
+				Matrix rotation;
+				Node* cameraNode=_activeCamera->getNode();
+				Quaternion q=cameraNode->getRotation();
+				//std::cout << q.x << "," << q.y << "," << q.z << "," << q.w << std::endl;
+				//std::cout << cameraNode->getTranslation().x << "," << cameraNode->getTranslation().y << "," << cameraNode->getTranslation().z << std::endl;
+				Vector3 eye=cameraNode->getTranslation();
+				Vector3 d=p-eye;
+				Vector3 u;
+				Vector3::cross(Vector3(-1,1,0), d, &u);
+				
+				//std::cout << "new" << u.x << "," << u.y << "," << u.z << std::endl;
+				Matrix::createLookAt(eye, p, u.normalize(), &rotation);
+				rotation.transpose();
+				cameraNode->setRotation(rotation);
+			}//*/
 			std::cout << p.x << "," << p.y << "," << p.z << std::endl;
 			//p=_playerController->getCue()->getTranslation();
 			//std::cout << "Cue: " << p.x << "," << p.y << "," << p.z << std::endl;
@@ -420,7 +430,7 @@ namespace Menus{
 	
 	void GameHud::startRuning(){
 		if (strcmp(_activeCamera->getNode()->getId(), "CameraCue")==0){
-			this->lookTop(Control::Listener::CLICK);
+			this->lookFree(Control::Listener::CLICK);
 		}
 		_status=RUNING;
 		_newOptionShowing=-1;

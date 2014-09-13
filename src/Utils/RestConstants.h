@@ -11,7 +11,7 @@
 
 #define kServerIp "127.0.0.1"
 #define kConnectionProtocol "http://"
-#define kPathBase "/"
+#define kPathBase "/Billard/"
 
 #define kServerUrl kConnectionProtocol##kServerIp##kPathBase
 
